@@ -1,0 +1,294 @@
+【数组】
+
+- [数组定义](#数组定义)
+- [创建数组](#创建数组)
+- [获取数组元素](#获取数组元素)
+- [遍历数组](#遍历数组)
+- [数组长度](#数组长度)
+	- [计算数组的和、平均值](#计算数组的和平均值)
+	- [求数组中的最大值](#求数组中的最大值)
+	- [数组转化为分割字符串](#数组转化为分割字符串)
+- [数组新增元素](#数组新增元素)
+	- [新建一个数组，存放10个整数1~10](#新建一个数组存放10个整数110)
+	- [筛选数组](#筛选数组)
+	- [删除指定数组元素（简单数组去重）](#删除指定数组元素简单数组去重)
+	- [翻转数组](#翻转数组)
+- [冒泡排序](#冒泡排序)
+
+
+# 数组定义
+
+- 一组数据的集合
+- 存储在单个变量下
+- 数组可以存放任意类型的元素
+
+# 创建数组
+
+创建数组有两种方法：
+- new
+- 数组字面量
+
+1.new
+
+```html
+<script>
+	var arr = new Array(); //空数组
+</script>
+```
+2.数组字面量 /更常用
+
+```html
+<script>
+	var arr = [];
+	var arr1 = [1, 2, 'pink老师', true]; //数组的初始化
+
+//数组里面的数据一定用逗号分隔，最后一个不需要
+//数组元素
+</script>
+```
+# 获取数组元素
+
+获取，访问，得到
+
+```html
+<script>
+	console.log(arr1); //列出数组所有元素
+	console.log(arr1[2]); //获取数组中的某一个元素
+	//不存在的元素为undefined
+</script>
+```
+数组索引，下标，序号，从0开始!!!
+
+<code>
+var arr = ['a','b','c','d']
+
+index --> 0 1 2 3
+</code>
+
+# 遍历数组
+
+遍历数组：把数组总所有元素从头到尾访问一次
+
+索引值在递增，使用**循环**
+
+```html
+<script>
+	var arr = ['red', 'green', 'blue'];
+	for (var i = 0; i < 3; i++) {
+		console.log(arr[i]);
+	}
+	//因为数组索引号从0开始，所以i<3
+	//输出的时候 arr[i] i计数器当索引号使用 
+</script>
+```
+# 数组长度
+
+用 `Array.length` 获取数组长度
+
+```html
+<script>
+	console.log(arr.length); //输出数组的长度
+</script>
+```
+
+借助`Array.length`，遍历数组的代码可以优化为：
+
+```html
+<script>
+	var arr = ['red', 'green', 'blue'];
+	for (var i = 0; i < arr.length; i++) {
+		console.log(arr[i]);
+	}
+	//数组的长度是元素个数，不要跟索引号混淆
+	//arr.length 动态检测数组元素的个数
+</script>
+```
+## 计算数组的和、平均值
+
+```html
+<script>
+	var arr = [2, 6, 1, 7, 4];
+	var sum = 0;
+	var average = 0;
+	for (var i = 0; i < arr.length; i++) {
+		sum += arr[i]; //加的是数组元素 arr[i] 不是计数器 i
+	}
+	average = sum / arr.length;
+	console.log(sum, average); //输出多个变量，用逗号隔开 
+</script>
+```
+## 求数组中的最大值
+
+```html
+<script>
+	var arr = [2, 6, 1, 77, 52, 25, 7];
+	var max = arr[0]; 
+	for (var i = 1; i < arr.length; i++) {
+		if (arr[i] > max) {
+			max = arr[i];
+		}
+	}
+	console.log(max);
+</script>
+```
+练习：求最小值
+
+```html
+<script>
+	var arr = [2, 6, 1, 77, 52, 25, 7];
+	var min = arr[0];
+	for (var i = 1; i < arr.length; i++) {
+		if (arr[i] < min) {
+			min = arr[i];
+		}
+	}
+	console.log(min); 
+</script>
+```
+## 数组转化为分割字符串
+
+```html
+<script>
+	var arr = ['red', 'green', 'blue', 'pink'];
+	var str = '';
+	var sep = '';
+	for (var i = 0; i < arr.length; i++) {
+		str += arr[i] + sep;
+	}
+	console.log(str); 
+</script>
+```
+
+# 数组新增元素
+
+1.修改length长度
+
+```html
+<script>
+	var arr = ['red', 'green', 'blue'];
+	arr.length = 5; //扩容，修改数组长度为5，空元素为undefined 
+</script>
+```
+
+2.修改索引号 /更常用
+
+```html
+<script>
+	var arr1 = ['red', 'green', 'blue'];
+	arr1[3] = 'pink'; //追加新的数组元素
+	arr1[0] = 'yellow'; //替换原有的数组元素 
+	arr1 = '有点意思'; //不要直接给数组名赋值，否则所有数组元素全没了，这句语句把数组变成了字符串 
+</script>
+```
+
+## 新建一个数组，存放10个整数1~10
+
+```html
+<script>
+	var arr = [];
+	for (var i = 0; i < 10; i++) {
+		arr[i] = i + 1; //注意不要直接给数组赋值，而是给数组元素赋值 
+	} //同理，如果要存放1~100，只用修改为 i<100 即可实现
+	console.log(arr); 
+</script>
+```
+## 筛选数组
+
+将数组[2,0,6,1,77,0,52,0,25,7]中大于等于10的元素选出来，放入新的数组。
+
+方法1：新声明变量j
+
+```html
+<script>
+	var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+	var newArr = [];
+	var j = 0;
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] > 10) {
+			newArr[j] = arr[i];
+			j++;
+		}
+	}
+</script>
+```
+方法2：newArr[newArr.length]
+
+```html
+<script>
+	var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+	var newArr = [];
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] > 10) {
+			newArr[newArr.length] = arr[i];  
+			//从原数组中挑选出新数组，新数组的索引号可以用newArr.length动态表示，非常巧妙
+		}
+	}
+</script>
+```
+## 删除指定数组元素（简单数组去重）
+
+删除数组[2, 0, 6, 1, 77, 0, 52, 0, 25, 7]中所有的0
+
+```html
+<script>
+	var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+	var newArr = [];
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] != 0) {
+			newArr[newArr.length] = arr[i];
+		}
+	}
+</script>
+```
+## 翻转数组
+
+要求：将数组['red','green','blue','pink','purple']的内容反过来存放
+输出：['purple','pink','blue','green','red']
+
+```html
+<script>
+	var arr = ['red', 'green', 'blue', 'pink', 'purple'];
+	var newArr = [];
+	for (var i = 0; i < arr.length; i++) {
+		newArr[arr.length - i - 1] = arr[i];
+	}
+
+	//pink老师的写法如下
+	// for (var i = arr.length - 1; i >= 0; i--) {
+	// 	newArr[newArr.length] = arr[i];    // 循环语句中的这句赋值语句最为关键，一定要注意索引号+1或-1的问题
+	// }
+</script>
+```
+# 冒泡排序
+
+交换两个变量的值
+
+```html
+<script>
+	var num1 = 10;
+	var num2 = 20;
+	var temp;
+	temp = num1;
+	num1 = num2;
+	num2 = temp;
+	console.log(num1, num2);
+</script>
+```
+冒泡排序：是一种算法，把一系列的数据按照一定的顺序进行排列显示
+核心算法：一次比较两个元素，如果他们的顺序错误就交换过来
+
+```html
+<script>
+	var arr = [5, 4, 3, 2, 1];
+	for (i = 0; i < arr.length - 1; i++) {
+		for (j = 0; j < arr.length - i - 1; j++) {
+			if (arr[j] > arr[j + 1]) {
+				var temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+	console.log(arr);
+</script>
+```

@@ -9,16 +9,26 @@
 
 <body>
 
+	手机号码：<input type="text">
+	<button>发送</button>
 
-	<button>stop timeout</button>
 	<script>
 		var btn = document.querySelector('button');
-		var timeout007 = setTimeout(function () {
-			console.log('boom');
-		}, 2000);
-
+		var seconds = 3;  //定义剩下的秒数
 		btn.addEventListener('click', function () {
-			clearTimeout(timeout007);
+			btn.disabled = true;
+			var timer = setInterval(function () {
+				if (seconds == 0) {
+					// 清楚定时器、复原按钮
+					clearInterval(timer);
+					btn.disabled = false;
+					btn.innerHTML = '发送';
+					seconds = 3;  //这里一定要恢复初始值
+				} else {
+					btn.innerHTML = '还剩' + seconds + '秒再次点击';
+					seconds--;
+				}
+			}, 1000)
 		})
 	</script>
 </body>

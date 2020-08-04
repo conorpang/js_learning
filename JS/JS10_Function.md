@@ -1,9 +1,33 @@
 【函数】
 
+- [函数定义](#函数定义)
+- [函数使用](#函数使用)
+	- [求1-100的累加和](#求1-100的累加和)
+- [函数的参数](#函数的参数)
+	- [函数形参和实参的匹配问题](#函数形参和实参的匹配问题)
+- [函数的返回值return](#函数的返回值return)
+	- [利用函数求任意两个数的最大值](#利用函数求任意两个数的最大值)
+	- [利用函数求任意一个数组中的最大值](#利用函数求任意一个数组中的最大值)
+	- [return终止函数只能返回一个值](#return终止函数只能返回一个值)
+	- [函数没有return返回的是undefined](#函数没有return返回的是undefined)
+	- [break, continue, return的区别](#break-continue-return的区别)
+	- [通过榨汁机看透函数](#通过榨汁机看透函数)
+- [arguments的使用](#arguments的使用)
+	- [利用函数求任意个数的最大值](#利用函数求任意个数的最大值)
+- [函数案例](#函数案例)
+	- [利用函数翻转数组](#利用函数翻转数组)
+	- [函数封装冒泡排序](#函数封装冒泡排序)
+	- [利用函数判断闰年](#利用函数判断闰年)
+- [函数可以调用另一个函数](#函数可以调用另一个函数)
+	- [输出2月份天数](#输出2月份天数)
+- [函数的两种声明方式](#函数的两种声明方式)
+
+
 # 函数定义
 
 封装了一段可以被重复执行调用的代码块，目的就是让大量代码重复使用
 
+```html
 <script>
 	function getSum(num1, num2) {
 		var sum = 0;
@@ -14,13 +38,15 @@
 	}
 	getSum(1, 100);
 	get(10, 50);
-</script>
+<script>
+```
 
 
 # 函数使用
 
 两步：声明函数、调用函数
 
+```html
 <script>
 	// 声明函数
 	function sayHi() {
@@ -33,12 +59,14 @@
 	// 调用函数
 	// 函数名()
 	sayHi();
-</script>
+<script>
+```
 
-函数的封装(打包)：通过函数封装起来，对外只提供一个简单的函数接口
+函数的封装（打包）：通过函数封装起来，对外只提供一个简单的函数接口
 
 ## 求1-100的累加和
 
+```html
 <script>
 	function getSum() {
 		var sum = 0;
@@ -49,11 +77,13 @@
 	}
 
 	getSum();
-</script>
+<script>
+```
 
 # 函数的参数
 
 形参和实参
+```html
 <script>
 	function 函数名(形参1, 形参2, 实参n) {   //声明函数的小括号里面用形参
 
@@ -63,17 +93,21 @@
 
 	//形参是接受实参的，相当于一个变量，无需声明
 	//函数的参数，个数不限，可以没有
-</script>
+<script>
+```
 
 
+```html
 <script>
 	//利用函数求任意两个数的和
 	function getSum(num1, num2) {
 		console.log(num1 + num2);
 	}
 	getSum(3, 8);
-</script>
+<script>
+```
 
+```html
 <script>
 	//利用函数求任意两个数之间的和
 	function getSums(start, end) {
@@ -84,16 +118,18 @@
 		console.log(sum);
 	}
 	getSum(3, 8);
-</script>
+<script>
+```
 
 注意：
-1.多个参数之间用逗号隔开
-2.形参可以看做无需声明的变量
+1. 多个参数之间用逗号隔开
+2. 形参可以看做无需声明的变量
 
 
 
 
 ## 函数形参和实参的匹配问题
+```html
 <script>
 
 	function getSum(num1, num2) {
@@ -109,12 +145,14 @@
 	getSum(1); //NaN
 
 //建议：尽量让实参的个数和形参相匹配
-</script>
+<script>
+```
 
 # 函数的返回值return
 
 希望函数将值返回给调用者，可用return语句实现
 
+```html
 <script>
 	function 函数名() {
 		return 需要返回的结果;
@@ -123,19 +161,23 @@
 
 	// 函数只实现某种功能，最终的结果需要返回给函数的调用者函数名，通过return实现
 	// 只要函数遇到return，就把后面的结果返回给函数的调用者
-</script>
+<script>
+```
 
 代码验证
 
+```html
 <script>
 	function getResult() {
 		return 666;
 	}
 	getResult(); // getResult() = 666
 	console.log(getResult());
-</script>
+<script>
+```
 
 
+```html
 <script>
 	//用return语句重写：利用函数求任意两个数的和
 	function getSum(num1, num2) {
@@ -143,10 +185,12 @@
 
 	}
 	console.log(getSum(1, 2));
-</script>
+<script>
+```
 
 ## 利用函数求任意两个数的最大值
 
+```html
 <script>
 	function getMax(num1, num2) {
 		if (num1 > num2) {
@@ -160,12 +204,14 @@
 	}
 	console.log(getMax(1, 3));
 
-</script>
+<script>
+```
 
 ## 利用函数求任意一个数组中的最大值
 
 求数组 [5,2,99,101,67,77] 中的最大值
 
+```html
 <script>
 	function getArrMax(arr) {
 		var max = arr[0];
@@ -179,11 +225,13 @@
 	//实际开发中，常用一个变量来接受函数的返回结果
 	var re = getArrMax([5, 2, 99, 101, 67, 77]);  //实参是一个数组
 	console.log(re);
-</script>
+<script>
+```
 
 
 ## return终止函数只能返回一个值
 
+```html
 <script>
 
 	// return终止函数，之后的程序都不会执行
@@ -209,10 +257,12 @@
 	var re = getResult(1, 2);
 	console.log(re);
 
-</script>
+<script>
+```
 
 ## 函数没有return返回的是undefined
 
+```html
 <script>
 	// 函数有return，则返回return后面的值
 	// 没有return，则返回undefined
@@ -222,28 +272,29 @@
 	}
 	console.log(fun2());  //返回undefined
 
-</script>
+<script>
+```
 
 
 ## break, continue, return的区别
 
-break - 结束当前循环体，比如for, while
-continue - 跳出本次循环，继续执行下次循环，比如for, while
-return - 不仅可以退出循环，还能够返回return语句中的值，同时还可以结束当前函数体内的代码
+- break - 结束当前循环体，比如for, while
+- continue - 跳出本次循环，继续执行下次循环，比如for, while
+- return - 不仅可以退出循环，还能够返回return语句中的值，同时还可以结束当前函数体内的代码
 
 ## 通过榨汁机看透函数
 
 实现某种功能：输入 => 内部处理 => 输出
 
 作业：
-
-1.输入任意两个数字的任意算数运算，弹出运算后的结果
-2.输入任意两个数字的最大值，弹出运算后的结果
-3.输入三个不同数字的最大值，弹出运算后的结果
-4.输入一个数判断是否是质数，弹出返回值
+- 1.输入任意两个数字的任意算数运算，弹出运算后的结果
+- 2.输入任意两个数字的最大值，弹出运算后的结果
+- 3.输入三个不同数字的最大值，弹出运算后的结果
+- 4.输入一个数判断是否是质数，弹出返回值
 
 # arguments的使用
 
+```html
 <script>
 
 	// 不确定有多少参数传递时，可以用arguments获取，是函数中的内置对象，存储了传递的所有实参
@@ -265,10 +316,12 @@ return - 不仅可以退出循环，还能够返回return语句中的值，同�
 	}
 	fn(1, 2, 3);
 	fn(1, 2, 3, 4, 5);
-</script>
+<script>
+```
 
 ## 利用函数求任意个数的最大值
 
+```html
 <script>
 	function getMax() {
 		var max = arguments[0];
@@ -281,12 +334,14 @@ return - 不仅可以退出循环，还能够返回return语句中的值，同�
 	}
 	var re = getMax(1, 5, 6);
 	console.log(re);
-</script>
+<script>
+```
 
 # 函数案例
 
 ## 利用函数翻转数组
 
+```html
 <script>
 	function reverseArr(arr) {
 		var newArr = []; //注意声明数组的写法，需要复习
@@ -306,27 +361,31 @@ return - 不仅可以退出循环，还能够返回return语句中的值，同�
 	var re = reverseArr(arr);
 	console.log(re);
 
-</script>
-
-128 over.
+<script>
+```
 
 
 ## 函数封装冒泡排序
 
+```html
 <script>
 
-</script>
+<script>
+```
 
 
 ## 利用函数判断闰年
 
+```html
 <script>
 
-</script>
+<script>
+```
 
 
 # 函数可以调用另一个函数
 
+```html
 <script>
 
 	// 函数可以相互调用
@@ -340,12 +399,14 @@ return - 不仅可以退出循环，还能够返回return语句中的值，同�
 		console.log(222);
 		console.log('fn2');
 	}
-</script>
+<script>
+```
 
 ## 输出2月份天数
 
 输入年份，输出当前年份2月份的天数
 
+```html
 <script>
 
 	//输入年份，输出当前年份2月份的天数
@@ -369,11 +430,13 @@ return - 不仅可以退出循环，还能够返回return语句中的值，同�
 		}
 		return leap;
 	}
-</script>
+<script>
+```
 
 
 # 函数的两种声明方式
 
+```html
 <script>
 	// 1.利用函数关键字自定义函数(命名函数)
 	function fn() {
@@ -392,4 +455,5 @@ return - 不仅可以退出循环，还能够返回return语句中的值，同�
 	// 调用时用变量名调用
 	// 匿名函数也可以传递参数
 
-</script>
+<script>
+```

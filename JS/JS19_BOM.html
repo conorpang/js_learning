@@ -262,10 +262,120 @@ element.addEventListener('click',function(){})
 	// setInterval 每隔一段时间，就去调用这个函数，会调用很多次，重复调用这个函数
 </script>
 
-P83.over
-https://www.bilibili.com/video/BV1k4411w7sV?p=84
+## 案例：京东秒杀倒计时
+
+分析
+- 倒计时是不断变化的，因此需要定时器来自动变化 setInterval
+- 三个黑色盒子存放时分秒
+- 三个盒子的innerHTML放入计算的时、分、秒数
+- 首次执行的时候也有间隔毫秒数，因此刷新页面会有空白
+- 最好采取封装函数的形式，这样可以先调用一次这个函数，防止刚开始刷新页面时有空白这一问题
+
+<div>
+	<span class="hour">1</span>
+	<span class="minute">2</span>
+	<span class="second">3</span>
+</div>
+
+<script>
+	var hour = document.querySelector('.hour');
+	var minute = document.querySelector('.minute');
+	var second = document.querySelector('.second');
+	var inputTime = +new Date('2020-01-01 18:00:00');
+
+	countDown(); //先调用一次，防止刷新出现空白
+	setInterval(countDown, 1000);//开启定时器
+
+	function countDown() {
+		var nowTime = +new Date();
+		var times = (inputTime - nowTime) / 1000;
+
+		h = parseInt(times / 60 / 60 % 24);
+		m = parseInt(times / 60 % 60);
+		s = parseInt(times % 60);
+
+		h = h < 10 ? '0' + h : h;
+		m = m < 10 ? '0' + m : m;
+		s = s < 10 ? '0' + s : s;
+
+		hour.innerHTML = h;
+		minute.innerHTML = m;
+		second.innerHTML = s;
+	}
+</script>
+
+## 停止 setInterval() 定时器
+
+<script>
+	window.clearInterval(intervalID);
+
+	// window可以省略
+	// 里面的参数就是定时器的标识符
+</script>
 
 
+<button class="begin">turn on timer</button>
+<button class="stop">turn off timer</button>
+
+<script>
+	var begin = document.querySelector('.begin');
+	var stop = document.querySelector('.stop');
+
+	var timer = null; //全局变量，null为一个空对象，一定要赋一个值，否则为undefined
+
+	begin.addEventListener('click', function () {
+		timer = setInterval(function () {
+			// 这里不要用var timer=... 因为只是声明了函数内的局部变量，stop的事件函数无法访问	
+			//函数里没有声明的变量当全局变量使用
+			console.log('hello');
+		}, 1000)
+	})
+
+	stop.addEventListener('click', function () {
+		clearInterval(timer);
+	})
+
+</script>
+
+## 案例：发送短信
+
+点击按钮后，该按钮60秒内不能再次点击，防止重复发送短信
+
+[文本输入框]【按钮】
+
+- 点击按钮后，禁用disabled为true
+- 同时按钮内容发生变化，注意button里面的内容通过innerHTML修改
+- 秒数发生变化，需要定时器
+- 定义一个变量，在定时器里面不断递减
+- 如果变量为0，说明到了时间，停止定时器，并且复原初始状态
+
+
+手机号码：<input type="text">
+<button>发送</button>
+
+<script>
+	var btn = document.querySelector('button');
+	var seconds = 3;  //定义剩下的秒数
+	btn.addEventListener('click', function () {
+		btn.disabled = true;
+		var timer = setInterval(function () {
+			if (seconds == 0) {
+				// 清楚定时器、复原按钮
+				clearInterval(timer);
+				btn.disabled = false;
+				btn.innerHTML = '发送';
+				seconds = 3;  //这里一定要恢复初始值
+			} else {
+				btn.innerHTML = '还剩' + seconds + '秒再次点击';
+				seconds--;
+			}
+		}, 1000)
+	})
+</script>
+
+
+P86.over
+https://www.bilibili.com/video/BV1k4411w7sV?p=87
 
 # JS执行机制
 

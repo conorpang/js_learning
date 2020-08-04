@@ -1,0 +1,112 @@
+【初识JS】
+
+
+- [初识JS](#初识js)
+	- [历史](#历史)
+	- [JS是什么](#js是什么)
+	- [JS的作用](#js的作用)
+	- [HTML/CSS/JS的关系](#htmlcssjs的关系)
+	- [浏览器执行JS简介](#浏览器执行js简介)
+	- [JS的组成](#js的组成)
+		- [ECMAScript](#ecmascript)
+		- [DOM 文档对象模型](#dom-文档对象模型)
+		- [BOM 浏览器对象模型](#bom-浏览器对象模型)
+- [JS注释](#js注释)
+- [JS输入输出语句](#js输入输出语句)
+
+# 初识JS
+
+## 历史
+
+布兰登·艾奇，1995年10天内发明，LiveScript=>JS
+
+## JS是什么 
+客户端脚本语言，无需编译，由JS解释器进行解释执行，可基于nodejs进行服务端编程，简称JS
+
+## JS的作用
+表单验证、网页特效、服务端开发nodejs、桌面程序electron、APP (cordava、控制硬件、游戏开发
+
+## HTML/CSS/JS的关系
+N/ADJ/V 的关系
+
+## 浏览器执行JS简介
+
+浏览器分成两部分
+- 渲染引擎
+- JS引擎（如Chrome中的V8）
+
+> JS引擎逐行解释代码，因此JS属于脚本语言
+
+## JS的组成
+- ECMAScript：JS语法
+- DOM：页面文档对象模型 
+- BOM：浏览器对象模型
+
+### ECMAScript
+
+JavaScript-网景, Jscript-微软
+
+ECMAScript规定了JS的编程语法和基础核心知识，是所有浏览器厂商共同遵守的一套S语法工业标准。
+
+### DOM 文档对象模型
+
+文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可扩展标记语言的标准编程接口。通过DOM提供的接口可以对页面上的各种元素进行操作（大小、位置、颜色等）。
+
+### BOM 浏览器对象模型
+
+BOM（Browser Object Model，简称BOM）是指浏览器对象模型，它提供了独立于内容的、可以与浏览器窗口进行互动的对象结构。通过BOM可以操作浏览器窗口，比如弹出框、控制浏览器跳转、获取分辨率等。
+
+JS的三种位置：
+- 行内
+- 内嵌
+- 外部
+
+行内式
+```html
+<input type="button" value="tangbohu" onclick="alert('qiuxiang')">
+```
+
+在HTML中我们推荐使用双引号，JS中我们推荐使用单引号
+在html中编写JS大量代码时，不方便阅读
+引号易错，引号多层嵌套匹配时，非常容易弄混
+
+
+内嵌式
+```html
+<script>
+	alert('shamoluotuo')
+</script>
+```
+
+外部引入
+```html
+<script src="abc.js"><script>
+```
+# JS注释
+
+- 单行注释 `//`	 快捷键 `ctrl+/`
+- 多行注释 `/* */`	快捷键`shift+alt+a`，可自定义
+
+# JS输入输出语句
+
+| 语句               | 用法                           | 归属       |
+| ------------------ | ------------------------------ | ---------- |
+| `alert(msg)`       | 浏览器弹出警示框               | 归属浏览器 |
+| `console.log(msg)` | 浏览器控制台打印输出信息       | 归属浏览器 |
+| `prompt(info)`     | 浏览器弹出输入框，用户可以输入 | 归属浏览器 |
+
+例如：
+```html
+<script>
+	
+	// input
+	prompt('input age:')
+
+	// alert
+	alert('result is')
+
+	// console
+	console.log('only viewed by coder')
+
+</script>
+```

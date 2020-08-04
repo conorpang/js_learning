@@ -7,8 +7,7 @@
 - 内置对象
 - 浏览器对象
 
-前两个对象是JS基础内容，属于ECMAScript
-第三个‘浏览器对象’是JS独有的，到JS API再讲解
+前两个对象是JS基础内容，属于ECMAScript，第三个‘浏览器对象’是JS独有的，到 JS API 再讲解
 
 内置对象
 - JS语言自带的对象，供开发者使用，
@@ -31,6 +30,7 @@
 
 不是构造函数，所以不需要new来调用，而是直接调用属性或方法
 
+```html
 <script>
 	console.log(Math.PI);  //圆周率属性
 	console.log(Math.max(1, 99, 3));  //99
@@ -38,11 +38,13 @@
 	console.log(Math.max); //-Infinity
 
 </script>
+```
 
 ## 封装自己的数学对象
 
 封装自己的数学对象，里面有PI、求最大值、求最小值
 
+```html
 <script>
 	var myMath = {
 		PI: 3.14159265357,
@@ -71,18 +73,22 @@
 	console.log(myMath.max(1, 2, 3));
 	console.log(myMath.min(1, 2, 3));
 </script>
+```
 
 ## Math取绝对值方法
 
+```html
 <script>
 	// 绝对值
 	console.log(Math.abs(-1)); //1
 	console.log(Math.abs('-1'));  //隐式转换 会把字符串转换为数字型
 	console.log(Math.abs('pink')); //无法转换 NaN
 </script>
+```
 
 ## Math三个取整方法
 
+```html
 <script>
 	//取整
 	Math.floor();   // 向下取整
@@ -103,9 +109,11 @@
 	console.log(Math.round(-1.5)); // -1  !!!
 
 </script>
+```
 
 ## Math 随机数方法
 
+```html
 <script>
 	// Math.random() 随机返回一个小数 [0,1)
 	// 该方法不跟参数
@@ -124,6 +132,7 @@
 	console.log(arr[getRandom(0, arr.length - 1)]);
 
 </script>
+```
 
 ## 猜数字游戏
 
@@ -132,6 +141,7 @@
 如果小于该数字，提示数字小了，继续猜；
 如果等于该数字，提示猜对了，结束程序；
 
+```html
 <script>
 	function getRandom(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -155,6 +165,7 @@
 	}
 
 </script>
+```
 
 
 作业：猜1-50之间的数字，但是只有10次机会
@@ -163,6 +174,7 @@
 
 # 日期对象
 
+```html
 <script>
 	// Date() 日期对象，是一个构造函数，必须使用new 来调用
 	var arr = new Array(); //创建一个数组对象
@@ -183,6 +195,7 @@
 	console.log(date2);
 
 </script>
+```
 
 ## 格式化日期年月日星期
 
@@ -190,14 +203,15 @@
 
 以下均为方法
 
-getFullYear() => dObj.getFullYear()
-getMonth() 获取当月 0-11
-getDate() 获取日期
-getDay() 获取周几，周日为0，周六为6
-getHours()
-getMinutes()
-getSeconds()
+- getFullYear() => dObj.getFullYear()
+- getMonth() 获取当月 0-11
+- getDate() 获取日期
+- getDay() 获取周几，周日为0，周六为6
+- getHours()
+- getMinutes()
+- getSeconds()
 
+```html
 <script>
 	var date = new Date();
 	console.log(date.getFullYear()); // 获得年份
@@ -237,6 +251,7 @@ getSeconds()
 	console.log(getTime());
 
 </script>
+```
 
 ## Date()获取总的毫秒数
 
@@ -246,6 +261,7 @@ getSeconds()
 
 不是当前时间的毫秒数，而是距离1970-01-01过了多久
 
+```html
 <script>
 	// 1.通过 valueOf()  getTime()
 
@@ -265,10 +281,12 @@ getSeconds()
 
 	// 毫秒数永远不会重复，独一无二的，我们称之为“时间戳”
 </script>
+```
 
 
 ## 倒计时案例
 
+```html
 <script>
 	// 核心算法：输入的时间减去现在的时间
 	// 用时间戳来做
@@ -300,12 +318,14 @@ getSeconds()
 	console.log(countDown('2021-05-06 00:00:00'));
 
 </script>
+```
 
 
 # 数组对象
 
 数组的创建
 
+```html
 <script>
 	// 1. 字面量创建
 	var arr = [1, 2, 3];
@@ -322,9 +342,11 @@ getSeconds()
 	//等价于用字面量创建2个数组元素，分别为2和3
 	console.log(arr1);
 </script>
+```
 
 ## 检测输入的参数是否为数组
 
+```html
 <script>
 	// 1. instanceof 运算符，用来检测是否为数组
 	var arr = [];
@@ -342,9 +364,11 @@ getSeconds()
 	// 之前的reverse() 数组翻转函数可以在传参后加入一个数组判断
 
 </script>
+```
 
 ## 添加或删除数组元素
 
+```html
 <script>
 	// 提供了4种添加或删除元素的方法
 	// push()后加  unshift()前加
@@ -385,12 +409,14 @@ getSeconds()
 	console.log(arr.shift());  //返回值为删除的元素 
 
 </script>
+```
 
 
 ## 筛选数组
 
 工资数组 [1500,1200,2000,2100,1800]，要求工资超过2000的删除，剩余的放到新数组里
 
+```html
 <script>
 	var arr = [1500, 1200, 2000, 2100, 1800];
 	var newArr = [];
@@ -402,16 +428,20 @@ getSeconds()
 	}
 	console.log(newArr);
 </script>
+```
 
 
 ## 数组排序
 
 数组方法
 
-reverse() 颠倒数组中元素的顺序，无参数，该方法会改变原有数组，返回新数组
+### reverse() 
+颠倒数组中元素的顺序，无参数，该方法会改变原有数组，返回新数组
 
-sort() 对数组的元素进行排序，该方法会改变原有数组，返回新数组
+### sort() 
+对数组的元素进行排序，该方法会改变原有数组，返回新数组
 
+```html
 <script>
 	// 翻转数组
 	var arr = ['blue', 'red', 'pink'];
@@ -432,13 +462,17 @@ sort() 对数组的元素进行排序，该方法会改变原有数组，返回�
 	console.log(arr1);
 
 </script>
+```
 
 ## 数组索引方法
 
-indexOf() 数组中查找给定元素的第一个索引，如果存在，返回索引号，如果不存在，返回-1
+### indexOf() 
+数组中查找给定元素的第一个索引，如果存在，返回索引号，如果不存在，返回-1
 
-lastIndexOf() 从后往前查找索引，如果存在，返回索引号，如果不存在，返回-1
+### lastIndexOf() 
+从后往前查找索引，如果存在，返回索引号，如果不存在，返回-1
 
+```html
 <script>
 	var arr = ['red', 'green', 'blue', 'pink', 'blue'];
 	console.log(arr.indexOf('blue'));   // 2
@@ -447,6 +481,7 @@ lastIndexOf() 从后往前查找索引，如果存在，返回索引号，如果
 
 	console.log(arr.lastIndexOf('blue'));  // 4
 </script>
+```
 
 ## 数组去重案例（重点）
 
@@ -454,6 +489,7 @@ lastIndexOf() 从后往前查找索引，如果存在，返回索引号，如果
 
 
 
+```html
 <script>
 
 	// 核心算法：遍历旧数组，拿旧数组去查询新数组，如果该元素在新数组中不存在，就添加，否则不添加
@@ -476,13 +512,18 @@ lastIndexOf() 从后往前查找索引，如果存在，返回索引号，如果
 
 	console.log(demo);
 </script>
+```
 
 
 ## 数组转换为字符串方法
 
-toString() 把数组转换成字符串，逗号分隔每一项，返回一个字符串
-join('delimiter') 把数组中的所有元素转换为一个字符串，返回一个字符串
+### toString() 
+把数组转换成字符串，逗号分隔每一项，返回一个字符串
 
+### join('delimiter') 
+把数组中的所有元素转换为一个字符串，返回一个字符串
+
+```html
 <script>
 	// toString()
 	var arr = [1, 2, 3]
@@ -493,6 +534,7 @@ join('delimiter') 把数组中的所有元素转换为一个字符串，返回�
 	console.log(arr1.join('-')); // green-blue-pink
 	console.log(arr1.join('&')); // green&blue&pink
 </script>
+```
 
 作业：查询以下方法
 
@@ -505,7 +547,6 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 重点看下splice()
 
 
-
 # 字符串对象
 
 ## 基本包装类型
@@ -514,8 +555,9 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 
 基本包装类型就是把简单数据类型包装成为复杂数据类型，这样基本数据类型就有了属性和方法
 
-一句话总结：系统自动将其提升为了对象，专业术语叫“基本包装类型”
+一句话总结：系统自动将其提升为了对象，专业术语叫“**基本包装类型**”
 
+```html
 <script>
 	var str = 'Andy';
 	console.log(str.length);  // 4
@@ -532,12 +574,14 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	temp = null;
 
 </script>
+```
 
 
 ## 字符串不可变
 
 字符串里面的值不可变，虽然看上去可以改变内容，其实是地址变了，内存中新开辟了一个内存空间
 
+```html
 <script>
 	var str = 'andy';
 	console.log(str);  //andy
@@ -552,15 +596,19 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	console.log(str);
 
 </script>
+```
 
 ## 根据字符返回位置
 
 字符串所有的方法，都不会修改字符串本身，操作完成会返回一个新的字符串
 
-indexOf() 返回指定内容在元字符串中的位置，如果找不到就返回-1，开始的位置是index索引号
+### indexOf() 
+返回指定内容在元字符串中的位置，如果找不到就返回-1，开始的位置是index索引号
 
-lastIndexOf() 从后往前找，只找第一个匹配的
+### lastIndexOf() 
+从后往前找，只找第一个匹配的
 
+```html
 <script>
 	// str.indexOf('要查找的字符',[起始的位置])
 
@@ -571,11 +619,13 @@ lastIndexOf() 从后往前找，只找第一个匹配的
 	// lastIndexOf() 同理
 
 </script>
+```
 
 ## 案例：返回字符位置
 
 查找字符串'abcoefoxyozzopp'中所有o出现的位置以及次数
 
+```html
 <script>
 	var str = 'abcoefoxyozzopp';
 	var index = str.indexOf('o');
@@ -588,6 +638,7 @@ lastIndexOf() 从后往前找，只找第一个匹配的
 	}
 	console.log('o出现的次数是：' + num);
 </script>
+```
 
 作业：
 求数组['red','blue','red','green','pink','red']中red出现的位置和次数
@@ -596,12 +647,16 @@ lastIndexOf() 从后往前找，只找第一个匹配的
 
 ## 根据位置返回字符（重点）
 
-charAt(index) 返回指定位置的字符，str.charAt(0)
+### charAt(index) 
+返回指定位置的字符，str.charAt(0)
 
-charCodeAt(index) 获取指定位置处字符的ASCII码，str.charCodeAt(0)
+### charCodeAt(index) 
+获取指定位置处字符的ASCII码，str.charCodeAt(0)
 
-str[index]，获取指定位置处字符，H5，IE8+支持，和charAt()等效
+### str[index]
+获取指定位置处字符，H5，IE8+支持，和charAt()等效
 
+```html
 <script>
 
 	// charAt()
@@ -620,9 +675,11 @@ str[index]，获取指定位置处字符，H5，IE8+支持，和charAt()等效
 	console.log(str[0]); // a 
 
 </script>
+```
 
 ## 统计出现次数最多的字符
 
+```html
 <script>
 	// 判断对象是否有某一属性
 	var o = {
@@ -635,9 +692,11 @@ str[index]，获取指定位置处字符，H5，IE8+支持，和charAt()等效
 		console.log('the attribute does not exist');
 	}
 </script>
+```
 
 
 
+```html
 <script>
 	// 判断一个字符串'abcoefoxyozzopp'中出现次数最多的字符，并统计次数
 
@@ -670,18 +729,24 @@ str[index]，获取指定位置处字符，H5，IE8+支持，和charAt()等效
 	console.log('最多的字符是：' + ch);
 
 </script>
+```
 
 
 ## 字符串的操作方法（重点）
 
-concat(str1,str2,str3,...) 用于连接两个或多个字符串，拼接字符串，等效于+，+更常用
+### concat(str1,str2,str3,...) 
+用于连接两个或多个字符串，拼接字符串，等效于+，+更常用
 
-substr(start,length) 从start位置开始，取length个字符
+### substr(start,length) 
+从start位置开始，取length个字符
 
-slice(start,end) 从start位置开始，截取到end的位置，end取不到
+### slice(start,end) 
+从start位置开始，截取到end的位置，end取不到
 
-substring(start,end) 从start位置开始，截取到end的位置，end取不到，基本和slice()相同，但是不接受负值
+### substring(start,end) 
+从start位置开始，截取到end的位置，end取不到，基本和slice()相同，但是不接受负值
 
+```html
 <script>
 	// 字符串操作
 
@@ -694,11 +759,13 @@ substring(start,end) 从start位置开始，截取到end的位置，end取不到
 	console.log(str1.substr(2, 2));  //春风
 
 </script>
+```
 
 ## 替换字符串
 
-replace('source char','target char')
+### replace('source char','target char')
 
+```html
 <script>
 
 	// replace()
@@ -716,12 +783,14 @@ replace('source char','target char')
 	// 可以用于过滤敏感词
 
 </script>
+```
 
 
 ## 字符串转换为数组
 
-split('delimiter')
+### split('delimiter')
 
+```html
 <script>
 	// 字符串=>数组 split('delimiter')
 	// 联想到 数组=>字符串 join('delimiter')
@@ -733,6 +802,7 @@ split('delimiter')
 	console.log(str3.split('&'));
 
 </script>
+```
 
 作业：
 
