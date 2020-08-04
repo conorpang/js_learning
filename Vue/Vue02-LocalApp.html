@@ -468,5 +468,129 @@ https://cn.vuejs.org/v2/api#v-on
 
 # v-model
 
-P16.over
-https://www.bilibili.com/video/BV12J411m7MG?p=17
+获取和设置表单元素的值，也称“双向数据绑定”
+
+<div id="app">
+	<input type="text" v-model="message" @keyup.enter="getM">
+	<!-- 这里表单元素message发生变化，JS中message的value也会发生改变，可以从下方h2标签看出 -->
+	<h2>{{message}}</h2>
+
+
+	<!-- 这里用方法直接修改JS中message的value，可以看表单元素message会同步修改 -->
+	<input type="button" @click="setM" value="修改message的value">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+	var app = new Vue({
+		el: "#app",
+		data: {
+			message: "it is a message"
+		},
+		methods: {
+			getM: function () {
+				alert(this.message);
+			},
+			setM: function () {
+				this.message = "message changed!"
+			}
+		}
+	})
+</script>
+
+- v-model指令的作用是便捷的设置和获取表单元素的值
+- 绑定的数据会和表单元素值相关联
+- 绑定的数据 和 表单元素的值 可以双向互换
+
+
+# 案例：小黑记事本
+
+- 新增列表结构
+- 删除列表中某项
+- 统计列表条数
+- 清空列表所有内容
+- 无任何数据时，底部的统计栏会隐藏
+
+
+新增列表结构
+- 生成列表结构 v-for / arr
+- 获取用户输入 v-model
+- 回车后新增数据 v-on .enter 添加数据
+
+删除列表中某项
+- 点谁删谁 v-on splice 索引
+
+统计列表条数
+- 统计信息实质上是数组的长度 v-text .length
+
+清空列表所有内容
+- 点击清除 v-on
+- 清空的实质是清空数组
+
+无任何数据时，底部的统计栏会隐藏
+- 本质是v-show隐藏 if 数组非空
+
+总结：
+- 列表数据可以通过v-for指令生成
+- v-on结合事件修饰符可以对事件进行限制，比如.enter
+- v-on绑定事件时可以传递参数
+- v-model可以快速设置和获取表单元素的值
+- 基于数据的开发方式，与基于DOM不同
+
+
+<!-- APP主体 -->
+<section id="todoapp">
+	<header class="header">
+		<h1>black notebook</h1>
+		<!-- 输入框 -->
+		<!-- 获取输入数据，双向绑定；绑定键盘事件 -->
+		<input autofocus="autofocus" autocomplete="off" placeholder="Write something..." v-model="inputValue"
+			@keyup.enter="add">
+	</header>
+	<!-- 列表区域 -->
+	<section class="main">
+		<ul class="todo-list">
+			<li class="todo" v-for="(item,index) in list">
+				<div class="view">
+					<span class="index">{{ index+1 }}</span>
+					<label>{{ item }}</label>
+					<button class="remove" @click="remove(index)">x</button>
+					<!-- 事件的自定义参数 -->
+				</div>
+			</li>
+		</ul>
+	</section>
+	<footer class="footer">
+		<!-- 统计和清空 -->
+		<span class="todo-count" v-text="'total: '+ list.length + ' notes'" v-show="list.length!=0"></span>
+		<button class="clear" @click="clear" v-show="list.length!=0">clear all notes</button>
+	</footer>
+</section>
+<!-- 底部信息 -->
+<footer class="info">
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	var app = new Vue({
+		el: "#todoapp",
+		data: {
+			list: ['code', 'eat', 'sleep'],
+			inputValue: "something",
+			isShow: true
+		},
+		methods: {
+			add: function () {
+				this.isShow = true;
+				this.list.push(this.inputValue); //获取到的数据加入数组中，v-for同步新增列表
+			},
+			remove: function (index) {
+				this.list.splice(index, 1) //引用了splice方法 splice(从哪里删，删几个)
+			},
+			clear: function () {
+				this.list = [];
+			}
+		}
+	})
+</script>

@@ -169,28 +169,31 @@ window.innerHeight当前屏幕高度
 
 window对象提供了2种好用的方法：定时器
 
+## 设置定时器
+
 <script>
-	//setTimeout() 用于设置一个定时器，在定时器到期后执行函数
+	window.setTimeout(function () { }, [delayedTimeInMM]);
+
+	// setTimeout() 用于设置一个定时器，在定时器到期后执行函数
 	// window可省,延时时间为毫秒，可省，默认为0
 	// 调用函数可以写函数，也可以写函数名 还可以写 'function()'
 	// 多个定时器加标识符
-	window.setTimeout(function () { }, [delayedTimeInMM]);
-
 </script>
 
 <script>
-	//直接写函数
+
+	// 方式1：直接写函数
 	setTimeout(function () {
 		console.log('Time out!');
 	})
 
-	// 函数名调用
+
+	// 方式2：函数名调用
 	function callback() {
 		console.log('boom!');
 	}
-
-	var time1 = setTimeout(callback, 3000);
-	var time2 = setTimeout('callback()', 5000); //不提倡
+	var time1 = setTimeout(callback, 3000); //这里调用了callback函数
+	var time2 = setTimeout('callback()', 5000); //这种写法也能实现功能，但是不提倡
 
 </script>
 
@@ -203,8 +206,65 @@ element.addEventListener('click',function(){})
 里面的函数都是回调函数
 
 
-P80.over
-https://www.bilibili.com/video/BV1k4411w7sV?p=81
+## 案例：5秒后关闭广告
+
+- 5秒后，隐藏广告
+- 用定时器，setTimeout()
+
+<img src="images/open.png" alt="">
+<script>
+	var ad = document.querySelector('.ad');
+	setTimeout(function () {
+		ad.style.display = 'none';
+	}, 5000);  //5秒后隐藏
+</script>
+
+## 停止定时器
+
+<script>
+	window.clearTimeout(timeoutID);
+
+	// window可以省略
+	// 括号里的参数是定时器的标识符
+</script>
+
+<button>stop timeout</button>
+<script>
+	var btn = document.querySelector('button');
+	var timeout007 = setTimeout(function () {
+		console.log('boom');
+	}, 2000);
+
+	btn.addEventListener('click', function () {
+		clearTimeout(timeout007);
+	})
+</script>
+
+## setInterval() 定时器
+
+<script>
+	window.setInterval(回调函数, [间隔的毫秒数]);
+
+	// 该方法重复调用一个函数，每隔这个时间，就去调用一次回调函数
+
+	// window可以省略
+	// 调用函数可以直接写函数、写函数名、字符串'函数名()'三种形式
+	// 间隔的毫秒数省略默认是0，如果写必须是毫秒，表示间隔多少毫秒就自动调用这个函数
+	// 建议给定时器赋值一个标识符
+</script>
+
+<script>
+	setInterval(function () {
+		console.log('something');
+	}, 1000);
+
+	// setTimeout 延时时间到了，就去调用这个函数，只调用一次，然后结束该定时器
+	// setInterval 每隔一段时间，就去调用这个函数，会调用很多次，重复调用这个函数
+</script>
+
+P83.over
+https://www.bilibili.com/video/BV1k4411w7sV?p=84
+
 
 
 # JS执行机制
