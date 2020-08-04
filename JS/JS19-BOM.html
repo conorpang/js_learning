@@ -1,0 +1,216 @@
+【BOM】
+
+# BOM概述
+
+JS / DOM / BOM
+
+浏览器对象模型，独立于内容于浏览器窗口进行交互的对象，核心对象是window
+
+BOM由一系列相关对象构成，含多种属性和方法
+
+BOM缺乏标准，兼容性较差，JS语法的标准化组织是ECMA，DOM的标准化组织是W3C，BOM最初是Netscape浏览器标准的一部分
+
+
+DOM/BOM对比
+
+DOM
+- 文档对象模型
+- DOM 就是把文档当作对象来看
+- DOM 的顶级对象是document
+- DOM 主要学习的是操作页面元素
+- DOM 是W3C的标准规范
+
+BOM
+- 浏览器对象模型
+- 把浏览器当作对象来看
+- BOM 的顶级对象是window
+- BOM 学习的是浏览器窗口交互的一些对象
+- BOM 是浏览器厂商在各自浏览器上定义的，兼容性较差
+
+BOM 比 DOM 更大，包含 DOM
+
+window
+- document
+- location
+- navigation
+- screen
+- history
+
+window对象是浏览器的顶级对象，有双重角色
+- JS 访问浏览器窗口的一个接口
+- 是全局对象，定义在全局作用域中的变量，函数都会变成window对象的属性和方法
+
+调用时可以省略window,如alert(), prompt()
+window.alert()
+window.prompt()
+
+
+
+<script>
+	window.document.querySelector();
+	var num = 0; //num为全局对象,自动变成windows的属性
+	console.log(window.num);
+
+	function fn() {
+		console.log(11);
+	}
+	fn();
+	window.fn(); //fn() 为全局作用域下的函数
+
+	console.dir(window);
+	console.dir(window.name); //name本身有意义，不要随便命名变量为name
+</script>
+
+
+# window对象的常见事件
+
+## 页面加载事件
+
+<button>点击</button>
+
+<script>
+	var btn = document.querySelector('button');
+	btn.addEventListener('click', function () {
+		alert('click me');
+	})
+	//问题来了：把JS写到button上方就无效了，如何解决？
+</script>
+
+1.window.onload是窗口加载事件，当文档内容完全加载完成（包括图片、脚本文件、CSS文件等）会触发该事件，然后调用处理函数
+
+2.window.onload传统注册方式只能写一次，如果有多个，会以最后一个window.onload为准
+
+3.若使用addEventListener则没有限制
+
+<script>
+	//窗口加载事件
+	// 传统方式
+	window.onload = function () { }
+	// addEventListener方式
+	window.addEventListener('load', function () { })
+
+	//还有一个类似的，DOMContentLoaded事件触发是，仅当DOM加载完成，不包括样式表、图片、flash等，IE9+支持
+	document.addEventListener('DOMContentLoaded', function () { })
+
+	//如果页面的图片很多，从用户访问到onload触发可能需要较长时间，交互效果就不能实现，必然影响用户体验，此时用DOMContentLoaded比较合适
+
+</script>
+
+
+<script>
+	window.onload = function () {  //这样就可以把JS放在页面任意位置
+		var btn = document.querySelector('button');
+		btn.addEventListener('click', function () {
+			alert('click me');
+		})
+	}
+
+	window.onload = function () {
+		alert('22');       //传统方式只能注册一次，第二次会覆盖第一次
+	}
+
+	window.addEventListener('load', function () {
+		var btn = document.querySelector('button');
+		btn.addEventListener('click', function () {
+			alert('click me');
+		})
+	})
+
+	window.addEventListener('load', function () {
+		alert('22');   //addEventListener方式无限制
+	})
+
+	document.addEventListener('DOMCintentLoaded', function () {
+		alert('33');  //DOMCintentLoaded比load加载更快，先弹33
+	})
+</script>
+
+## 调整窗口大小事件
+
+
+
+<script>
+	window.onresize = function () { }
+	window.addEventListener('resize', function () { })
+</script>
+
+window.onresize 是调整窗口大小的加载事件，当触发时就会调用处理函数
+
+1. 只要窗口发生像素变化，就会触发该事件
+2. 常利用该事件完成响应式布局，
+window.innerWidth当前屏幕宽度
+window.innerHeight当前屏幕高度
+
+<style>
+	div {
+		width: 200px;
+		height: 200px;
+		background-color: pink;
+	}
+</style>
+
+<script>
+	window.addEventListener('load', function () {
+		var div = document.querySelector('div');
+		window.addEventListener('resize', function () {
+			console.log('changed');
+			if (window.innerWidth <= 800) {
+				div.style.display = 'none';
+			} else {
+				div.style.display = 'block';
+			}
+		})
+	})
+</script>
+<div>123</div>
+
+
+# 定时器
+
+window对象提供了2种好用的方法：定时器
+
+<script>
+	//setTimeout() 用于设置一个定时器，在定时器到期后执行函数
+	// window可省,延时时间为毫秒，可省，默认为0
+	// 调用函数可以写函数，也可以写函数名 还可以写 'function()'
+	// 多个定时器加标识符
+	window.setTimeout(function () { }, [delayedTimeInMM]);
+
+</script>
+
+<script>
+	//直接写函数
+	setTimeout(function () {
+		console.log('Time out!');
+	})
+
+	// 函数名调用
+	function callback() {
+		console.log('boom!');
+	}
+
+	var time1 = setTimeout(callback, 3000);
+	var time2 = setTimeout('callback()', 5000); //不提倡
+
+</script>
+
+setTimeout()这个函数我们也称为*回调函数 callback*
+普通函数按照代码顺序直接调用，而这个函数需要等待时间，时间到了才去调用函数，因此称为回调函数
+
+以前所讲的
+element.onclick = function(){}
+element.addEventListener('click',function(){})
+里面的函数都是回调函数
+
+
+P80.over
+https://www.bilibili.com/video/BV1k4411w7sV?p=81
+
+
+# JS执行机制
+
+# location对象
+
+# naviagator对象
+
+# history对象

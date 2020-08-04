@@ -1,0 +1,102 @@
+【预解析】
+
+# 预解析定义
+
+JS解析器在运行JS代码时分两步：
+
+1. 预解析
+JS 引擎会把JS里面所有的var和function提升到当前作用域的最前面
+
+1.1 变量预解析（变量提升）
+把所有的变量声明提升到当前作用域的最前面，不提升赋值操作
+
+1.2 函数预解析（函数提升）
+把所有的函数声明提升到当前作用域的最前面，不调用函数
+
+
+
+2.代码执行
+按照代码书写的顺序从上往下执行
+
+<script>
+
+// 所以函数表达式调用必须写在函数表达式的下面
+
+</script>
+
+
+## 预解析案例
+
+案例1：
+
+<script>
+	var num = 10;
+	fun();
+
+	function fun() {
+		console.log(num);
+		var num = 20;
+	}
+
+	//最终结果为 undefined
+
+	// 相当于以下
+
+	// var num;
+	// function fun() {
+	// 	var num;
+	// 	console.log(num);
+	// 	num = 20;
+	// }
+	// num = 10
+	// fun();
+
+</script>
+
+
+案例2:
+<script>
+	var num = 10;
+	function fn() {
+		console.log(num);
+		var num = 20;
+		console.log(num);
+	}
+	fn();
+
+	//最终结果为 undefined,20
+</script>
+
+案例3:
+
+<script>
+	var a = 18;
+	f1();
+	function f1() {
+		var b = 9;
+		console.log(a);
+		console.log(b);
+		var a = '123';
+	}
+
+	//最终结果为undefined,9
+</script>
+
+案例4:(最容易出错，重要！)
+
+<script>
+	f1();
+	console.log(c);
+	console.log(b);
+	console.log(a);
+	function f1() {
+		var a = b = c = 9;
+		// 相当于 var a= 9, b = 9, c = 9;
+		// b 和 c 直接赋值，没有var声明，当全局变量看
+		console.log(a);
+		console.log(b);
+		console.log(c);
+	}
+
+	//最终结果为9,9,9,9,9,undefined
+</script>
