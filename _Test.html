@@ -4,33 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Vue basic</title>
+	<title>test</title>
 </head>
 
 <body>
 
-	手机号码：<input type="text">
-	<button>发送</button>
 
-	<script>
-		var btn = document.querySelector('button');
-		var seconds = 3;  //定义剩下的秒数
-		btn.addEventListener('click', function () {
-			btn.disabled = true;
-			var timer = setInterval(function () {
-				if (seconds == 0) {
-					// 清楚定时器、复原按钮
-					clearInterval(timer);
-					btn.disabled = false;
-					btn.innerHTML = '发送';
-					seconds = 3;  //这里一定要恢复初始值
-				} else {
-					btn.innerHTML = '还剩' + seconds + '秒再次点击';
-					seconds--;
-				}
-			}, 1000)
-		})
-	</script>
+
 </body>
 
-</html>
+</html>this

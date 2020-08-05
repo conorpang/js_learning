@@ -19,5 +19,8 @@ Advance
 
 Deploy Github
 - [Github Deployment](https://www.cnblogs.com/superGG1990/p/6844952.html)
+- using `git push to` in VScode to upload to remote repo
+- using `git pull from` in VScode to download from remote repo
 
-
+Markdonw
+- [Mermaid Grammar](https://cloud.tencent.com/developer/article/1334691)

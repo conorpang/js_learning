@@ -2,16 +2,15 @@
 
 # BOM概述
 
-JS / DOM / BOM
+`JS / DOM / BOM`
 
-浏览器对象模型，独立于内容于浏览器窗口进行交互的对象，核心对象是window
+## BOM是什么
 
-BOM由一系列相关对象构成，含多种属性和方法
+- BOM是浏览器对象模型，独立于内容于浏览器窗口进行交互的对象，核心对象是window
+- BOM由一系列相关对象构成，含多种属性和方法
+- BOM缺乏标准，兼容性较差，JS语法的标准化组织是ECMA，DOM的标准化组织是W3C，BOM最初是Netscape浏览器标准的一部分
 
-BOM缺乏标准，兼容性较差，JS语法的标准化组织是ECMA，DOM的标准化组织是W3C，BOM最初是Netscape浏览器标准的一部分
-
-
-DOM/BOM对比
+## DOM/BOM对比
 
 DOM
 - 文档对象模型
@@ -27,7 +26,7 @@ BOM
 - BOM 学习的是浏览器窗口交互的一些对象
 - BOM 是浏览器厂商在各自浏览器上定义的，兼容性较差
 
-BOM 比 DOM 更大，包含 DOM
+> BOM 比 DOM 更大，包含 DOM
 
 window
 - document
@@ -40,10 +39,11 @@ window对象是浏览器的顶级对象，有双重角色
 - JS 访问浏览器窗口的一个接口
 - 是全局对象，定义在全局作用域中的变量，函数都会变成window对象的属性和方法
 
-调用时可以省略window,如alert(), prompt()
+> 注意：调用时可以省略`window`,如 `alert()`, `prompt()`
+```js
 window.alert()
 window.prompt()
-
+```
 
 
 <script>
@@ -66,8 +66,8 @@ window.prompt()
 
 ## 页面加载事件
 
+```html
 <button>点击</button>
-
 <script>
 	var btn = document.querySelector('button');
 	btn.addEventListener('click', function () {
@@ -75,13 +75,13 @@ window.prompt()
 	})
 	//问题来了：把JS写到button上方就无效了，如何解决？
 </script>
+```
 
-1.window.onload是窗口加载事件，当文档内容完全加载完成（包括图片、脚本文件、CSS文件等）会触发该事件，然后调用处理函数
+- `window.onload` 是窗口加载事件，当文档内容完全加载完成（包括图片、脚本文件、CSS文件等）会触发该事件，然后调用处理函数
+- `window.onload` 传统注册方式只能写一次，如果有多个，会以最后一个 `window.onload` 为准
+- 若使用`addEventListener`则没有限制
 
-2.window.onload传统注册方式只能写一次，如果有多个，会以最后一个window.onload为准
-
-3.若使用addEventListener则没有限制
-
+```html
 <script>
 	//窗口加载事件
 	// 传统方式
@@ -93,10 +93,10 @@ window.prompt()
 	document.addEventListener('DOMContentLoaded', function () { })
 
 	//如果页面的图片很多，从用户访问到onload触发可能需要较长时间，交互效果就不能实现，必然影响用户体验，此时用DOMContentLoaded比较合适
-
 </script>
+```
 
-
+```html
 <script>
 	window.onload = function () {  //这样就可以把JS放在页面任意位置
 		var btn = document.querySelector('button');
@@ -124,23 +124,26 @@ window.prompt()
 		alert('33');  //DOMCintentLoaded比load加载更快，先弹33
 	})
 </script>
+```
 
 ## 调整窗口大小事件
 
-
-
+```html
 <script>
 	window.onresize = function () { }
 	window.addEventListener('resize', function () { })
 </script>
+```
 
-window.onresize 是调整窗口大小的加载事件，当触发时就会调用处理函数
+`window.onresize` 是调整窗口大小的加载事件，当触发时就会调用处理函数
+- `window.innerWidth` 当前屏幕宽度
+- `window.innerHeight` 当前屏幕高度
 
+注意
 1. 只要窗口发生像素变化，就会触发该事件
-2. 常利用该事件完成响应式布局，
-window.innerWidth当前屏幕宽度
-window.innerHeight当前屏幕高度
+2. 常利用该事件完成响应式布局
 
+```html
 <style>
 	div {
 		width: 200px;
@@ -163,14 +166,17 @@ window.innerHeight当前屏幕高度
 	})
 </script>
 <div>123</div>
-
+```
 
 # 定时器
 
 window对象提供了2种好用的方法：定时器
+- `setTimeout()`
+- `setInterval()`
 
-## 设置定时器
+## 设置定时器 setTimeout()
 
+```html
 <script>
 	window.setTimeout(function () { }, [delayedTimeInMM]);
 
@@ -179,7 +185,9 @@ window对象提供了2种好用的方法：定时器
 	// 调用函数可以写函数，也可以写函数名 还可以写 'function()'
 	// 多个定时器加标识符
 </script>
+```
 
+```html
 <script>
 
 	// 方式1：直接写函数
@@ -196,13 +204,17 @@ window对象提供了2种好用的方法：定时器
 	var time2 = setTimeout('callback()', 5000); //这种写法也能实现功能，但是不提倡
 
 </script>
+```
 
-setTimeout()这个函数我们也称为*回调函数 callback*
+`setTimeout()`这个函数我们也称为*回调函数 callback*
+
 普通函数按照代码顺序直接调用，而这个函数需要等待时间，时间到了才去调用函数，因此称为回调函数
 
 以前所讲的
-element.onclick = function(){}
-element.addEventListener('click',function(){})
+
+- `element.onclick = function(){}`
+- `element.addEventListener('click',function(){})`
+
 里面的函数都是回调函数
 
 
@@ -211,6 +223,7 @@ element.addEventListener('click',function(){})
 - 5秒后，隐藏广告
 - 用定时器，setTimeout()
 
+```html
 <img src="images/open.png" alt="">
 <script>
 	var ad = document.querySelector('.ad');
@@ -218,9 +231,11 @@ element.addEventListener('click',function(){})
 		ad.style.display = 'none';
 	}, 5000);  //5秒后隐藏
 </script>
+```
 
-## 停止定时器
+## 停止定时器 clearTimeout()
 
+```html
 <script>
 	window.clearTimeout(timeoutID);
 
@@ -239,9 +254,11 @@ element.addEventListener('click',function(){})
 		clearTimeout(timeout007);
 	})
 </script>
+```
 
-## setInterval() 定时器
+## 设置 setInterval() 定时器
 
+```html
 <script>
 	window.setInterval(回调函数, [间隔的毫秒数]);
 
@@ -252,7 +269,9 @@ element.addEventListener('click',function(){})
 	// 间隔的毫秒数省略默认是0，如果写必须是毫秒，表示间隔多少毫秒就自动调用这个函数
 	// 建议给定时器赋值一个标识符
 </script>
+```
 
+```html
 <script>
 	setInterval(function () {
 		console.log('something');
@@ -261,6 +280,7 @@ element.addEventListener('click',function(){})
 	// setTimeout 延时时间到了，就去调用这个函数，只调用一次，然后结束该定时器
 	// setInterval 每隔一段时间，就去调用这个函数，会调用很多次，重复调用这个函数
 </script>
+```
 
 ## 案例：京东秒杀倒计时
 
@@ -271,6 +291,7 @@ element.addEventListener('click',function(){})
 - 首次执行的时候也有间隔毫秒数，因此刷新页面会有空白
 - 最好采取封装函数的形式，这样可以先调用一次这个函数，防止刚开始刷新页面时有空白这一问题
 
+```html
 <div>
 	<span class="hour">1</span>
 	<span class="minute">2</span>
@@ -303,17 +324,20 @@ element.addEventListener('click',function(){})
 		second.innerHTML = s;
 	}
 </script>
+```
 
 ## 停止 setInterval() 定时器
 
+```html
 <script>
 	window.clearInterval(intervalID);
 
 	// window可以省略
 	// 里面的参数就是定时器的标识符
 </script>
+```
 
-
+```html
 <button class="begin">turn on timer</button>
 <button class="stop">turn off timer</button>
 
@@ -336,6 +360,7 @@ element.addEventListener('click',function(){})
 	})
 
 </script>
+```
 
 ## 案例：发送短信
 
@@ -349,7 +374,7 @@ element.addEventListener('click',function(){})
 - 定义一个变量，在定时器里面不断递减
 - 如果变量为0，说明到了时间，停止定时器，并且复原初始状态
 
-
+```html
 手机号码：<input type="text">
 <button>发送</button>
 
@@ -372,14 +397,164 @@ element.addEventListener('click',function(){})
 		}, 1000)
 	})
 </script>
+```
 
+## this 的指向问题
 
-P86.over
-https://www.bilibili.com/video/BV1k4411w7sV?p=87
+this的指向在函数定义的时候无法确定，只有函数执行的时候才能确定this到底指向谁，一般情况下this的最终指向的是那个**调用它的对象**
 
-# JS执行机制
+- 全局作用域下或者普通函数中this指向的都是window，定时器里的this指向的也是window
+- 方法中的this指向的是调用它的对象
+- 构造函数中的this指向的是构造函数的实例
+
+```html
+<button>点击</button>
+<script>
+
+	// 全局作用域下或者普通函数中this指向的都是window，定时器里的this指向的也是window
+
+	console.log(this); // 指向的是window
+	function fn() {
+		console.log(this); // 指向的是window
+	}
+	fn();
+
+	setTimeout(function () {
+		console.log(this); // 定时器里面的this指向的也是window 
+	}, 1000)
+
+	// 方法中的this指向的是调用它的对象
+
+	var o = {
+		sayHi: function () {
+			console.log(this); //this指向的是o对象
+		}
+	}
+	o.sayHi();
+
+	var btn = document.querySelector('button');
+	btn.onclick = function () {
+		console.log(this); // this指向的是button
+	}
+	btn.addEventListener('click', function () {
+		console.log(this); // this指向的是button
+	})
+
+	// 构造函数中的this指向的是构造函数的实例
+
+	function Fun() {
+		console.log(this);
+	}
+	var fun = new Fun(); // this指向的是fun实例
+</script>
+```
+
+# JS执行队列
+
+JS是**单线程语言**，同一时间只能做一件事，JS为交互而生
+单线程意味着所有任务需要排队，可能造成页面渲染不连贯
+
+```html
+<script>
+	console.log(1);
+	setTimeout(function () {
+		console.log(3);  // 单线程执行的话，该任务加载需要等待时间，会影响下一个输出任务
+	}, 1000)
+	console.log(2);
+</script>
+```
+
+为了解决排队问题，HTML5提出web worker标准，允许JS创建多个线程，于是JS中出现了**同步**和**异步**
+
+- 同步：前一个任务结束后再执行下一个任务，程序的执行顺序与任务的排列顺序是一致的
+- 异步：做一件事情的同时，还可以处理其他事情（多线程）
+> 二者的本质区别：流水线上各个流程的执行顺序不同
+
+```html
+<script>
+	console.log(1);
+	setTimeout(function () {  //回调函数属于异步任务
+		console.log(3);
+	}, 0) //延时时间为0
+	console.log(2);
+	// 最后结果输出的是 1，2，3
+</script>
+```
+
+任务分类
+- 同步任务：位于主线程执行栈
+- 异步任务：位于任务队列（消息队列），回调函数属于异步任务
+
+常见的异步任务有以下三类
+- 普通事件：click, resize 等
+- 资源加载：load, error 等
+- 定时器：setInterval, setTimeout 等
+
+★JS执行机制
+- 先执行执行栈中的同步任务
+- 异步任务放到任务队列中
+- 一旦执行栈中的同步任务执行完毕，系统就会按次序读取任务队列中的异步任务，于是被读取的异步任务结束等待状态，进入执行栈，开始执行
+
+```html
+<script>
+	console.log(1); // 同步任务1
+	document.onclick = function () {
+		console.log('click'); //异步任务1
+	}
+	console.log(2); // 同步任务2
+	setTimeout(function () {
+		console.log(3); //异步任务2
+	}, 3000)
+</script>
+```
+
+执行过程
+- 当有异步任务时，执行栈提交给对应的异步进程处理
+- 异步API包括（AJAX-网络模块，DOM事件-DOM模块，setTimeout，setInterval等timer模块）
+- 异步任务完毕，推入任务队列中
+- 任务队列包括（onload onclick事件等，setTimeout等，网络请求AJAX等）
+- 主线程执行完毕，查询任务队列，取出一个任务，推入主线程处理，重复该动作
+- 由于主线程不断的重复获得任务、执行任务、再获取任务、再执行，这种机制被称为**事件循环（event loop）**
 
 # location对象
+
+window对象提供了一个location属性用于获取或设置窗体的URL，并且可以用于解析URL，因为这个属性返回的是一个对象，所以我们将这个属性也称为location对象
+
+URL是什么？
+- 统一资源定位符：互联网上标准资源的地址
+- 语法格式
+- `protocol://host[:port]/path/[?query]$fragment`
+
+说明
+- protocol 通信协议
+- host 主机/域名
+- port 端口号 http默认为80
+- path 路径 由0到多个 / 符号隔开的字符串，一般表示主机上的一个目录或者文件地址
+- query 参数 以键值对的形式出现 通常用 & 隔开
+- fragment 片段 # 常见于来链接和锚点
+
+location对象的属性
+- **`location.href`** 获取或设置整个URL
+- `location.host` 返回主机/域名
+- `location.port` 返回端口号 如果未写 返回空字符串
+- `location.pathname` 返回路径
+- **`location.search`** 返回参数
+- `location.hash` 返回片段
+
+> 重点记忆 href 和 search
+
+举个例子
+
+
+- `https://www.bilibili.com/video/BV1dV411d72A?from=search&seid=16034263370898888134#dasdasdasd` 整个URL
+- `www.bilibili.com` 域名
+- `/video/BV1dV411d72A` 路径
+- `?from=search&seid=16034263370898888134` 参数
+- `#dasdasdasd` 片段
+
+91.over
+https://www.bilibili.com/video/BV1k4411w7sV?p=92
+
 
 # naviagator对象
 

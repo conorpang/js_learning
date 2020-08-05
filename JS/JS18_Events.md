@@ -3,10 +3,19 @@
 - [注册事件](#注册事件)
 - [删除事件](#删除事件)
 - [DOM事件流](#dom事件流)
-- [事件对象](#事件对象)
+- [★事件对象](#事件对象)
+	- [什么是事件对象](#什么是事件对象)
+	- [事件对象常见属性和方法](#事件对象常见属性和方法)
+		- [e.target](#etarget)
+		- [e.type](#etype)
 - [阻止事件冒泡](#阻止事件冒泡)
 - [事件委托](#事件委托)
 - [常用的鼠标事件](#常用的鼠标事件)
+	- [禁用右键菜单和禁用选中](#禁用右键菜单和禁用选中)
+		- [禁止鼠标右键菜单](#禁止鼠标右键菜单)
+		- [禁止鼠标选中](#禁止鼠标选中)
+	- [鼠标事件对象](#鼠标事件对象)
+	- [案例：跟随鼠标的天使](#案例跟随鼠标的天使)
 - [常用的键盘事件](#常用的键盘事件)
 
 
@@ -16,37 +25,28 @@
 
 两种方式：传统方式、方法监听
 
-1.传统方式
+- 传统方式
+  - on 开头的事件，如onclick
+  - 特点：注册事件有唯一性，同意元素同一事件只能设置一个处理函数，最后注册的处理函数会覆盖前面注册的处理函数
 
-on 开头的事件，如onclick
-
+```html
 <button onclick="alert('hi~')"></button>
-<script>btn.onclick = function () { }</script>
+<script>
+	// 传统方式
+	btn.onclick = function () { }
+</script>
+```
 
-特点：注册事件有唯一性，同意元素同一事件只能设置一个处理函数，最后注册的处理函数会覆盖前面注册的处理函数
+- 方法监听
+  - 使用：`EventTarget.addEventListener(type,listener[, useCapture])`
+    - `type`: 事件类型字符串，比如click, mouseover,不用写on
+    - `listener`: 事件处理函数，事件发生时，会调用该监听函数
+    - `useCapture`: 可选参数，是一个布尔值，默认为false, 学完DOM流后，我们再学习
+  - w3c标准，推荐方式，`addEventListener()` 方法
+  - IE9之前不支持，可用`attachEvent()`代替
+  - 特点：同一元素同一事件可以注册多个监听器
 
-
-2.方法监听
-
-`EventTarget.addEventListener(type,listener[, useCapture])`
-
-- type: 事件类型字符串，比如click, mouseover,不用写on
-- listener: 事件处理函数，事件发生时，会调用该监听函数
-- useCapture: 可选参数，是一个布尔值，默认为false, 学完DOM流后，我们再学习
-
-
-w3c标准，推荐方式，addEventListener() 方法
-IE9之前不支持，可用attachEvent()代替
-特点：同一元素同一事件可以注册多个监听器
-
-
-attachEvent() 事件监听方式
-`eventTarget.attachEvent(eventNameWithOn, callback)`
-
-- eventNameWithOn 事件类型字符串，比如onclick, onmouseover 要带on
-- callback 事件处理函数，当目标触发事件时回调函数被调用
-
-
+```html
 <button>传统方式</button>
 <button>方法监听</button>
 
@@ -70,9 +70,14 @@ attachEvent() 事件监听方式
 	})
 
 </script>
+```
+- IE独有方式
+  - `attachEvent()` 事件监听方式
+  - `eventTarget.attachEvent(eventNameWithOn, callback)`
+  - eventNameWithOn 事件类型字符串，比如onclick, onmouseover 要带on
+  - callback 事件处理函数，当目标触发事件时回调函数被调用
 
-
-
+```html
 <button>ie9 attachEvent</button>
 
 <script>
@@ -81,11 +86,13 @@ attachEvent() 事件监听方式
 		alert('99');   //IE独有，IE9之前才支持，别的浏览器不识别
 	})
 </script>
+```
 
 
-
-可以封装函数解决兼容性问题
-
+- 可以封装函数解决兼容性问题（见下方函数）
+- 兼容性处理原则：首先照顾大多数浏览器，再处理特殊浏览器
+  
+```html
 <script>
 	function addEventListener(element, eventName, fn) {
 
@@ -103,23 +110,22 @@ attachEvent() 事件监听方式
 		}
 	}
 </script>
-
-兼容性处理原则：首先照顾大多数浏览器，再处理特殊浏览器
+```
 
 
 
 
 # 删除事件
 
-or 解绑事件
+也称为 **解绑事件**
 
-1.传统方式
-eventTarget.onclick = null;
+- 传统方式 
+  - `eventTarget.onclick = null;`
+- 方法监听
+	- `eventTarget.removeEventListener(type, listen[, useCapture])`
+	- `eventTarget.detachEvent(eventNameWithOn, callback)`
 
-2.方法监听
-eventTarget.removeEventListener(type, listen[, useCapture])
-eventTarget.detachEvent(eventNameWithOn, callback)
-
+```html
 <div>1</div>
 <div>2</div>
 <div>3</div>
@@ -148,9 +154,11 @@ eventTarget.detachEvent(eventNameWithOn, callback)
 	divs[2].detachEvent('onclick', fn1);
 
 </script>
+```
 
 删除事件兼容性解决方案
 
+```html
 <script>
 	function removwEventListener(element, eventName, fn) {
 
@@ -168,7 +176,7 @@ eventTarget.detachEvent(eventNameWithOn, callback)
 		}
 	}
 </script>
-
+```
 
 # DOM事件流
 
@@ -180,19 +188,20 @@ eventTarget.detachEvent(eventNameWithOn, callback)
 
 类比：石头落入水中下沉冒泡
 
-- 捕获阶段：网景提出，由DOM最顶层节点开始，然后逐级向下传播到最具体的元素接收过程
+- **捕获阶段**：网景提出，由DOM最顶层节点开始，然后逐级向下传播到最具体的元素接收过程
 
-- 冒泡阶段：IE提出，事件开始由最具体的元素接收，然后逐级向上传播到DOM最顶层节点的过程
+- **冒泡阶段**：IE提出，事件开始由最具体的元素接收，然后逐级向上传播到DOM最顶层节点的过程
 
 注意：
 
 - JS代码只能执行捕获或者冒泡其中的一个阶段
-- onclick和attachEvent只能得到冒泡阶段
-- addEventListener(type, listen[,useCapture]) 第三个参数true=>捕获阶段；false=>冒泡阶段
+- `onclick` 和 `attachEvent`只能得到冒泡阶段
+- `addEventListener(type, listen[,useCapture])` 第三个参数`true`=>捕获阶段；`false`=>冒泡阶段
 - 实际开发中我们更关注‘冒泡阶段’
-- 有些事件是没有冒泡的，如onblur, onfocus, onmouseenter, onmouseleave
+- 有些事件是没有冒泡的，如 `onblur, onfocus, onmouseenter, onmouseleave`
 - 事件冒泡有时候会带来麻烦，有时候又会帮助很巧妙的做某些事件
 
+```html
 <div class="father">
 	<div class="son">son box</div>
 </div>
@@ -217,6 +226,7 @@ eventTarget.detachEvent(eventNameWithOn, callback)
 	// son先弹，father后弹
 
 </script>
+```
 
 # ★事件对象
 
@@ -225,9 +235,10 @@ eventTarget.detachEvent(eventNameWithOn, callback)
 - event是一个事件对象，写到侦听函数的小括号里，当形参看
 - 事件对象只有了事件才会存在，由系统自动创建，不需要传递参数
 - 事件对象是一系列相关数据的集合，跟事件相关，比如鼠标点击（包含鼠标坐标等）、键盘事件（包含键盘事件信息如用户按键等）
-- 这个事件对象可以自行命名，如event evt e
-- 事件对象也有兼容性问题，ie678兼容处理 e = e || window.event;
+- 这个事件对象可以自行命名，如 `event evt e`
+- 事件对象也有兼容性问题，ie678兼容处理 `e = e || window.event;`
 
+```html
 <div>123</div>
 <script>
 	var div = document.querySelector('div');
@@ -250,19 +261,21 @@ eventTarget.detachEvent(eventNameWithOn, callback)
 
 	}
 </script>
+```
 
 ## 事件对象常见属性和方法
 
-e.target 返回触发事件的对象 标准
-e.srcElement 返回触发事件的对象 非标准 ie678使用
-e.type 返回事件的类型，如click mouseover 不带on
-e.cancelBubble 阻止冒泡 非标准 ie678使用
-e.returnValue 阻止默认事件 非标准 ie678使用 比如不让链接跳转
-e.preventDefault() 阻止默认事件 标准 比如不让链接跳转
-e.stopPropagation() 阻止冒泡 标准
+- `e.target` 返回触发事件的对象 标准
+- `e.srcElement` 返回触发事件的对象 非标准 ie678使用
+- `e.type` 返回事件的类型，如click mouseover 不带on
+- `e.cancelBubble` 阻止冒泡 非标准 ie678使用
+- `e.returnValue` 阻止默认事件 非标准 ie678使用 比如不让链接跳转
+- `e.preventDefault()` 阻止默认事件 标准 比如不让链接跳转
+- `e.stopPropagation()` 阻止冒泡 标准
 
 ### e.target
 
+```html
 <div>123</div>
 <ul>
 	<li>123</li>
@@ -293,10 +306,11 @@ e.stopPropagation() 阻止冒泡 标准
 
 	//了解：跟this相似的属性，currentTarget ie678不支持
 </script>
-
+```
 
 ### e.type
 
+```html
 <div>123</div>
 <a href="https://www.baidu.com">百度</a>
 <form action="https://www.baidu.com">
@@ -334,6 +348,7 @@ e.stopPropagation() 阻止冒泡 标准
 		//方法虽好，但是若后面有代码就无法执行
 	}
 </script>
+```
 
 # 阻止事件冒泡
 
@@ -344,7 +359,7 @@ e.stopPropagation() 阻止冒泡 标准
 - 标准写法：stopPropagation() 方法
 - 非标准写法：IE678 cancelBubble 属性
 
-
+```html
 <div class="father">
 	<div class="son">son box</div>
 </div>
@@ -365,15 +380,17 @@ e.stopPropagation() 阻止冒泡 标准
 		window.event.cancelBubble = true;
 	}
 </script>
+```
 
 # 事件委托
 
-or 事件代理、事件委派（JQuery）
+也称为 **事件代理、事件委派**（JQuery的叫法）
 
 ★原理：不是每个子节点单独设置事件监听器，而是将事件监听器设置在‘父节点’上，然后利用冒泡原理影响设置每个子节点
 
 事件委托的作用：只操作一次DOM，提高了程序的性能
 
+```html
 <ul>
 	<li>content</li>
 	<li>content</li>
@@ -396,7 +413,7 @@ or 事件代理、事件委派（JQuery）
 		e.target.style.backgroundColor = 'pink';
 	})
 </script>
-
+```
 
 # 常用的鼠标事件
 
@@ -411,38 +428,41 @@ or 事件代理、事件委派（JQuery）
 
 ## 禁用右键菜单和禁用选中
 
-1.禁止鼠标右键菜单
-contextmenu主要控制应该何时显示上下文菜单，主要用于程序员取消默认的上下文菜单
+### 禁止鼠标右键菜单
 
+`contextmenu` 主要控制应该何时显示上下文菜单，主要用于程序员取消默认的上下文菜单
+
+```html
 <script>
 	document.addEventListener('contextmenu', function (e) {
 		e.preventDefault();  //右键菜单点击出不来
 	})
 </script>
+```
 
-2.禁止鼠标选中
-selectstart 开始选中
+### 禁止鼠标选中
 
+`selectstart` 开始选中
+
+```html
 <script>
 	document.addEventListener('selectstart', function (e) {
 		e.preventDefault();  //右键菜单点击出不来
 	})
 </script>
-
+```
 
 ## 鼠标事件对象
 
 MouseEvent 鼠标事件对象
-KeyboardEvent 键盘事件对象
+- e.clientX 返回鼠标相对于浏览器窗口可视区的X坐标
+- e.clientY 返回鼠标相对于浏览器窗口可视区的Y坐标
+- e.pageX 返回鼠标相对于文档页面的X坐标 IE9+支持
+- e.pageY 返回鼠标相对于文档页面的Y坐标 IE9+支持
+- e.screenX 返回鼠标相对于电脑屏幕的X坐标
+- e.screenY 返回鼠标相对于电脑屏幕的Y坐标
 
-e.clientX 返回鼠标相对于浏览器窗口可视区的X坐标
-e.clientY 返回鼠标相对于浏览器窗口可视区的Y坐标
-e.pageX 返回鼠标相对于文档页面的X坐标 IE9+支持
-e.pageY 返回鼠标相对于文档页面的Y坐标 IE9+支持
-e.screenX 返回鼠标相对于电脑屏幕的X坐标
-e.screenY 返回鼠标相对于电脑屏幕的Y坐标
-
-
+```html
 <script>
 	document.addEventListener('click', function (e) {
 		// clientX/Y 注意是可视区的坐标，滚动条不影响
@@ -459,9 +479,11 @@ e.screenY 返回鼠标相对于电脑屏幕的Y坐标
 		console.log(e.screenY);
 	})
 </script>
+```
 
 ## 案例：跟随鼠标的天使
 
+```html
 <style>
 	img {
 		position: absolute;
@@ -480,13 +502,15 @@ e.screenY 返回鼠标相对于电脑屏幕的Y坐标
 		pic.style.top = y - 40 + 'px';
 	})
 </script>
+```
 
 # 常用的键盘事件
 
-onkeyup 某个按键松开时触发
-onkeydown 某个按键按下时触发
-onkeypress 某个按键按下时触发 但是不识别功能键Ctrl Shift等
+- `onkeyup` 某个按键松开时触发
+- `onkeydown` 某个按键按下时触发
+- `onkeypress` 某个按键按下时触发 但是不识别功能键Ctrl Shift等
 
+```html
 <script>
 	document.onkeyup = function () {
 		console.log('key up');
@@ -503,11 +527,14 @@ onkeypress 某个按键按下时触发 但是不识别功能键Ctrl Shift等
 	// 三个事件都有时，按照down > press > up 的顺序执行
 	// 实际开发更多使用keyup / keydown
 </script>
+```
 
-keycode 判断用户按键
+`keycode` 判断用户按键
 
-键盘事件对象的keycode属性返回该键的ASCII值
+键盘事件对象的`keycode`属性返回该键的`ASCII`值
 
+
+```html
 <script>
 	document.addEventListener('keyup', function (e) {
 		console.log('up: ' + e.keyCode);
@@ -521,6 +548,7 @@ keycode 判断用户按键
 
 	})
 </script>
+```
 
 72.over
 73-75.not yet

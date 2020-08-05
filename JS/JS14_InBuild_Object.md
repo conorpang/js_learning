@@ -1,5 +1,53 @@
 【内置对象】
 
+- [内置对象的定义](#内置对象的定义)
+- [查阅文档](#查阅文档)
+- [Math对象](#math对象)
+	- [封装自己的数学对象](#封装自己的数学对象)
+	- [Math取绝对值方法](#math取绝对值方法)
+	- [Math三个取整方法](#math三个取整方法)
+	- [Math随机数方法](#math随机数方法)
+	- [猜数字游戏](#猜数字游戏)
+- [日期对象](#日期对象)
+	- [格式化日期年月日星期](#格式化日期年月日星期)
+	- [Date()获取总的毫秒数](#date获取总的毫秒数)
+	- [倒计时案例](#倒计时案例)
+- [数组对象](#数组对象)
+	- [检测输入的参数是否为数组](#检测输入的参数是否为数组)
+	- [添加或删除数组元素](#添加或删除数组元素)
+	- [筛选数组](#筛选数组)
+	- [数组排序](#数组排序)
+		- [reverse()](#reverse)
+		- [sort()](#sort)
+	- [数组索引方法](#数组索引方法)
+		- [indexOf()](#indexof)
+		- [lastIndexOf()](#lastindexof)
+	- [数组去重案例（重点）](#数组去重案例重点)
+	- [数组转换为字符串方法](#数组转换为字符串方法)
+		- [toString()](#tostring)
+		- [join('delimiter')](#joindelimiter)
+- [字符串对象](#字符串对象)
+	- [基本包装类型](#基本包装类型)
+	- [字符串不可变](#字符串不可变)
+	- [根据字符返回位置](#根据字符返回位置)
+		- [indexOf()](#indexof-1)
+		- [lastIndexOf()](#lastindexof-1)
+	- [案例：返回字符位置](#案例返回字符位置)
+	- [根据位置返回字符（重点）](#根据位置返回字符重点)
+		- [charAt(index)](#charatindex)
+		- [charCodeAt(index)](#charcodeatindex)
+		- [str[index]](#strindex)
+	- [统计出现次数最多的字符](#统计出现次数最多的字符)
+	- [字符串的操作方法（重点）](#字符串的操作方法重点)
+		- [concat(str1,str2,str3,...)](#concatstr1str2str3)
+		- [substr(start,length)](#substrstartlength)
+		- [slice(start,end)](#slicestartend)
+		- [substring(start,end)](#substringstartend)
+	- [替换字符串](#替换字符串)
+		- [replace('source char','target char')](#replacesource-chartarget-char)
+	- [字符串转换为数组](#字符串转换为数组)
+		- [split('delimiter')](#splitdelimiter)
+
 # 内置对象的定义
 
 对象分类：
@@ -111,7 +159,7 @@
 </script>
 ```
 
-## Math 随机数方法
+## Math随机数方法
 
 ```html
 <script>

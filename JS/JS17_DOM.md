@@ -2,59 +2,64 @@
 
 - [DOM简介](#dom简介)
 - [获取元素](#获取元素)
-- [ID获取元素](#id获取元素)
-- [Tag获取元素](#tag获取元素)
-- [H5新增方法获取元素](#h5新增方法获取元素)
-- [获取特殊元素（body和html）](#获取特殊元素body和html)
+	- [ID获取元素](#id获取元素)
+	- [Tag获取元素](#tag获取元素)
+	- [H5新增方法获取元素](#h5新增方法获取元素)
+	- [获取特殊元素（body和html）](#获取特殊元素body和html)
 - [事件基础](#事件基础)
-- [事件三要素](#事件三要素)
-- [执行事件的步骤](#执行事件的步骤)
+	- [事件三要素](#事件三要素)
+	- [执行事件的步骤](#执行事件的步骤)
 - [操作元素](#操作元素)
-- [改变元素内容](#改变元素内容)
-- [innerText和innerHTML的区别](#innertext和innerhtml的区别)
-- [修改元素属性](#修改元素属性)
-- [案例：分时显示不同图片，不同问候语](#案例分时显示不同图片不同问候语)
-- [修改表单属性](#修改表单属性)
-- [案例：模仿京东登陆页面显示明文密码](#案例模仿京东登陆页面显示明文密码)
-- [修改元素的样式属性](#修改元素的样式属性)
-- [案例：淘宝点击关闭二维码](#案例淘宝点击关闭二维码)
-- [案例：循环精灵图背景](#案例循环精灵图背景)
-- [案例：显示隐藏文本框](#案例显示隐藏文本框)
-- [使用ClassName修改样式属性](#使用classname修改样式属性)
-- [案例：密码框格式提示错误信息](#案例密码框格式提示错误信息)
-- [操作元素总结](#操作元素总结)
-- [排他思想（算法）](#排他思想算法)
-- [案例：百度换肤效果](#案例百度换肤效果)
-- [案例：表格悬浮经过变色](#案例表格悬浮经过变色)
-- [案例：表单全选取消](#案例表单全选取消)
-- [自定义属性的操作](#自定义属性的操作)
-- [案例：tab栏切换（重点★）](#案例tab栏切换重点)
-- [H5自定义属性](#h5自定义属性)
+	- [改变元素内容](#改变元素内容)
+	- [innerText和innerHTML的区别](#innertext和innerhtml的区别)
+	- [修改元素属性](#修改元素属性)
+	- [案例：分时显示不同图片，不同问候语](#案例分时显示不同图片不同问候语)
+	- [修改表单属性](#修改表单属性)
+	- [案例：模仿京东登陆页面显示明文密码](#案例模仿京东登陆页面显示明文密码)
+	- [修改元素的样式属性](#修改元素的样式属性)
+	- [案例：淘宝点击关闭二维码](#案例淘宝点击关闭二维码)
+	- [案例：循环精灵图背景](#案例循环精灵图背景)
+	- [案例：显示隐藏文本框](#案例显示隐藏文本框)
+	- [使用ClassName修改样式属性](#使用classname修改样式属性)
+	- [案例：密码框格式提示错误信息](#案例密码框格式提示错误信息)
+	- [操作元素总结](#操作元素总结)
+	- [排他思想（算法）](#排他思想算法)
+	- [案例：百度换肤效果](#案例百度换肤效果)
+	- [案例：表格悬浮经过变色](#案例表格悬浮经过变色)
+	- [案例：表单全选取消](#案例表单全选取消)
+	- [自定义属性的操作](#自定义属性的操作)
+	- [案例：tab栏切换（重点★）](#案例tab栏切换重点)
+	- [H5自定义属性](#h5自定义属性)
 - [节点操作](#节点操作)
-- [获取元素方式](#获取元素方式)
-- [节点概述](#节点概述)
-- [节点层级](#节点层级)
-- [获取first/last子元素](#获取firstlast子元素)
-- [案例：新浪下拉菜单](#案例新浪下拉菜单)
-- [兄弟节点操作](#兄弟节点操作)
-- [创建/添加节点](#创建添加节点)
+	- [获取元素方式](#获取元素方式)
+	- [节点概述](#节点概述)
+	- [节点层级](#节点层级)
+	- [获取first/last子元素](#获取firstlast子元素)
+	- [案例：新浪下拉菜单](#案例新浪下拉菜单)
+	- [节点操作：兄弟节点](#节点操作兄弟节点)
+	- [节点操作：创建/添加节点](#节点操作创建添加节点)
+		- [创建节点](#创建节点)
+		- [添加节点](#添加节点)
+	- [案例：简单版发布留言](#案例简单版发布留言)
+	- [节点操作：删除节点](#节点操作删除节点)
+	- [案例：删除留言案例](#案例删除留言案例)
+	- [节点操作：复制节点](#节点操作复制节点)
+	- [案例：动态生成表格](#案例动态生成表格)
+	- [三种动态创建元素的区别](#三种动态创建元素的区别)
+	- [DOM重点核心](#dom重点核心)
 
 # DOM简介
 
 文档对象模型 Document Object Model
-是W3C组织推荐的处理可扩展标记语言（HTML/XML）的标准编程接口
-
-提供了一系列的DOM接口，可改变网页的内容、结构和样式
+- 是W3C组织推荐的处理可扩展标记语言（HTML/XML）的标准编程接口
+- 提供了一系列的DOM接口，可改变网页的内容、结构和样式
 
 DOM树
-
-文档 > 根元素 > 元素 > ... > 元素 > 属性
-
-文档 document 一个页面就是一个文档
-元素 element 页面中所有标签都是元素
-节点 node 网页中的所有内容（标签、属性、文本、注释等）都是节点
-
-DOM把以上内容都看作‘对象’
+- 文档 > 根元素 > 元素 > ... > 元素 > 属性
+- 文档 document 一个页面就是一个文档
+- 元素 element 页面中所有标签都是元素
+- 节点 node 网页中的所有内容（标签、属性、文本、注释等）都是节点
+> DOM把以上内容都看作**对象**
 
 
 # 获取元素
@@ -69,6 +74,7 @@ DOM在实际开发中主要用来操作元素，获取页面元素的方法：
 
 getElementById(ID) 可以获取带有ID的元素对象
 
+```html
 <div id="time">2019-9-9</div>
 <script>
 	// 因为文档页面从上往下加载，所以先有标签，再有JS
@@ -100,8 +106,8 @@ getElementById(ID) 可以获取带有ID的元素对象
 	// ariaExpanded: null
 	// ariaHasPopup: null
 	// ...反正很长很多
-
 </script>
+```
 
 
 
@@ -110,10 +116,10 @@ getElementById(ID) 可以获取带有ID的元素对象
 getElementsByTagName() 返回带有指定标签名的对象集合
 
 注意:
-1.因为得到的是一个对象的集合,所以想要操作就要遍历
-2.得到的元素对象是动态的
+1. 因为得到的是一个对象的集合,所以想要操作就要遍历
+2. 得到的元素对象是动态的
 
-
+```html
 <ul>
 	<li>text</li>
 	<li>text</li>
@@ -148,13 +154,15 @@ getElementsByTagName() 返回带有指定标签名的对象集合
 	// 如果页面中没有这个元素,返回的是空的伪数组
 
 </script>
+```
 
 还可以获取某个元素(父元素)内部的所有指定标签名的子元素
 
-element.getElementsByTagName('tagName');
+```element.getElementsByTagName('tagName')```
 
 父元素必须是指定的单个对象,获取的时候不包括父元素自己
 
+```html
 <ul>
 	<li>text</li>
 	<li>text</li>
@@ -182,19 +190,22 @@ element.getElementsByTagName('tagName');
 	console.log(ol.getElementsByTagName('li'));
 
 </script>
+```
 
 
 ## H5新增方法获取元素
 
-document.getElementsByClassName('class')
+`document.getElementsByClassName('class')`
 // 根据类名返回元素对象集合
 
-document.querySelector('selector')
+`document.querySelector('selector')`
 // 根据指定选择器返回第一个元素对象
 
-document.querySelectorAll('selector')
+`document.querySelectorAll('selector')`
 // 根据指定选择器返回所有元素
 
+
+```html
 <div class="box">盒子</div>
 <div class="box">盒子</div>
 <div id="nav">
@@ -235,9 +246,12 @@ document.querySelectorAll('selector')
 	console.log(allBox);
 
 </script>
+```
 
 ## 获取特殊元素（body和html）
 
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -263,8 +277,8 @@ document.querySelectorAll('selector')
 
 	</script>
 </body>
-
 </html>
+```
 
 # 事件基础
 
@@ -272,7 +286,6 @@ document.querySelectorAll('selector')
 - 事件是可以被JS侦测到的行为
 
 > 简单理解：‘触发-响应’ 机制
-
 > 网页中的每个元素都可以触发JS事件
 
 ## 事件三要素
@@ -283,6 +296,7 @@ document.querySelectorAll('selector')
 - 事件类型：如何触发，什么事件，比如鼠标点击onclick、鼠标经过、键盘按下
 - 事件处理程序：通过函数赋值的方式完成
 
+```html
 <body>
 	<button id="btn">唐伯虎</button>
 	<script>
@@ -295,15 +309,16 @@ document.querySelectorAll('selector')
 			alert('点秋香');
 		}
 	</script>
-
 </body>
+```
 
 ## 执行事件的步骤
 
-获取事件源
-注册事件（绑定事件）
-添加事件处理程序（采取函数赋值的形式）
+- 获取事件源
+- 注册事件（绑定事件）
+- 添加事件处理程序（采取函数赋值的形式）
 
+```html
 <div>123</div>
 <script>
 	// 执行事件步骤
@@ -318,18 +333,18 @@ document.querySelectorAll('selector')
 
 	}
 </script>
-
+```
 
 常见的鼠标事件
 
-onclick 鼠标点击左键触发
-onmouseover 鼠标经过触发
-onmouseout 鼠标离开触发
-onfocus 获得鼠标焦点触发
-onblur 失去鼠标焦点触发
-onmousemove 鼠标移动触发
-onmouseup 鼠标弹起触发
-onmousedown 鼠标按下触发
+- onclick 鼠标点击左键触发
+- onmouseover 鼠标经过触发
+- onmouseout 鼠标离开触发
+- onfocus 获得鼠标焦点触发
+- onblur 失去鼠标焦点触发
+- onmousemove 鼠标移动触发
+- onmouseup 鼠标弹起触发
+- onmousedown 鼠标按下触发
 
 分析事件三要素
 
@@ -342,12 +357,14 @@ JS的DOM操作可以改变网页内容、结构和样式，我们可以利用DOM
 
 ## 改变元素内容
 
-element.innerText()
+`element.innerText()`
 // 从起始位置到终止位置的内容，去除html标签，去除空格和换行
 
-element.innerHTML()
+`element.innerHTML()`
 // 从起始位置到终止位置的全部内容，包括html标签，保留空格和换行
 
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -398,12 +415,12 @@ element.innerHTML()
 		p.innerHTML = getDate();
 	</script>
 </body>
-
 </html>
-
+```
 
 ## innerText和innerHTML的区别
 
+```html
 <div>今天是：2019</div>
 <p>
 	我是文字
@@ -438,6 +455,7 @@ element.innerHTML()
 
  	// innerHTML更为常用
 </script>
+```
 
 
 ## 修改元素属性
@@ -446,6 +464,8 @@ element.innerHTML()
 - src, href
 - id, alt, title
 
+
+```html
 <body>
 	<button id="ldh">ldh</button>
 	<button id="zxy">zxy</button>
@@ -470,14 +490,16 @@ element.innerHTML()
 		}
 	</script>
 </body>
-
+```
 
 ## 案例：分时显示不同图片，不同问候语
 
-如果上午打开页面，显示“上午好”，显示上午图片
-如果下午打开页面，显示“下午好”，显示下午图片
-如果晚上打开页面，显示“晚上好”，显示晚上图片
+- 如果上午打开页面，显示“上午好”，显示上午图片
+- 如果下午打开页面，显示“下午好”，显示下午图片
+- 如果晚上打开页面，显示“晚上好”，显示晚上图片
 
+
+```html
 <body>
 	<img src="images/s.gif" alt="">
 	<div>上午好</div>
@@ -505,13 +527,14 @@ element.innerHTML()
 
 	</script>
 </body>
+```
 
 ## 修改表单属性
 
 利用DOM可以操作如下表单元素的属性
+`type, value, checked, selected, disabled`
 
-type, value, checked, selected, disabled
-
+```html
 <button>按钮</button>
 <input type="text" value="content">
 <script>
@@ -534,6 +557,7 @@ type, value, checked, selected, disabled
 
 	}
 </script>
+```
 
 ## 案例：模仿京东登陆页面显示明文密码
 
@@ -541,6 +565,7 @@ type, value, checked, selected, disabled
 - 点击眼睛按钮，把密码框类型改为文本框
 - 一个按钮两个状态，点击一次，切换为文本框，再点击一次切换为密码框
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -599,24 +624,27 @@ type, value, checked, selected, disabled
 			}
 		}
 	</script>
+
 </body>
 
 </html>
+
+```
 
 ## 修改元素的样式属性
 
 可以修改元素的大小、颜色、位置等样式
 
-element.style 行内样式操作
+`element.style` 行内样式操作
 
-element.className 类名样式操作
+`element.className` 类名样式操作
 
 注意：
 
 - JS里面的样式采用驼峰命名法，如fontSize, backgroundColor
 - JS修改样式操作，产生的是行内样式，权重更高
 
-
+```html
 <style>
 	div {
 		width: 200px;
@@ -636,6 +664,7 @@ element.className 类名样式操作
 		this.style.width = '250px';
 	}
 </script>
+```
 
 
 ## 案例：淘宝点击关闭二维码
@@ -648,7 +677,7 @@ element.className 类名样式操作
 -> display:block 显示元素
 - 点击按钮，让这个二维码盒子隐藏起来
 
-
+```html
 <!-- 这里省了CSS样式 -->
 <div class="box">
 	淘宝二维码
@@ -664,9 +693,11 @@ element.className 类名样式操作
 		box.style.display = 'none';
 	}
 </script>
+```
 
 ## 案例：循环精灵图背景
 
+```html
 <style>
 	* {
 		margin: 0;
@@ -720,6 +751,7 @@ element.className 类名样式操作
 		lis[i].style.backgroundPosition = '0 -' + y + 'px';
 	}
 </script>
+```
 
 
 ## 案例：显示隐藏文本框
@@ -731,7 +763,7 @@ element.className 类名样式操作
 - onfocus 获得焦点
 - onblur 失去焦点
 
-
+```html
 <style>
 	input {
 		color: #999;
@@ -770,11 +802,13 @@ element.className 类名样式操作
 	}
 
 </script>
+```
 
 ## 使用ClassName修改样式属性
 
 如果需要修改的样式比较多，一个一个用style写太慢
 
+```html
 <style>
 	div {
 		width: 100px;
@@ -806,6 +840,7 @@ element.className 类名样式操作
 		this.className = 'first change';
 	}
 </script>
+```
 
 ## 案例：密码框格式提示错误信息
 
@@ -817,6 +852,7 @@ element.className 类名样式操作
 - 如果输入的不是6-16位，则提示错误信息，颜色为红色，小图标变化
 - 因为样式变化较多，采用className修改样式
 
+```html
 <style>
 	div {
 		width: 600px;
@@ -862,6 +898,7 @@ element.className 类名样式操作
 		}
 	}
 </script>
+```
 
 
 ## 操作元素总结
@@ -875,10 +912,10 @@ element.className 类名样式操作
 
 作业：
 
-1.世纪佳缘 用户名 显示隐藏内容
-2.京东关闭广告（直接隐藏即可）
-3.新浪下拉菜单（新浪微博即可）
-4.开关灯案例，页面背景色黑白切换
+- 1.世纪佳缘 用户名 显示隐藏内容
+- 2.京东关闭广告（直接隐藏即可）
+- 3.新浪下拉菜单（新浪微博即可）
+- 4.开关灯案例，页面背景色黑白切换
 
 
 ## 排他思想（算法）
@@ -889,7 +926,7 @@ element.className 类名样式操作
 
 注意：顺序不能颠倒，首先干掉其他人，再设置自己
 
-
+```html
 <body>
 	<button>按钮1</button>
 	<button>按钮2</button>
@@ -912,7 +949,9 @@ element.className 类名样式操作
 			}
 		}
 	</script>
+
 </body>
+```
 
 ## 案例：百度换肤效果
 
@@ -921,6 +960,8 @@ element.className 类名样式操作
 - 点击小图片，让页面背景修改为当前图片
 - 核心算法：把当前图片的src路径取过来，给body作为背景
 
+
+```html
 <style>
 
 </style>
@@ -949,9 +990,12 @@ element.className 类名样式操作
 	}
 
 </script>
+```
 
 ## 案例：表格悬浮经过变色
 
+
+```html
 <style>
 	table {
 		width: 800px;
@@ -1069,11 +1113,13 @@ element.className 类名样式操作
 			}
 		}
 	</script>
-</body>
 
+</body>
+```
 
 ## 案例：表单全选取消
 
+```html
 <style>
 	* {
 		padding: 0;
@@ -1203,12 +1249,16 @@ element.className 类名样式操作
 			}
 		}
 	</script>
-</body>>
+
+</body>
+
+```
 
 ## 自定义属性的操作
 
 获取元素的属性值
 
+```html
 <body>
 	<div id="demo" index="1" class="nav"></div>
 </body>
@@ -1227,10 +1277,12 @@ element.className 类名样式操作
 	console.log(div.getAttribute('index'));  //1
 
 </script>
+```
 
 
 设置属性值
 
+```html
 <script>
 	// 设置属性值：element.attribute = 'value'; 
 	// 设置内置属性值
@@ -1248,14 +1300,17 @@ element.className 类名样式操作
 	div.setAttribute('class', 'footer');  //class特殊，不是className
 
 </script>
+```
 
 移除属性
 
+```html
 <script>
 	// 移除属性：element.removeAttribute('attibute');
 	div.removeAttribute('index');
 
 </script>
+```
 
 
 ## 案例：tab栏切换（重点★）
@@ -1267,6 +1322,7 @@ element.className 类名样式操作
 - 上部分模块为选项卡，点击一个，当前底色为红色，其余不变（排他思想），修改类名
 - 下部分模块内容，会跟随上部分选项卡变化，所以下部分模块的变化写到上部分的点击事件里
 
+```html
 <style>
 	* {
 		margin: 0;
@@ -1384,19 +1440,23 @@ element.className 类名样式操作
 		}
 
 	</script>
+
 </body>>
+```
 
 ## H5自定义属性
 
 目的：为了保存并使用数据，有些数据可以保存到页面中，而不用保存到数据库中
 
-通过getAttribute()获取自定义属性
+通过 `getAttribute()` 获取自定义属性
 
 H5规定自定义属性以data-开头作为属性名，并赋值
-例如 <div data-index="1"></div>
+
+例如 `<div data-index="1"></div>`
 
 或者通过JS设置
 
+```html
 <div getTime="20" data-index="2"></div>
 <script>
 	var div = document.querySelector('div');
@@ -1405,16 +1465,18 @@ H5规定自定义属性以data-开头作为属性名，并赋值
 
 	div.setAttribute('data-time', 20);
 </script>
+```
 
 获取H5自定义属性
 
-兼容性获取 *更好用
+兼容性获取 *更好用*
 - element.getAttribute('data-index');
 
 H5新增获取 (IE11+才支持)
 - element.dataset.index
 - element.dataset['index']
 
+```html
 <div getTime="20" data-index="2" data-list-name="andy"></div>
 <script>
 	// dataset是一个集合，里面存放了所有以data-开头的自定义属性
@@ -1428,6 +1490,7 @@ H5新增获取 (IE11+才支持)
 	console.log(div.dataset.listName); //注意这里改成了驼峰命名法
 	console.log(div.dataset['listName']);
 </script>
+```
 
 
 # 节点操作
@@ -1436,17 +1499,15 @@ H5新增获取 (IE11+才支持)
 ## 获取元素方式
 
 1. 利用DOM提供的方法获取元素
-
-- getElementById
-- getElementsByTagName
-- querySelector
-- 逻辑性不强，繁琐
+   - getElementById
+   - getElementsByTagName
+   - querySelector
+   - 逻辑性不强，繁琐
 
 
 2. 利用节点层级关系获取元素
-
-- 利用父子兄节点关系获取元素
-- 逻辑性强，但是兼容性差
+   - 利用父子兄节点关系获取元素
+   - 逻辑性强，但是兼容性差
 
 
 这两种方式都可以获取节点元素，都会使用，但是节点操作更简单
@@ -1459,14 +1520,14 @@ H5新增获取 (IE11+才支持)
 - 一般的，节点至少拥有三个基本属性：nodeType/nodeName/nodeValue
 
 
-nodeType
-
+节点类型
 - 元素节点：nodeType = 1
 - 属性节点：nodeType = 2
 - 文本节点：nodeType = 3 (文本节点包含文字、空格、换行等)
 
 > 实际开发中，主要操作的是元素节点
 
+```html
 <div>iamdiv</div>
 <span>iamspan</span>
 <ul>
@@ -1489,23 +1550,25 @@ nodeType
 	// nodeValue: null
 
 </script>
+```
 
 ## 节点层级
 
 父子兄层级关系
 
-html
-
-head body
-
-title a h1
-
-text href text
-
+```mermaid
+graph TD
+	html-->head
+	html-->body
+	head-->title-->text1
+	body-->a-->href
+	body-->h1-->text2
+```
 
 
 1. 父级节点 parentNode
 
+```html
 <div class="demo">
 	<div class="box">
 		<span class="qrcode"></span>
@@ -1518,11 +1581,13 @@ text href text
 	// 父节点 parentNode 得到是*最近*的父节点，找不到返回为null
 	qrcode.parentNode; 
 </script>
+```
 
 2. 子节点 childNode
 parentNode.childNodes - 标准 - 获取所有子节点 - 不好用
 parentNode.children - 非标准 - 获取所有子元素节点 - 好用!!!
 
+```html
 <ul>
 	<li>iamli</li>
 	<li>iamli</li>
@@ -1558,9 +1623,11 @@ parentNode.children - 非标准 - 获取所有子元素节点 - 好用!!!
 	console.log(ul.children);  // 4个li节点
 
 </script>
+```
 
 ## 获取first/last子元素
 
+```html
 <ol>
 	<li>iamli1</li>
 	<li>iamli2</li>
@@ -1585,9 +1652,11 @@ parentNode.children - 非标准 - 获取所有子元素节点 - 好用!!!
 	console.log(ol.children[ol.children.length - 1]);
 
 </script>
+```
 
 ## 案例：新浪下拉菜单
 
+```html
 <style>
 	* {
 		margin: 0;
@@ -1722,18 +1791,22 @@ parentNode.children - 非标准 - 获取所有子元素节点 - 好用!!!
 		}
 	}
 </script>
+```
 
 ## 节点操作：兄弟节点
 
-node.nextSibling 下一个兄弟节点(包含元素或者文本节点等)
-node.previousSibling 上一个兄弟节点(包含元素或者文本节点等)
 
-node.nextElementSibling 下一个兄弟元素节点
-node.previousElementSibling 上一个兄弟元素节点
-这两个方法还是有兼容性问题，IE9+才支持
+包含元素或文本节点
+- `node.nextSibling` 下一个兄弟节点(包含元素或者文本节点等)
+- `node.previousSibling` 上一个兄弟节点(包含元素或者文本节点等)
 
 
+只包含元素节点
+- `node.nextElementSibling` 下一个兄弟元素节点
+- `node.previousElementSibling` 上一个兄弟元素节点
+> 只包含元素节点的这两个方法有兼容性问题，IE9+才支持
 
+```html
 <div>iamdiv</div>
 <span>iamspan</span>
 <script>
@@ -1757,25 +1830,26 @@ node.previousElementSibling 上一个兄弟元素节点
 	}
 
 </script>
+```
 
 ## 节点操作：创建/添加节点
 
-（例如网页新增留言，新增元素）
+> 例如网页新增留言，新增元素
 
-1.创建节点
+### 创建节点
 
-document.createElement()
+`document.createElement()`
 该方法创建由tagName指定的HTML元素，因为这些元素原先不存在，是根据我们的需求动态生成的，所以我们也称为“动态创建元素节点”
 
-2.添加节点
+### 添加节点
 
-node.appendChild(child)
+`node.appendChild(child)`
 该方法将一个节点添加到指定父节点的子节点列表*末尾*，类似CSS中的after伪元素
 
-insertBefore(child, selectedElement)
+`insertBefore(child, selectedElement)`
 该方法将一个节点添加到指定父节点的指定子节点的*前面*，类似CSS中的before伪元素
 
-
+```html
 <body>
 	<ul>
 		<li>123</li>
@@ -1796,9 +1870,11 @@ insertBefore(child, selectedElement)
 	// 页面添加新元素分两步：1.创建元素，2.添加元素
 
 </script>
+```
 
 ## 案例：简单版发布留言
 
+```html
 <textarea name="" id="">123</textarea>
 <button>发布</button>
 <ul>
@@ -1833,13 +1909,13 @@ insertBefore(child, selectedElement)
 		}
 	}
 </script>
+```
 
 ## 节点操作：删除节点
 
-node.removeChild(child)
+`node.removeChild(child)` 删除一个子节点
 
-删除一个子节点
-
+```html
 <button>删除</button>
 <ul>
 	<li>熊大</li>
@@ -1865,9 +1941,11 @@ node.removeChild(child)
 
 	}
 </script>
+```
 
 ## 案例：删除留言案例
 
+```html
 <textarea name="" id="">123</textarea>
 <button>发布</button>
 <ul>
@@ -1912,11 +1990,13 @@ node.removeChild(child)
 		}
 	}
 </script>
+```
 
 ## 节点操作：复制节点
 
-node.cloneNode()
+`node.cloneNode()`
 
+```html
 <ul>
 	<li>1</li>
 	<li>2</li>
@@ -1937,9 +2017,11 @@ node.cloneNode()
 	ul.appendChild(lili);
 
 </script>
+```
 
 ## 案例：动态生成表格
 
+```html
 <style>
 	table {
 		width: 500px;
@@ -2025,13 +2107,15 @@ node.cloneNode()
 		}
 	}
 </script>
+```
 
 ## 三种动态创建元素的区别
 
-- document.write()
-- element.innerHTML
-- document.createElement()
+- `document.write()`
+- `element.innerHTML`
+- `document.createElement()`
 
+```html
 <button>点击</button>
 <p>abc</p>
 <div class="inner"></div>
@@ -2059,10 +2143,12 @@ node.cloneNode()
 
 	//★总之，不管什么浏览器，innerHTML的效率都要比createElement高
 </script>
+```
 
 ## DOM重点核心
 
 DOM - 文档对象模型 - W3C标准 - 可扩展标记语言的接口
+
 改变网页的内容、结构和样式
 
 1. 对于JS，为了能够使JS操作HTML，JS有一套自己的DOM编程接口
@@ -2072,6 +2158,7 @@ DOM - 文档对象模型 - W3C标准 - 可扩展标记语言的接口
 
 关于DOM操作，我们主要是对元素操作，主要有创建、增删改查、属性操作、事件操作
 
+```
 创建：document.write() / innerHTML / createElement()
 
 增加：appendChild() / insertChild()
@@ -2103,3 +2190,4 @@ DOM - 文档对象模型 - W3C标准 - 可扩展标记语言的接口
 - onmousemove 鼠标移动触发
 - onmouseup 鼠标弹起触发
 - onmousedown 鼠标按下触发
+```
