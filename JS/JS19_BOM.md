@@ -1,8 +1,28 @@
 【BOM】
 
+- [BOM概述](#bom概述)
+	- [BOM是什么](#bom是什么)
+	- [DOM/BOM对比](#dombom对比)
+- [window对象的常见事件](#window对象的常见事件)
+	- [页面加载事件](#页面加载事件)
+	- [调整窗口大小事件](#调整窗口大小事件)
+- [定时器](#定时器)
+	- [设置定时器 setTimeout()](#设置定时器-settimeout)
+	- [案例：5秒后关闭广告](#案例5秒后关闭广告)
+	- [停止定时器 clearTimeout()](#停止定时器-cleartimeout)
+	- [设置 setInterval() 定时器](#设置-setinterval-定时器)
+	- [案例：京东秒杀倒计时](#案例京东秒杀倒计时)
+	- [停止 setInterval() 定时器](#停止-setinterval-定时器)
+	- [案例：发送短信](#案例发送短信)
+	- [this 的指向问题](#this-的指向问题)
+- [JS执行队列](#js执行队列)
+- [location对象](#location对象)
+- [naviagator对象](#naviagator对象)
+- [history对象](#history对象)
+
 # BOM概述
 
-`JS / DOM / BOM`
+回顾JS的三个部分: JS / DOM / BOM
 
 ## BOM是什么
 
