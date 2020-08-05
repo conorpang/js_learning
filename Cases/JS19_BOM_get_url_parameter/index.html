@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>index</title>
+</head>
+
+<body>
+	<div></div>
+	<script>
+		var para = location.search.substr(1); //去掉问号
+		var uname_arr = para.split('='); //获取键值对
+		var uname = uname_arr[1]; //获取值，即uname
+
+		var div = document.querySelector('div');
+		div.innerHTML = '你好，' + uname;
+	</script>
+
+</body>
+
+</html>

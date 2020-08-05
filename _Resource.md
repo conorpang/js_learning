@@ -9,7 +9,7 @@ Basic
 - [source code](https://gitee.com/xiaoqiang001/jsapis_material/tree/master) 
 
 Web APIs 
-- [Web API](https://www.bilibili.com/video/BV1k4411w7sV) [PROGRESS: P86.over]
+- [Web API](https://www.bilibili.com/video/BV1k4411w7sV) [PROGRESS: P98.over]
 - [source code](https://gitee.com/xiaoqiang001/jsapis_material) 
 - [notes from others](https://github.com/babbittry/Front-end-notes/blob/master/Web%20APIs-notes/Web%20APIs.md) 
 
@@ -22,5 +22,5 @@ Deploy Github
 - using `git push to` in VScode to upload to remote repo
 - using `git pull from` in VScode to download from remote repo
 
-Markdonw
+Markdown
 - [Mermaid Grammar](https://cloud.tencent.com/developer/article/1334691)

@@ -17,8 +17,13 @@
 	- [this 的指向问题](#this-的指向问题)
 - [JS执行队列](#js执行队列)
 - [location对象](#location对象)
+	- [location对象的属性](#location对象的属性)
+	- [案例：5秒后跳转页面](#案例5秒后跳转页面)
+	- [案例：获取URL的参数数据](#案例获取url的参数数据)
+	- [location对象的方法](#location对象的方法)
 - [naviagator对象](#naviagator对象)
 - [history对象](#history对象)
+	- [案例：前进后退页面](#案例前进后退页面)
 
 # BOM概述
 
@@ -553,7 +558,8 @@ URL是什么？
 - query 参数 以键值对的形式出现 通常用 & 隔开
 - fragment 片段 # 常见于来链接和锚点
 
-location对象的属性
+## location对象的属性
+
 - **`location.href`** 获取或设置整个URL
 - `location.host` 返回主机/域名
 - `location.port` 返回端口号 如果未写 返回空字符串
@@ -572,10 +578,152 @@ location对象的属性
 - `?from=search&seid=16034263370898888134` 参数
 - `#dasdasdasd` 片段
 
-91.over
-https://www.bilibili.com/video/BV1k4411w7sV?p=92
+页面跳转功能
 
+```html
+<button>点击</button>
+	<script>
+		var btn = document.querySelector('button');
+		btn.addEventListener('click', function () {
+			// console.log(location.href);  // 获得当前页面的URL
+			location.href = 'http://www.baidu.com'
+		})
+	</script>
+```
+
+## 案例：5秒后跳转页面
+
+```html
+<div></div>
+<script>
+	var div = document.querySelector('div');
+	var time = 5;
+
+	jump(); // 先运行一次函数，防止出现空白页
+	setInterval(jump, 1000);
+
+	function jump() {
+		if (time == 0) {
+			location.href = 'http://www.baidu.com';
+		} else {
+			div.innerHTML = '你将在' + time + '秒钟后跳转到首页';
+			time--;
+		}
+	}
+</script>
+```
+## 案例：获取URL的参数数据
+
+- 登录页面，包含提交表单，action提交到 index.html 页面
+- index页面，，可以使用第一个页面的参数，可以实现数据在不同页面的传递效果
+- index页面之所以可以使用第一个页面的数据，是利用了URL里面的location.search参数
+- index页面拿到参数后还需要提取参数
+- 第一步去掉? 用substr
+- 第二步利用等号(=)分割键值对 split('=')
+
+最后写好的代码如下：
+
+
+login.html
+```html
+<form action="index.html">
+		<!-- 默认是用的get提交 -->
+		用户名：<input type="text" name="uname">
+		<input type="submit" value="login">
+</form>
+```
+
+index.html
+```html
+<div></div>
+<script>
+	var para = location.search.substr(1); //去掉问号
+	var uname_arr = para.split('='); //获取键值对
+	var uname = uname_arr[1]; //获取值，即uname
+
+	var div = document.querySelector('div');
+	div.innerHTML = '你好，' + uname;
+</script>
+```
+
+
+## location对象的方法
+
+- `location.assign()` 跟hrer一样,可以跳转页面,也称为重定向页面
+- `location.replace()` 替换当前页面,因为不记录历史,所以不能后推页面
+- `location.reload()` 重新加载页面,相当于刷新按钮或者F5, 如果参数为true,强制刷新ctrl+F5
+
+```html
+	<button class="button1">click1</button>
+	<button class="button2">click2</button>
+	<button class="button3">click3</button>
+	<script>
+		var btn1 = document.querySelector('.button1');
+		btn1.addEventListener('click', function () {
+			location.assign('http://www.douban.com');  //跳转页面
+			//有记录页面历史,因此可以实现后退功能
+		})
+
+		var btn2 = document.querySelector('.button2');
+		btn2.addEventListener('click', function () {
+			location.replace('http://www.douban.com');  //跳转页面
+			//无记录页面历史,无法后退
+		})
+
+		var btn3 = document.querySelector('.button3');
+		btn3.addEventListener('click', function () {
+			location.reload();
+			//括号参数为true, 强制刷新当前页面
+		})
+	</script>
+```
 
 # naviagator对象
 
+navigator对象包含有关浏览器的信息, 它有很多属性,最常用的是`userAgent`, 该属性可以返回由客户机发送服务器的user-agent头部的值
+
+可以通过`navigator.userAgent`属性作为判断条件,给电脑端和移动端跳转不同页面
+
 # history对象
+
+history对象用于与历史记录交互,该对象包含用户(在浏览器窗口中)访问过的URL
+
+history对象一般在实际开发中比较少用,但是会在一些OA办公系统中见到
+
+
+history方法
+- `back()` 后退功能
+- `forward()` 前进功能
+- `go(para)` 前进/后退均可, 参数为1 前进1个页面, 参数为-1 后退一个页面
+
+## 案例：前进后退页面
+
+index.html
+
+```html
+	<p>这是index页面</p>
+	<a href="list.html">go to list page</a>
+	<button>back</button>
+
+	<script>
+		var btn = document.querySelector('button');
+		btn.addEventListener('click', function () {
+			// history.back();
+			history.go(-1);
+		})
+	</script>
+```
+
+list.html
+```html
+<p>这是list页面</p>
+	<a href="index.html">go to index page</a>
+	<button>forward</button>
+
+	<script>
+		var btn = document.querySelector('button');
+		btn.addEventListener('click', function () {
+			history.forward();
+		})
+	</script>
+```
