@@ -1,6 +1,10 @@
 【PC网页特效】
 
 - [元素偏移量 offset 系列](#元素偏移量-offset-系列)
+	- [offset与style的区别](#offset与style的区别)
+	- [案例：获取鼠标在盒子里的坐标](#案例获取鼠标在盒子里的坐标)
+	- [案例：模态框拖拽](#案例模态框拖拽)
+	- [案例：仿京东放大镜](#案例仿京东放大镜)
 - [元素可视区 client 系列](#元素可视区-client-系列)
 - [元素滚动 scroll 系列](#元素滚动-scroll-系列)
 - [动画函数封装](#动画函数封装)
@@ -20,6 +24,9 @@ offset常用属性
 - `element.offsetWidth` 返回自身包括padding, border, 内容区的宽度，无单位
 - `element.offsetHeight` 返回自身包括padding, border, 内容区的高度，无单位
 
+
+
+> 使用：`element.offsetTop` / `element.offsetLeft` / `element.offsetParent`
 ```html
 <style>
 	.father {
@@ -53,13 +60,368 @@ offset常用属性
 	// 父元素是否有定位看css中的position
 	console.log(son.offsetTop); //0
 	console.log(son.offsetLeft); //45
+
+	// 返回带有定位的父元素,否则返回body
+	console.log(son.offsetParent);  //返回的最近一级的带定位的父元素
+	console.log(son.parentNode); //返回的最近一级的父元素
 </script>
 ```
-P98.over
-https://www.bilibili.com/video/BV1k4411w7sV?p=99
+
+> 使用：`element.offsetWidth` / `element.offsetHeight` 
+
+```html
+<div class="w"></div>
+
+	<style>
+		.w {
+			width: 200px;
+			height: 200px;
+			background-color: skyblue;
+			margin: 0 auto 200px;
+			padding: 10px;
+			border: 15px solid red;
+		}
+	</style>
+	<script>
+		var w = document.querySelector('.w');
+
+		// 可以动态获取元素的大下,宽度和高度,包含padding + border + width/height
+		console.log(w.offsetWidth);
+		console.log(w.offsetHeight);
+
+	</script>
+```
+
+## offset与style的区别
+
+offset
+- offset 可以得到**任意样式表**中的样式值
+- offset 系列获得的数值是**没有单位**的
+- offsetWidth 包含 padding+border+width
+- offsetWidth 等属性是只读属性，只能获取不能赋值
+> 想要获取元素大小位置，用offset更加合适
+
+style
+- style 只能得到**行内样式表**中的样式值
+- style.width 获得的是**带有单位**的字符串
+- style.width 获得的值不包含 padding 和 border
+- style.width 是可读写属性，可以获取也可以赋值
+> 想要给元素更改值，用style
+
+```html
+<style>
+	.box {
+		width: 200px;
+		height: 200px;
+		padding: 20px;
+		background-color: pink;
+	}
+</style>
+
+<div class="box" style="width: 200px;"></div>
+
+<script>
+	var box = document.querySelector('.box');
+	console.log(box.offsetWidth); //读的是css，200px
+	console.log(box.style.width); //读的是行内样式，200px
+
+	box.offsetWidth = '300px'; // 只读属性，无法更改
+	box.style.width = '300px'; // 可以更改
+</script>
+```
+
+## 案例：获取鼠标在盒子里的坐标
+
+- 在盒子里点击，想要得到鼠标距离盒子左右的距离，绑定单击事件
+- 得到鼠标在页面中的坐标 `e.pageX` / `e.pageY`
+- 得到盒子的偏移量，两者相减即为鼠标在盒子里的坐标
+
+```html
+	<style>
+		.box {
+			height: 200px;
+			width: 200px;
+			background-color: lightblue;
+		}
+
+		* {
+			margin: 100px;
+		}
+	</style>
+	<div class="box"></div>
+
+	<script>
+		// 在盒子里点击，想要得到鼠标距离盒子左右的距离，绑定单击事件
+		var box = document.querySelector('.box');
+		// 想要以移动鼠标就获取新坐标，可以用鼠标移动事件mousemove
+		box.addEventListener('mousemove', function (e) {
+			// 得到鼠标在页面中的坐标 e.pageX / e.pageY
+			console.log(e.pageX, e.pageY);
+
+			// 得到盒子的偏移量，两者相减即为鼠标在盒子里的坐标
+			var x = e.pageX - this.offsetLeft;
+			var y = e.pageY - this.offsetTop;
+			this.innerHTML = '鼠标在盒子内的坐标为：(' + x + ',' + y + ')'
+		})
+	</script>
+
+```
+## 案例：模态框拖拽
+
+弹出框，有时也称为模态框
+
+案例要求
+- 点击弹出层，会弹出模态框，并且显示灰色半透明的遮挡层
+- 点击关闭按钮，可以关闭模态框，并且同时关闭灰色半透明遮挡层
+- 鼠标放到模态框最上面一行，可以按住鼠标拖拽模态框在页面中移动
+- 鼠标松开，可以停止拖动模态框
+
+实现方法
+- 点击弹出层,模态框和遮挡层就会显示出来 `display: block;`
+- 点击关闭按钮,模态框和遮挡层就会隐藏起来 `display: none;`
+- 页面拖拽的原理:鼠标 按下>移动>松开 `mousedown` > `mousemove` > `mouseup`
+- 拖拽过程:鼠标移动过程中,获得最新的值赋值给模态框的left和top值
+- 鼠标按下触发的事件源为模态框最上面一行
+- 鼠标的坐标减去鼠标在盒子内的坐标,才是模态框真正的位置
+- 鼠标按下,得到鼠标在盒子的坐标
+- 鼠标移动,就让模态框的坐标设置为:鼠标坐标减去盒子坐标即可,注意移动事件写到按下事件里面
+- 鼠标松开,就停止拖拽,让鼠标移动事件解除
+
+```html
+<style>
+		.login-header {
+			width: 100%;
+			text-align: center;
+			height: 30px;
+			font-size: 24px;
+			line-height: 30px;
+		}
+
+		ul,
+		li,
+		ol,
+		dl,
+		dt,
+		dd,
+		div,
+		p,
+		span,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		a {
+			padding: 0px;
+			margin: 0px;
+		}
+
+		.login {
+			display: none;
+			width: 512px;
+			height: 280px;
+			position: fixed;
+			border: #ebebeb solid 1px;
+			left: 50%;
+			top: 50%;
+			background: #ffffff;
+			box-shadow: 0px 0px 20px #ddd;
+			z-index: 9999;
+			transform: translate(-50%, -50%);
+		}
+
+		.login-title {
+			width: 100%;
+			margin: 10px 0px 0px 0px;
+			text-align: center;
+			line-height: 40px;
+			height: 40px;
+			font-size: 18px;
+			position: relative;
+			cursor: move;
+		}
+
+		.login-input-content {
+			margin-top: 20px;
+		}
+
+		.login-button {
+			width: 50%;
+			margin: 30px auto 0px auto;
+			line-height: 40px;
+			font-size: 14px;
+			border: #ebebeb 1px solid;
+			text-align: center;
+		}
+
+		.login-bg {
+			display: none;
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			background: rgba(0, 0, 0, .3);
+		}
+
+		a {
+			text-decoration: none;
+			color: #000000;
+		}
+
+		.login-button a {
+			display: block;
+		}
+
+		.login-input input.list-input {
+			float: left;
+			line-height: 35px;
+			height: 35px;
+			width: 350px;
+			border: #ebebeb 1px solid;
+			text-indent: 5px;
+		}
+
+		.login-input {
+			overflow: hidden;
+			margin: 0px 0px 20px 0px;
+		}
+
+		.login-input label {
+			float: left;
+			width: 90px;
+			padding-right: 10px;
+			text-align: right;
+			line-height: 35px;
+			height: 35px;
+			font-size: 14px;
+		}
+
+		.login-title span {
+			position: absolute;
+			font-size: 12px;
+			right: -20px;
+			top: -30px;
+			background: #ffffff;
+			border: #ebebeb solid 1px;
+			width: 40px;
+			height: 40px;
+			border-radius: 20px;
+		}
+	</style>
+
+	<div class="login-header"><a id="link" href="javascript:;">点击，弹出登录框</a></div>
+
+	<div id="login" class="login">
+		<div id="title" class="login-title">登录会员
+			<span><a id="closeBtn" href="javascript:void(0);" class="close-login">关闭</a></span>
+		</div>
+
+		<div class="login-input-content">
+			<div class="login-input">
+				<label>用户名：</label>
+				<input type="text" placeholder="请输入用户名" name="info[username]" id="username" class="list-input">
+			</div>
+			<div class="login-input">
+				<label>登录密码：</label>
+				<input type="password" placeholder="请输入登录密码" name="info[password]" id="password" class="list-input">
+			</div>
+		</div>
+
+		<div id="loginBtn" class="login-button"><a href="javascript:void(0);" id="login-button-submit">登录会员</a></div>
+
+	</div>
+	<!-- 遮盖层 -->
+	<div id="bg" class="login-bg"></div>
+
+	<script>
+		var login = document.querySelector('.login');
+		var mask = document.querySelector('.login-bg');
+		var link = document.querySelector('#link');
+		var closeBtn = document.querySelector('#closeBtn');
+
+		// 点击弹出
+		link.addEventListener('click', function () {
+			mask.style.display = 'block';
+			login.style.display = 'block';
+		})
+
+		// 点击关闭
+		closeBtn.addEventListener('click', function () {
+			login.style.display = 'none';
+			mask.style.display = 'none';
+		})
+
+		// 鼠标拖拽
+		var title = document.querySelector('#title');
+
+		// 鼠标按下,获得鼠标在盒子内的坐标
+		title.addEventListener('mousedown', function (e) {
+			var x = e.pageX - login.offsetLeft;
+			var y = e.pageY - login.offsetTop;
+
+			// 鼠标拖动, 把鼠标在页面中的坐标减去鼠标在盒子里的坐标就是 模态框的left和top值
+			// 这里把事件加在document上了,而不是title上, 自己试下就知道为什么了
+			document.addEventListener('mousemove', move)
+
+			function move(e) {
+				login.style.left = e.pageX - x + 'px';
+				login.style.top = e.pageY - y + 'px';
+			}
+
+			// 鼠标弹起, 让鼠标移动事件解除
+			document.addEventListener('mouseup', function () {
+				this.removeEventListener('mousemove', move)
+			})
+		})
+	</script>
+```
+
+## 案例：仿京东放大镜
+
+105-109还没看
+https://www.bilibili.com/video/BV1k4411w7sV?p=105
 
 # 元素可视区 client 系列
 
+client 客户端，使用client系列的相关属性可以获取元素可视区的相关信息，可以动态的得到该元素的边框大小、
+元素大小等
+
+- `element.clientTop` 返回元素上边框的大小
+- `element.clientLeft` 返回元素左边框的大小
+- `element.clientWidth` 返回自身包括padding, 内容区的宽度, 不含边框, 返回数值不带单位
+- `element.clientHeight` 返回元素自身包括padding, 内容区的高度, 不含边框, 返回数值不带单位
+
+```html
+<style>
+		div {
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+			border: 10px solid purple;
+			padding: 10px;
+		}
+</style>
+
+<div></div>
+
+<script>
+		// clientWidth 和 offsetWidth 最大的区别就是不包含边框
+		var div = document.querySelector('div');
+		console.log(div.clientWidth); //200
+
+		 // 加border 还是200 
+		 // 加padding 变220
+</script>
+
+```
+
+110.over
+https://www.bilibili.com/video/BV1k4411w7sV?p=111
+
 # 元素滚动 scroll 系列
+
 # 动画函数封装
+
 # 常见网页特效案例
