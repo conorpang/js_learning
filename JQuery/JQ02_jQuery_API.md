@@ -1,5 +1,22 @@
 【jQuery常用API】
 
+- [jquery 选择器](#jquery-选择器)
+	- [基础选择器](#基础选择器)
+	- [层级选择器](#层级选择器)
+	- [隐式迭代](#隐式迭代)
+	- [jquery 筛选选择器](#jquery-筛选选择器)
+	- [jquery 筛选方法](#jquery-筛选方法)
+	- [案例：新浪下拉菜单](#案例新浪下拉菜单)
+	- [jquery中的排他思想](#jquery中的排他思想)
+	- [案例：淘宝服饰精品](#案例淘宝服饰精品)
+- [jquery 样式操作](#jquery-样式操作)
+	- [案例：tab栏切换](#案例tab栏切换)
+- [jquery 效果](#jquery-效果)
+- [jquery 属性操作](#jquery-属性操作)
+- [jquery 文本属性值](#jquery-文本属性值)
+- [jquery 元素操作](#jquery-元素操作)
+- [jquery 尺寸、位置操作](#jquery-尺寸位置操作)
+
 # jquery 选择器
 
 ## 基础选择器
@@ -129,13 +146,15 @@ jquery设置样式 `$('div').css('attribute','value')`
 ```
 ## jquery 筛选方法
 
+> 重点记 `parent()`，`children(selector)`，`find(selector)`，`siblings(selector)`，`eq(index)`
+
 - `parent()` 用法: `$('li').parent()` 说明:查找父级
 - `children(selector)` 用法: `$('ul').('li')` 说明:查找最近一级的子元素(亲儿子),相当于 `$('ul>li')`
 - `find(selector)` 用法: `$(ul).find('li')` 说明:后代选择器,相当于`$('ul li')`
 - `siblings(selector)` 用法: `$('.first').siblings(li)` 说明: 查找兄弟接节点,不包括本身
 - `nextAll([expr])` 用法: `$('.first').nextAll()` 说明: 查找当前元素之后所有的同辈元素
 - `prevAll([expr])` 用法: `$('.last').prevAll()` 说明: 查找当前元素之前所有的同辈元素
-- `hasClass(class)` 用法: `$('div').hasClass(protected)` 说明: 检查当前元素是否含有某个特定的类,如果由,返回true
+- `hasClass(class)` 用法: `$('div').hasClass(protected)` 说明: 检查当前元素是否含有某个特定的类,如果有,返回true
 - `eq(index)` 用法: `$('li').eq(2)` 说明: 相当于 `$('li:eq(2)')` index从0开始
 
 > 使用`parent()`，`children(selector)`，`siblings(selector)`
@@ -157,17 +176,63 @@ jquery设置样式 `$('div').css('attribute','value')`
 	$(function () {
 		// 父 
 		// parent() 返回的是最近一级的父元素
-		console.log($('.son').parent());
+		console.log($('.son').parent();
 		// 子 
 		// children() 返回的是最近一级的子元素
 		$('.nav').children('p').css('color', 'purple');
 		// find()  返回的是所有子代元素
 		$('.nav').find('div p').css('color', 'green');
 		// 兄
-		console.log($('.nav p').siblings('div'));
+		console.log($('.nav p').siblings('div');
 	})
 </script>
 ```
+
+
+
+> 使用`siblings()`，`prevAll()`，`nextAll()`，`hasClass()`，`eq(index)`
+
+```html
+<script src="jquery.min.js"></script>
+<style>
+	.test {
+		font-weight: ;
+	}
+</style>
+<ol>
+	<li>我是ol的li</li>
+	<li>我是ol的li</li>
+	<li class="item">我是ol的li</li>
+	<li>我是ol的li</li>
+	<li>我是ol的li</li>
+</ol>
+<ul>
+	<li>我是ul的li</li>
+	<li>我是ul的li</li>
+	<li class="test">我是ul的li</li>
+	<li>我是ul的li</li>
+	<li>我是ul的li</li>
+</ul>
+<div class="current">I have current</div>
+<div>I don't have current</div>
+<script>
+	$(function () {
+		// sibilings 选取的除了自身以外的所有亲兄弟
+		$('ol .item').siblings('li').css('color', 'red');
+		// prevAll nextAll 当前元素之前/之后的同辈元素
+		$('ul .test').prevAll('li').css('color', 'green');
+		$('ul .test').nextAll('li').css('color', 'orange');
+		// eq(index) 更推荐用方法写
+		$('ul li').eq(2).css('color', 'blue');
+		// 等同于如下
+		$('ul li:eq(2)').css('color', 'blue');
+		// 判断是否有某个类名
+		$('div:first').hasClass('current');  //true
+		$('div:last').hasClass('current');  //false
+	})
+</script>
+```
+
 
 ## 案例：新浪下拉菜单
 
@@ -255,11 +320,184 @@ jquery设置样式 `$('div').css('attribute','value')`
 	})
 </script>
 ```
+## jquery中的排他思想
 
-13.over
-https://www.bilibili.com/video/BV1Wz411B7N5?p=14
+> 排他思想：当前元素设置样式，其余的兄弟元素清除样式
+
+```html
+<script src="jquery.min.js"></script>
+<button>快速</button>
+<button>快速</button>
+<button>快速</button>
+<button>快速</button>
+<button>快速</button>
+<button>快速</button>
+<button>快速</button>
+<script>
+	$(function () {
+		// 隐式迭代 所有的按钮都绑定了点击事件
+		$('button').click(function () {
+			//其余的兄弟去掉背景颜色 隐式迭代
+			$(this).siblings('button').css('background', '');
+			// 当前的元素变化背景颜色
+			$(this).css('background', 'pink');
+		})
+	})
+</script>
+```
+## 案例：淘宝服饰精品
+
+- 左侧有9个标签（li），鼠标移动到任意标签上，右侧的内容区盒子显示对应图片，其余的图片隐藏
+- 需要得到当前小li的索引号，就可以显示对应索引号的图片
+- jQuery得到当前元素索引号`$(this).index()`
+- 通过`eq(index)`方法选择对应的图片
+- 显示隐藏元素 `show()` `hide()`
+
+
+```html
+<script src="jquery.min.js"></script>
+
+	<style>
+		#content div {
+			display: none;
+		}
+	</style>
+	<div class="wrapper">
+		<ul id="left">
+			<li><a href="">女靴</a></li>
+			<li><a href="">雪地靴</a></li>
+			<li><a href="">冬裙</a></li>
+			<li><a href="">呢大衣</a></li>
+			<li><a href="">毛衣</a></li>
+			<li><a href="">棉服</a></li>
+			<li><a href="">女裤</a></li>
+			<li><a href="">羽绒服</a></li>
+			<li><a href="">牛仔裤</a></li>
+		</ul>
+	</div>
+
+	<div id="content">
+		<div style="display:block"><a href="#"><img src="images/01.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/02.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/03.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/04.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/05.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/06.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/07.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/08.jpg" width="200" height="120"></a></div>
+		<div><a href="#"><img src="images/09.jpg" width="200" height="120"></a></div>
+	</div>
+
+	<script>
+		$(function () {
+			// 鼠标经过事件
+			$('#left li').mouseover(function () {
+
+				// 获取当前经过的小li索引号
+				var index = $(this).index();
+
+				// 让右侧对应图片显示出来
+				$('#content div').eq(index).show();
+
+				// 隐藏其余图片
+				$('#content div').eq(index).siblings('div').hide();
+
+			})
+		})
+	</script>
+```
 
 # jquery 样式操作
+
+简单样式修改css，复杂样式操作类
+
+简答样式修改
+- 参数只写属性名，则是返回属性值 `$(this).css('color');`
+- 参数写了属性名和属性值，逗号分隔，可以修改对应属性的属性值 `$(this).css('color','red');` 注意属性名必须加引号，值为数字可以不带单位和引号
+- 参数修改可以是对象形式，方便设置多组样式，属性名和属性值用冒号隔开，属性可以不加引号 `$(this).css({'color':'white','font-size':'20px'})`
+
+```html
+	<script src="jquery.min.js"></script>
+
+	<style>
+		div {
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+		}
+	</style>
+	<div>
+		托尔斯泰
+	</div>
+	<script>
+		$(function () {
+			console.log($('div').css('width')); // 200px
+			$('div').css('width', '300px');  //宽度发生变化
+			$('div').css({
+				'color': 'blue',
+				'font-size': '20px',
+				height: 500,
+				weight: 500,
+				backgroundColor: 'red' //复合属性必须采用驼峰命名法
+			})  //以对象形式修改css, 属性可以不加引号不是数字则需要加引号
+		})
+	</script>
+```
+
+
+复杂样式修改类
+- 作用等同于`classList` 可以操作样式，注意操作类里面的参数不需要加点
+- 添加类 `$('div').addClass('current')` 注意类名无需加点
+- 删除类 `$('div').removeClass('current')` 
+- 切换类 `$('div').toggleClass('current')`
+
+```html
+<script src="jquery.min.js"></script>
+
+	<style>
+		div {
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+			margin: 100px auto;
+			transition: all 0.5s;
+		}
+
+		.current {
+			background-color: red;
+			transform: rotate(360deg);
+		}
+	</style>
+	<div class='div1'></div>
+	<div class="current">haha</div>
+	<div class="div3"></div>
+
+
+	<script>
+		$(function () {
+			// 添加类
+			$('.div1').click(function () {
+				$(this).addClass('current');
+			})
+
+			// 删除类
+			$('.current').click(function () {
+				$(this).removeClass('current');
+			})
+
+			// 切换类
+			$('.div3').click(function () {
+				$(this).toggleClass('current');
+			})
+		})
+	</script>
+```
+
+## 案例：tab栏切换
+
+P18.over
+https://www.bilibili.com/video/BV1Wz411B7N5?p=19
+
 # jquery 效果
 # jquery 属性操作
 # jquery 文本属性值
