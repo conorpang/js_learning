@@ -11,7 +11,7 @@ Course
 - [Web API](https://www.bilibili.com/video/BV1k4411w7sV) `P98.over`
 [source code](https://gitee.com/xiaoqiang001/jsapis_material) 
 [notes from others](https://github.com/babbittry/Front-end-notes/blob/master/Web%20APIs-notes/Web%20APIs.md) 
-- [JQuery](https://www.bilibili.com/video/BV1Wz411B7N5) `P18.over`
+- [JQuery](https://www.bilibili.com/video/BV1Wz411B7N5) `P21.over`
 - [Ajax](https://www.bilibili.com/video/BV1ji4y1876Y/)
 - [Vue.js](https://www.bilibili.com/video/BV12J411m7MG) `P24.over`
 

@@ -11,6 +11,7 @@
 	- [案例：淘宝服饰精品](#案例淘宝服饰精品)
 - [jquery 样式操作](#jquery-样式操作)
 	- [案例：tab栏切换](#案例tab栏切换)
+	- [类操作与className的区别](#类操作与classname的区别)
 - [jquery 效果](#jquery-效果)
 - [jquery 属性操作](#jquery-属性操作)
 - [jquery 文本属性值](#jquery-文本属性值)
@@ -494,11 +495,161 @@ jquery设置样式 `$('div').css('attribute','value')`
 ```
 
 ## 案例：tab栏切换
+- 点击上部li,当前li添加current类,其余兄弟移除类
+- 点击的同时,得到当前li的索引号
+- 让下部里面相应索引号的item显示,其余的item隐藏
 
-P18.over
-https://www.bilibili.com/video/BV1Wz411B7N5?p=19
+
+```html
+	<style>
+		li {
+			height: 30px;
+			width: 80px;
+			background-color: lightgrey;
+			color: black;
+			display: inline-block;
+		}
+
+		.tab_con .item {
+			height: 200px;
+			width: 200px;
+			background-color: pink;
+			display: none;
+		}
+
+		.current {
+			background-color: darkred;
+			color: white;
+			display: inline-block;
+
+		}
+	</style>
+	<script src="jquery.min.js"></script>
+
+	<div class="tab">
+		<div class="tab_list">
+			<ul>
+				<li class="current">a</li>
+				<li>b</li>
+				<li>c</li>
+				<li>d</li>
+				<li>e</li>
+			</ul>
+		</div>
+		<div class="tab_con">
+			<div class="item" style="display:block;">a_content</div>
+			<div class="item">b_content</div>
+			<div class="item">c_content</div>
+			<div class="item">d_content</div>
+			<div class="item">e_content</div>
+		</div>
+	</div>
+
+
+	<script>
+		$(function () {
+			$(".tab_list li").click(function () {
+				// 点击上部的li, 当前li添加current类,其余兄弟移除类
+				// 链式编程操作
+				console.log($(this));
+				$(this).addClass("current").siblings().removeClass("current");
+
+				// 得到li的索引号
+				var index = $(this).index();
+				// 让下部里面相应索引号的item显示,其余item隐藏
+				$('.tab_con .item').eq(index).show().siblings().hide();
+			})
+		})
+	</script>
+
+```
+
+## 类操作与className的区别
+
+- 原生JS种的className会覆盖元素原先的类名
+- jquery的类操作只对特定类进行操作,不影响原先类名
+
+```html
+<script src="jquery.min.js"></script>
+	<style>
+		.one {
+			background-color: pink;
+			height: 200px;
+			width: 200px;
+		}
+
+		.two {
+			transform: rotate(720deg);
+		}
+	</style>
+	<div class="one"></div>
+	<script>
+		// var one = document.querySelector('.one');
+		// one.className = 'two'; //会覆盖掉原有类名one
+
+		$('.one').addClass('two');  //原有类名和新类名同时都有,addClass相当于追加类名
+
+		$('.one').removeClass('two');  //移除类名
+	</script>
+```
 
 # jquery 效果
+动画效果,常见的如:
+- 显示隐藏 show() hide() toggle()
+- 滑动 slideDown() slideUp() slideToggle()
+- 淡入淡出 fadeIn() fadeOut() fadeToggle() fadeTo()
+- 自定义动画 animate() 
+
+显示,语法规范 `show([speed,[easing],[fn]])`
+- 三个参数可以都省略,无动画直接显示
+- speed: 速度,预定速度字符串'slow' 'normal' 'fast' 或者表示动画时长的毫秒数值,如1000
+- easing: 用来指定切换效果, 默认是'swing', 可用参数 'linear'
+- fn: 回调函数,可以再动画完成时执行的函数,每个元素执行一次
+
+隐藏/切换,语法规范 `hide/toggle([speed,[easing],[fn]])`,用法和show()类似
+
+```html
+<style>
+		div {
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+		}
+	</style>
+	<script src="jquery.min.js"></script>
+	<button>show</button>
+	<button>hide</button>
+	<button>toggle</button>
+	<div></div>
+	<script>
+		$(function () {
+			$('button').eq(0).click(function () {
+				$('div').show(1000, function () {
+					alert('1');
+				});
+			})
+
+			$('button').eq(1).click(function () {
+				$('div').hide(1000, function () {
+					alert('1');
+				});
+			})
+
+			$('button').eq(2).click(function () {
+				$('div').toggle(1000, function () {
+					alert('1');
+				});
+			})
+			//一般情况下,我们都不加参数,直接显示或者隐藏
+		});
+	</script>
+```
+
+21.over
+https://www.bilibili.com/video/BV1Wz411B7N5?p=22
+
+
+
 # jquery 属性操作
 # jquery 文本属性值
 # jquery 元素操作
