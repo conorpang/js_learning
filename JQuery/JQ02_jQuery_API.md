@@ -13,8 +13,19 @@
 	- [案例：tab栏切换](#案例tab栏切换)
 	- [类操作与className的区别](#类操作与classname的区别)
 - [jquery 效果](#jquery-效果)
+	- [显示隐藏效果](#显示隐藏效果)
+	- [滑动效果](#滑动效果)
+	- [事件切换](#事件切换)
+	- [动画队列及其停止排队方法](#动画队列及其停止排队方法)
+	- [淡入淡出效果](#淡入淡出效果)
+	- [案例: 高亮显示案例](#案例-高亮显示案例)
+	- [自定义动画 animate](#自定义动画-animate)
+	- [案例:王者荣耀手风琴效果(折叠卡片)](#案例王者荣耀手风琴效果折叠卡片)
 - [jquery 属性操作](#jquery-属性操作)
+	- [案例:购物车模块-全选](#案例购物车模块-全选)
 - [jquery 文本属性值](#jquery-文本属性值)
+	- [案例: 购物车增减商品数量](#案例-购物车增减商品数量)
+	- [案例: 购物车修改商品小计](#案例-购物车修改商品小计)
 - [jquery 元素操作](#jquery-元素操作)
 - [jquery 尺寸、位置操作](#jquery-尺寸位置操作)
 
@@ -218,7 +229,7 @@ jquery设置样式 `$('div').css('attribute','value')`
 <div>I don't have current</div>
 <script>
 	$(function () {
-		// sibilings 选取的除了自身以外的所有亲兄弟
+		// siblings 选取的除了自身以外的所有亲兄弟
 		$('ol .item').siblings('li').css('color', 'red');
 		// prevAll nextAll 当前元素之前/之后的同辈元素
 		$('ul .test').prevAll('li').css('color', 'green');
@@ -312,11 +323,13 @@ jquery设置样式 `$('div').css('attribute','value')`
 		$('.nav>li').mouseover(function () {
 			// $(this) jQuery 中的当前元素 无需引号
 			// show() 显示元素 hide() 隐藏元素
-			$(this).children('ul').show();
+			// $(this).children('ul').show();
+			$(this).children('ul').slideDown(200);
 		})
 		// 鼠标移开
 		$('.nav>li').mouseout(function () {
-			$(this).children('ul').hide();
+			// $(this).children('ul').hide();
+			$(this).children('ul').slideUp(200);
 		})
 	})
 </script>
@@ -600,13 +613,13 @@ jquery设置样式 `$('div').css('attribute','value')`
 - 淡入淡出 fadeIn() fadeOut() fadeToggle() fadeTo()
 - 自定义动画 animate() 
 
-显示,语法规范 `show([speed,[easing],[fn]])`
+## 显示隐藏效果
+
+显示/隐藏/切换,语法规范 `show([speed,[easing],[fn]])`
 - 三个参数可以都省略,无动画直接显示
 - speed: 速度,预定速度字符串'slow' 'normal' 'fast' 或者表示动画时长的毫秒数值,如1000
 - easing: 用来指定切换效果, 默认是'swing', 可用参数 'linear'
 - fn: 回调函数,可以再动画完成时执行的函数,每个元素执行一次
-
-隐藏/切换,语法规范 `hide/toggle([speed,[easing],[fn]])`,用法和show()类似
 
 ```html
 <style>
@@ -645,12 +658,452 @@ jquery设置样式 `$('div').css('attribute','value')`
 	</script>
 ```
 
-21.over
-https://www.bilibili.com/video/BV1Wz411B7N5?p=22
+## 滑动效果
+
+- 语法规范  `slideDown([speed,[easing],[fn]])`, 和show()系列是一样的
+
+```html
+<style>
+	div {
+		width: 200px;
+		height: 200px;
+		background-color: pink;
+		display: none;
+	}
+</style>
+<script src="jquery.min.js"></script>
+<button>slideDown</button>
+<button>slideUp</button>
+<button>sildeToggle</button>
+<div></div>
+<script>
+	$(function () {
+		$('button').eq(0).click(function () {
+			$('div').slideDown(1000);
+		})
+		$('button').eq(1).click(function () {
+			$('div').slideUp(500);
+		})
+		$('button').eq(2).click(function () {
+			$('div').slideToggle(500);
+		})
+	});
+</script>
+```
+
+## 事件切换
+
+`hover([over,] out)`
+over 鼠标经过触发的函数,相当于mouseover
+out 鼠标离开触发的函数,相当于mouseout
 
 
+> 利用该函数对前述新浪微博导航栏的写法再改进
+
+```html
+<script src="jquery.min.js"></script>
+<script>
+		$(function () {
+			// 鼠标经过
+			// $('.nav>li').mouseover(function () {
+			// 	// $(this) jQuery 中的当前元素 无需引号
+			// 	// show() 显示元素 hide() 隐藏元素
+			// 	// $(this).children('ul').show();
+			// 	$(this).children('ul').slideDown(200);  //改成动画效果
+			// })
+			// // 鼠标移开
+			// $('.nav>li').mouseout(function () {
+			// 	// $(this).children('ul').hide();
+			// 	$(this).children('ul').slideUp(200);  //改成动画效果
+			// })
+
+
+			// 简化
+			// 鼠标经过和离开的复合效果
+			// $('.nav>li').hover(function () {
+			// 	$(this).children('ul').slideDown(200);
+			// }, function () {
+			// 	$(this).children('ul').slideUp(200);   
+			// })
+
+
+			// 极度简化
+			// hover如果只写一个函数,那么鼠标经过和离开都会触发这个函数
+			$('.nav>li').hover(function () {
+				$(this).children('ul').slideToggle(200);
+			})
+		})
+	</script>
+
+```
+## 动画队列及其停止排队方法
+
+- 动画队列/效果队列:动画或者效果一旦触发就会执行,如果多次触发,就会造成多个动画或者效果排队执行
+- 停止排队 `stop()` 停止上一次动画
+- `stop()`必须写到动画前面
+ 
+```html
+<script src="jquery.min.js"></script>
+<script>
+		$(function () {
+			$('.nav>li').hover(function () {
+				// stop()方法必须写到动画前面
+				$(this).children('ul').stop().slideToggle(200);
+			})
+		})
+	</script>
+
+```
+
+## 淡入淡出效果
+
+- 有四个:`fadeIn()` `fadeOut()`  `fadeToggle()` `fadeTo()`
+- 前三个语法规范: `fadeIn([speed,[easing],[fn]])`, 和show()系列是一样的
+- `fadeTo()`语法规范: `fadeTo([speed,opacity,[easing],[fn]])` 
+  - opacity 为透明度必须写, 取值0~1之间
+  - speed: 速度,预定速度字符串'slow' 'normal' 'fast' 或者表示动画时长的毫秒数值,如1000
+  - easing: 用来指定切换效果, 默认是'swing', 可用参数 'linear'
+  - fn: 回调函数,可以再动画完成时执行的函数,每个元素执行一次
+
+## 案例: 高亮显示案例
+
+```html
+<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		body {
+			background: #000;
+		}
+
+		.wrap {
+			margin: 100px auto 0;
+			width: 630px;
+			height: 394px;
+			padding: 10px 0 0 10px;
+			background: #000;
+			overflow: hidden;
+			border: 1px solid #fff;
+		}
+
+		.wrap li {
+			float: left;
+			margin: 0 10px 10px 0;
+		}
+
+		.wrap img {
+			display: block;
+			border: 0;
+			width: 200px;
+			height: 200px;
+		}
+	</style>
+
+	<script src="jquery.min.js"></script>
+
+	<div class="wrap">
+		<ul>
+			<li>
+				<a href="#"><img src="images/01.jpg" alt="" /></a>
+			</li>
+			<li>
+				<a href="#"><img src="images/02.jpg" alt="" /></a>
+			</li>
+			<li>
+				<a href="#"><img src="images/03.jpg" alt="" /></a>
+			</li>
+			<li>
+				<a href="#"><img src="images/04.jpg" alt="" /></a>
+			</li>
+			<li>
+				<a href="#"><img src="images/05.jpg" alt="" /></a>
+			</li>
+			<li>
+				<a href="#"><img src="images/06.jpg" alt="" /></a>
+			</li>
+		</ul>
+	</div>
+
+
+	<script>
+		$(function () {
+			$('.wrap li').hover(function () {
+				// 鼠标进入, 其他的li透明度降低为0.5
+				$(this).siblings().stop().fadeTo(400, 0.5);
+			}, function () {
+				// 鼠标离开, 其他的li透明度恢复为1
+				$(this).siblings().stop().fadeTo(400, 1)
+			})
+		})
+	</script>
+```
+
+## 自定义动画 animate 
+
+- 语法规范: `animate(params, [speed], [easing], [fn])`
+- params: 想要更改的样式属性,以对象形式传递,必须写,属性名可以不带引号,如果是复合属性需要采用驼峰命名法,其余的参数都可以省略
+
+```html
+<style>
+		div {
+			position: absolute;
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+		}
+	</style>
+	<script src="jquery.min.js"></script>
+	<button>动起来</button>
+	<div></div>
+	<script>
+		$(function () {
+			$('button').click(function () {
+				$('div').animate({
+					left: 500,
+					top: 300,
+					opacity: 0.4,
+					width: 500
+				}, 500);
+			})
+		})
+	</script>
+```
+
+## 案例:王者荣耀手风琴效果(折叠卡片)
+效果分析:
+- 鼠标经过某个小li, 
+  - 当前li宽度变为224px
+  - 同时里面的图片淡出, 大图片淡入
+  - 其余兄弟li宽度变为69px, 小图片淡入, 大图片淡出
+
+```html
+<script>
+		$(function () {
+			// 鼠标经过某个小li
+			$('.king li').mouseenter(function () {
+				// 当前li宽度变为224px, 同时里面的图片淡出, 大图片淡入
+				$(this).stop().animate({
+					width: 224
+				}, 200).find('.small').stop().fadeOut().siblings('.big').stop().fadeIn();
+
+				// 其余兄弟li宽度变为69px, 小图片淡入, 大图片淡出
+				$(this).siblings('li').stop().animate({
+					width: 69
+				}, 200).find('.small').stop().fadeIn().siblings('big').stop().fadeOut();
+			})
+			// 记得加stop()
+		})
+</script>
+```
 
 # jquery 属性操作
+
+- 获取元素固有属性值 `prop('attributeName')`
+- 设置~ : `prop('attributeName')`
+- 获取元素自定义属性值: `attr('attributeName')`
+- 设置~: `attr('attributeName')`
+- `attr()`方法也可以获取h5自定义属性
+
+数据缓存
+- `data()`方法可以再指定的元素上存取数据,并不会修改DOM元素的结构,一旦页面刷新,之前存放的数据都将被移除
+- 附加数据语法 `data('name','value')`
+- 获取数据语法 `data('name')`
+- 同时该方法还可以读取会h5自定义属性(可省略data-前缀),得到的是数字型
+
+```html
+	<a href="http://cn.bing.com" title="good">hahahhaha</a>
+	<input type="checkbox" checked>
+	<div index="nothing" data-index="2">自定义</div>
+	<span>123</span>
+	<script>
+		$(function () {
+			// 获取固有属性值
+			console.log($('a').prop('href'));
+
+			// 设置固有属性值
+			$('a').prop('title', 'all good');
+			$('input').change(function () {
+				console.log($(this).prop('checked'));  // true|false
+			})
+
+			// 获取自定义属性
+			console.log($('div').attr('index'));  // nothing
+
+			// 设置自定义属性
+			$('div').attr('index', 'something')
+			console.log($('div').attr('index'));  // something
+			console.log($('div').attr('data-index'));  // 2
+
+			// 数据缓存 data() 存放在元素的内存里面
+			$('span').data('uname', 'andy');
+			console.log($('span').data('uname')); // 可以取到andy
+			console.log($('div').data('index'));  //可以不用写data-前缀,同样可以取到值2, 2为数字型
+		})
+	</script>
+```
+
+## 案例:购物车模块-全选
+
+案例分析:点击上面或者下面的全选按钮,所有商品都选中
+- 全选思路:里面3个小的复选框按钮 j-checkbox 选中状态 checked 跟着全选 checkall 按钮走
+- 因为 checked 是复选框的固有属性,所以利用 prop() 方法获取和设置该属性
+- 把全选按钮状态赋值给三个小的复选框即可
+- 当我们每次点击小的复选框按钮时,就做判断,如果小的复选框被选中的个数等于3,就应该把全选按钮选上,否则不选
+- `:checked` 选择器 查找被选中的表单元素
+- 
+```html
+<script>
+		$(function () {
+			// 全选功能, 把全选按钮的状态赋值给三个小的按钮即可
+			$('.checkall').change(function () {
+				$('.j-checkbox, .checkall').prop('checked', $(this).prop('checked'));
+			})
+
+			// 单个点击小的按钮, 所有的都选中后, 全选按钮也自动跟着选中
+			$('.j-checkbox').change(function () {
+				// 被选中的复选框个数 = 所有的复选框个数
+				if ($('.j-checkbox:checked').length === $('.j-checkbox').length) {
+					$('.checkall').prop('checked', true);
+				} else {
+					$('.checkall').prop('checked', false);
+				}
+			})
+		})
+	</script>
+```
+
 # jquery 文本属性值
+- 主要针对元素的内容/表单的值 操作
+- 普通元素内容 `html()` 相当于原生的 `innerHTML()`
+  - `html()` 获取元素内容
+  - `html('content')` 设置元素内容
+- 普通元素文本内容 `text()` 相当于原生的 `innerText()`
+  - `text()` 获取元素文本内容
+  - `text('content')` 设置元素文本内容
+- 表单元素的值 `val()`
+  - `val()` 获取元素内容
+  - `val('content')` 设置元素内容
+
+
+```html
+<div>
+		<span>iamcontent</span>
+	</div>
+	<input type="text" value="please enter something">
+	<script>
+		$(function () {
+			// 设置元素内容 html()
+			console.log($('div').html());
+			$('div').html('123');
+
+			// 设置文本内容 text()
+			console.log($('div').text());
+			$('div').text('123');
+
+			// 设置表单的值 val()
+			console.log($('input').val());
+			$('input').val('changed');
+		})
+	</script>
+```
+
+## 案例: 购物车增减商品数量
+
+核心思路:
+- 首先声明一个变量,点击+号,就让这个值++,然后赋值给文本框
+- 注意只能增加本商品的数量,即当前+号的兄弟文本框的值
+- 修改表单的值用val()方法
+- 变量的初始值是文本框的值,在这个值的基础上++
+- 减号的思路同理,如果文本框的值是1,就不能再减了
+
+```html
+<script>
+		$(function () {
+
+			// 增加
+			$('.increment').click(function () {
+				// 得到当前兄弟文本框的值
+				var n = $(this).siblings('.itxt').val();
+				n++;
+				$(this).siblings('.itxt').val(n);
+			})
+
+
+			// 减少
+			$('.decrement').click(function () {
+				var n = $(this).siblings('.itxt').val();
+				// 减不能小于1
+				if (n == 1) {
+					return false;
+				} else {
+					n--;
+				}
+				$(this).siblings('.itxt').val(n);
+			})
+		})
+	</script>
+```
+
+## 案例: 购物车修改商品小计
+
+核心思路:
+- 每次点击加号或者剑豪,根据文本框的值乘以当前商品的价格,就是商品的小计
+- 注意只能增加本商品的小计模块
+- 修改普通元素的内容用text()方法
+- 当前商品的价格要把人民币符号去掉再相乘,截取字符串用substr()方法
+
+```html
+<script>
+		$(function () {
+
+			// 增加
+			$('.increment').click(function () {
+				// 得到当前兄弟文本框的值
+				var n = $(this).siblings('.itxt').val();
+				n++;
+				$(this).siblings('.itxt').val(n);
+
+				// 计算当前商品的价格
+				var p = $(this).parent().parent().siblings('.p-price').html();
+				p = p.substr(1);
+				$(this).parent().parent().siblings('.p-sum').html('￥' + p * n);
+
+			})
+
+
+			// 减少
+			$('.decrement').click(function () {
+				var n = $(this).siblings('.itxt').val();
+				// 减不能小于1
+				if (n == 1) {
+					return false;
+				} else {
+					n--;
+				}
+				$(this).siblings('.itxt').val(n);
+
+				// 计算当前商品的价格
+				var p = $(this).parent().parent().siblings('.p-price').html();
+				p = p.substr(1);
+				$(this).parent().parent().siblings('.p-sum').html('￥' + p * n);
+			})
+		})
+	</script>
+```
+
+P33.over
+https://www.bilibili.com/video/BV1Wz411B7N5?p=34
+
 # jquery 元素操作
+
+
+
 # jquery 尺寸、位置操作
+
+
