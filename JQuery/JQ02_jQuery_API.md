@@ -27,6 +27,11 @@
 	- [案例: 购物车增减商品数量](#案例-购物车增减商品数量)
 	- [案例: 购物车修改商品小计](#案例-购物车修改商品小计)
 - [jquery 元素操作](#jquery-元素操作)
+	- [遍历元素](#遍历元素)
+	- [创建元素](#创建元素)
+	- [添加元素](#添加元素)
+	- [删除元素](#删除元素)
+	- [案例: 购物车删除商品模块](#案例-购物车删除商品模块)
 - [jquery 尺寸、位置操作](#jquery-尺寸位置操作)
 
 # jquery 选择器
@@ -1052,17 +1057,29 @@ out 鼠标离开触发的函数,相当于mouseout
 
 ## 案例: 购物车修改商品小计
 
-核心思路:
-- 每次点击加号或者剑豪,根据文本框的值乘以当前商品的价格,就是商品的小计
+小计模块
+- 核心思路:每次点击加号或者剑减号,根据文本框的值乘以当前商品的价格,就是商品的小计
 - 注意只能增加本商品的小计模块
-- 修改普通元素的内容用text()方法
-- 当前商品的价格要把人民币符号去掉再相乘,截取字符串用substr()方法
+- 修改普通元素的内容用 text() 方法
+- 当前商品的价格要把人民币符号去掉再相乘,截取字符串用 substr()方法
+- parents('selector') 方法可以返回指定祖先元素
+- 最后计算的结果如果想保留两位小数可以使用 toFixed(2) 方法
+- 用户也可以直接修改表单里面的值,同样要计算小计,用表单change事件
+- 用最新的表单内的值乘以单价即可,但是还是当前商品小计
+
+总计和总额模块
+- 核心思路:把所有文本框里面的值相加就是总计数量,总额同理
+- 文本框里面值不相同,如果想要相加需要用到each()遍历,声明一个变量,相加即可
+- 点击加减号,会改变总结和总额,如果用户修改了文本框里面的值同样会改变总计和总额
+- 因此可以封装一个函数求总计和总额,以上2个操作调用这个函数即可
+- 注意:总计是文本框里面的值相加用val() 总额是普通元素内容用text()
+- 注意:普通元素里面的内容要去掉￥并且转换为数字型才能相加
 
 ```html
 <script>
 		$(function () {
 
-			// 增加
+			// 增加数量 商品小计随之改变
 			$('.increment').click(function () {
 				// 得到当前兄弟文本框的值
 				var n = $(this).siblings('.itxt').val();
@@ -1070,14 +1087,15 @@ out 鼠标离开触发的函数,相当于mouseout
 				$(this).siblings('.itxt').val(n);
 
 				// 计算当前商品的价格
-				var p = $(this).parent().parent().siblings('.p-price').html();
+				var p = $(this).parents('.p-num').siblings('.p-price').html();
+				// 去掉人民币符号
 				p = p.substr(1);
-				$(this).parent().parent().siblings('.p-sum').html('￥' + p * n);
+				$(this).parents('.p-num').siblings('.p-sum').html('￥' + (p * n).toFixed(2)); // toFixed(2) 结果保留2位小数
 
 			})
 
 
-			// 减少
+			// 减少数量 商品小计随之改变
 			$('.decrement').click(function () {
 				var n = $(this).siblings('.itxt').val();
 				// 减不能小于1
@@ -1087,22 +1105,213 @@ out 鼠标离开触发的函数,相当于mouseout
 					n--;
 				}
 				$(this).siblings('.itxt').val(n);
+				getSum(); // 总计随之变化
 
 				// 计算当前商品的价格
-				var p = $(this).parent().parent().siblings('.p-price').html();
+				var p = $(this).parents('.p-num').siblings('.p-price').html();
 				p = p.substr(1);
-				$(this).parent().parent().siblings('.p-sum').html('￥' + p * n);
+				$(this).parents('.p-num').siblings('.p-sum').html('￥' + (p * n).toFixed(2));
+				getSum(); // 总计随之变化
+			})
+
+			// 用户修改文本框的值 计算小计模块
+			$('.txt').change(function(){
+				// 先得到文本框里面的值 乘以 当前商品的单价
+				var n = $(this).val();
+				var p = $(this).parents('.p-num').siblings('.p-price').html();
+				p = p.substr(1);
+				$(this).parents('.p-num').siblings('.p-sum').html('￥' + (p * n).toFixed(2));
+				getSum(); // 总计随之变化
+
+			})
+
+			// 总计和总额模块
+			getSum(); // 进入页面先调用一次
+			// 总计
+			function getSum() {
+			var count = 0;  // 计算总件数
+			var money = 0;  // 计算总价钱
+			$('.itxt').each(function (i, ele) {
+				count += parseInt($(ele).val());
+			})
+
+			$('.amount-sum em').text(count);
+
+			// 总额
+			$('.p-sum').each(function (i,ele) {
+				money += parseFloat($(ele).text().substr(1));
+			})
+			$('.price-sum em').text('￥'+ money.toFixed(2));
+
+
+		}
+
+
+		})
+	</script>
+```
+
+
+寻找祖先元素 parents()
+
+```html
+<div class="one">
+		<div class="two">
+			<div class="three">
+				<div class="four">
+					我不容易
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		// 一个一个寻找父节点
+		$('.four').parent().parent().parent();
+
+		// parents('selector') 可以返回祖先元素 
+		$('.four').parents('.one');	
+	</script>
+```
+
+
+# jquery 元素操作
+
+主要是遍历 创建 添加 删除 元素操作
+
+## 遍历元素
+
+jquery隐式迭代是对同一类元素做相同操作,如果想给同一类元素做不同操作,就需要用到遍历
+
+语法:`$('div'.each(fucntion(index, domEle){xxx;}))`
+
+1. each() 方法遍历匹配的每一个元素, 主要用DOM处理
+2. 里面的回调函数有两个参数, index是元素的索引号, domEle 每个DOM元素对象, 而不是jquery对象
+3. 要使用jquery方法, 需要将DOM元素转换为jquery对象 $(domEle)
+
+```html
+	<div>111</div>
+	<div>222</div>
+	<div>333</div>
+	<script>
+		$(function () {
+			var arr = ['red', 'green', 'blue'];
+			var sum = 0;
+			$('div').each(function (i, domEle) {
+				// 回调函数第一个参数为索引号,名称可以自定义
+				// 回调函数第二个参数为dom对象,使用jquery方法需要转换
+
+				// 借助数组为每个元素添加不同颜色
+				$(domEle).css('color', arr[i]);
+
+				// 累加三个div内的值, 需要转换为字符型
+				sum += parseInt($(domEle).text());
+			})
+			console.log(sum);
+		})
+	</script>
+```
+
+另一种遍历方式 `$.each(object, function(index, element){xxx;})`
+
+1. $.each() 方法可用于遍历任何对象,主要用于**数据处理**,比如数组,对象
+2. 里面的函数有2个参数, index是元素索引号,element遍历内容
+
+```html
+	<div>111</div>
+	<div>222</div>
+	<div>333</div>
+	<script>
+		$(function () {
+			var arr = ['red', 'green', 'blue'];
+
+			// 遍历元素
+			$.each($('div'), function (i, ele) {
+				console.log(i);
+				console.log(ele);
+			})
+
+			// 遍历数组
+			$.each($(arr), function (i, ele) {
+				console.log(i);
+				console.log(ele);
+			})
+
+			// 遍历对象
+			$.each({ name: 'andy', age: 18 }, function (i, ele) {
+				console.log(i);  // 输出属性名
+				console.log(ele); // 输出属性值
 			})
 		})
 	</script>
 ```
 
-P33.over
-https://www.bilibili.com/video/BV1Wz411B7N5?p=34
+## 创建元素
 
-# jquery 元素操作
+直接写HTML标签用$()包裹即可动态创建
+
+语法:`$('<li></li>')`
+
+## 添加元素
+
+1. 内部添加 
+
+- `element.append('content')` 把内容添加到匹配元素内部最后面,类似原生的appendChild
+- `element.prepend('content')` 把内容添加到匹配元素内部最前面
+
+2. 外部添加
+
+- `element.before('content')` 把内容添加到目标元素后面
+- `element.after('content')` 把内容添加到目标元素前面
+
+内部添加元素,生成之后,是父子关系
+外部添加元素,生成之后,是兄弟关系
 
 
+## 删除元素
+
+- `element.remove()` 删除匹配的元素(自杀)
+- `element.empty()` 删除匹配的元素集合中所有的子节点(杀孩子)
+- `element.html('')` 清空匹配的元素内容(换成空)
+
+```html
+	<ul>
+		<li>
+			我是原先的li
+		</li>
+	</ul>
+	<div class="test">我是原先的div</div>
+	<script>
+		// 创建元素
+		var li = $('<li>我是后来的li</li>');
+		var lili = $('<li>我是后来的lili</li>');
+
+		// 添加元素
+
+		// (1)内部添加
+		$('ul').append(li);  // 放到原来的小li后面
+		$('ul').prepend(lili);
+
+		// (2)外部添加
+		var div1 = $('<div>我是后来的div1</div>');
+		var div2 = $('<div>我是后来的div2</div>');
+
+		$('.test').after(div1);
+		$('.test').before(div2);
+
+		// 删除元素
+		// $('ul').remove();
+		// $('ul').empty(); // ul还在,只是内部的小li都没了
+		$('ul').html(''); //ul还在,内部换成空白
+```
+
+## 案例: 购物车删除商品模块
+
+```html
+
+```
+
+P39.over
+https://www.bilibili.com/video/BV1Wz411B7N5?p=40
 
 # jquery 尺寸、位置操作
 
