@@ -32,6 +32,7 @@
 	- [添加元素](#添加元素)
 	- [删除元素](#删除元素)
 	- [案例: 购物车删除商品模块](#案例-购物车删除商品模块)
+	- [案例：购物车案例-选中商品添加背景](#案例购物车案例-选中商品添加背景)
 - [jquery 尺寸、位置操作](#jquery-尺寸位置操作)
 
 # jquery 选择器
@@ -1306,13 +1307,87 @@ jquery隐式迭代是对同一类元素做相同操作,如果想给同一类元�
 
 ## 案例: 购物车删除商品模块
 
-```html
+- 核心思路：把商品remove() 删除元素即可
+- 有三个地方可以进行删除操作：1. 商品后面的删除按钮，2. 删除选中的商品 3. 清理购物车
+- 商品后面的删除按钮：一定是删除当前的商品，所以从$(this)出发
+- 删除选中的商品：先判断小的复选框按钮是否为选中状态，如果是选中，则删除对应的商品
+- 清理购物车：
 
+
+```html 
+<script>
+		// 删除商品模块
+		// 1. 商品后面的删除按钮
+		$('.p-action a').click(function () {
+			// 删除当前的商品
+			$(this).parents('.cart-item').remove();
+			getSum(); //删除后重新计算价格
+		})
+
+		// 2. 删除选中的商品
+		$('.remove-batch').click(function () {
+			$('.j-checkbox:checked').parents('.cart-item').remove(); //含有隐式迭代
+			getSum();
+		})
+
+		// 3. 清理购物车
+		$('.clear-all').click(function () {
+			$('.cart-item').remove();
+			getSum();
+		})
+</script>
 ```
 
-P39.over
-https://www.bilibili.com/video/BV1Wz411B7N5?p=40
+## 案例：购物车案例-选中商品添加背景
+
+- 核心思路：选中的商品添加背景，不选中移除背景即可
+- 全选按钮点击：如果全选是选中的，则所有的商品添加背景，否则移除背景
+- 小的复选框点击：如果为选中状态，则当前商品添加背景，否则移除背景
+- 这个背景，可以童工类名修改，添加类和删除类
+
+```html
+<style>
+		.check-cart-item {
+			background: #fff4e8;
+		}
+</style>
+
+<script>
+		$(function () {
+			// 全选功能, 把全选按钮的状态赋值给三个小的按钮即可
+			$('.checkall').change(function () {
+				$('.j-checkbox, .checkall').prop('checked', $(this).prop('checked'));
+				if ($(this).prop('checked')) {
+					// 添加类名 check-cart-item
+					$('.cart-item').addClass('check-cart-item');
+				} else {
+					// 移除类名 check-cart-item
+					$('.cart-item').removeClass('check-cart-item');
+				}
+
+				// 单个点击小的按钮, 所有的都选中后, 全选按钮也自动跟着选中
+				$('.j-checkbox').change(function () {
+					// 被选中的复选框个数 = 所有的复选框个数
+					if ($('.j-checkbox:checked').length === $('.j-checkbox').length) {
+						$('.checkall').prop('checked', true);
+					} else {
+						$('.checkall').prop('checked', false);
+					}
+
+					if ($(this).prop('checked')) {
+						// 当前商品添加类名 check-cart-item
+						$(this).parents('.cart-item').addClass('check-cart-item');
+					} else {
+						// 当前商品移除类名 check-cart-item
+						$(this).parents('.cart-item').removeClass('check-cart-item');
+					}
+				})
+			})
+		})
+</script>
+```
+
 
 # jquery 尺寸、位置操作
 
-
+???
