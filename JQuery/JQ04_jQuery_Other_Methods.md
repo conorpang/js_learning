@@ -110,6 +110,8 @@
 
 # jquery 插件
 
+## jquery 插件
+
 - jquery功能比较有限，想要有更加复杂的特效，可以借助jquery插件完成
 - 这些插件也依赖于jquery, 所以必须先引入jquery
 - 常用插件网站
@@ -127,6 +129,32 @@
   - 图片使用延迟加载,可提高网页下载速度,也能帮助减轻服务器负载
   - 当滑动到可视区域时,再加载图片
 - 全屏滚动 fullpage.js [github](https://github.com/alvarotrigo/fullPage.js/tree/master/lang/chinese#fullpagejs)
+ 
+## bootstrap JS 插件
 
-P53.over
-https://www.bilibili.com/video/BV1Wz411B7N5?p=54
+bootstrap框架也是依赖于jquery开发的，因此里面的js插件使用，也必须引入jquery文件（需要引入bootstrap的css/js，jquery的js）
+
+[bootstrap JS插件](https://v3.bootcss.com/javascript/)
+- 组件：常用功能组合在了一起
+- JS插件：模态框、标签页、按钮等
+
+# 案例：阿里百秀
+
+bootstrap直接找组件复制后按需修改
+
+# 综合案例： ToDOList
+
+1. 功能介绍
+   - 文本框里面输入内容，按下回车，就可以生成待办事项
+   - 点击待办事项复选框，可以把当前数据添加到已完成事项里面
+   - 点击已完成事项复选框，可以把当前数据添加到待办事项里
+   - 本页面内容刷新后不会丢失（本地存储）
+
+2. 前期准备
+   - 基本HTML骨架代码
+   - 引入的css，js
+   - 自己的js可以单独写一个文件再引入
+  
+
+P58.over
+https://www.bilibili.com/video/BV1Wz411B7N5?p=59
