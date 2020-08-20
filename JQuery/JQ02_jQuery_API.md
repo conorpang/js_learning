@@ -167,7 +167,7 @@ jquery设置样式 `$('div').css('attribute','value')`
 > 重点记 `parent()`，`children(selector)`，`find(selector)`，`siblings(selector)`，`eq(index)`
 
 - `parent()` 用法: `$('li').parent()` 说明:查找父级
-- `children(selector)` 用法: `$('ul').('li')` 说明:查找最近一级的子元素(亲儿子),相当于 `$('ul>li')`
+- `children(selector)` 用法: `$('ul').children('li')` 说明:查找最近一级的子元素(亲儿子),相当于 `$('ul>li')`
 - `find(selector)` 用法: `$(ul).find('li')` 说明:后代选择器,相当于`$('ul li')`
 - `siblings(selector)` 用法: `$('.first').siblings(li)` 说明: 查找兄弟接节点,不包括本身
 - `nextAll([expr])` 用法: `$('.first').nextAll()` 说明: 查找当前元素之后所有的同辈元素

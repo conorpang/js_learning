@@ -196,7 +196,7 @@ off()方法可以移除通过on()方法添加的事件处理程序
 	</script>
 ```
 
-如果有的事件只处罚一次，可以使用one()来绑定事件
+如果有的事件只触发一次，可以使用one()来绑定事件
 
 ```html
 	<p>i am p</p>
@@ -211,7 +211,73 @@ off()方法可以移除通过on()方法添加的事件处理程序
 
 有些事件希望自动触发，比如轮播图自动播放功能跟点击按钮一直，可以利用定时器自动触发右侧按钮点击事件，不必鼠标点击触发
 
-P46.over
-https://www.bilibili.com/video/BV1Wz411B7N5?p=47
+有三种方式
+1. `element.click()` // 第一种简写形式
+2. `element.trigger('type')` // 第二种自动触发方式
+3. `element.triggerHandler(type)`  // 第三种自动触发方式,不会触发元素的默认行为
+
+```html
+<style>
+	div {
+		width: 200px;
+		height: 200px;
+		background-color: pink;
+	}
+</style>
+<div></div>
+<input type="text">
+<script>
+	$(function () {
+		$('div').on('click', function () {
+			alert(11);
+		})
+
+		// 自动触发事件
+		// 1. element.click()
+		// $('div').click();
+
+		// 2. element.trigger('type')
+		// $('div').trigger('click');
+
+		// 3. element.triggerHandler(type)
+		$('div').triggerHandler('click');
+		$('input').on('focus', function () {
+			$(this).val('nihao');
+		});
+		$('input').triggerHandler('focus');
+	})
+</script>
+```
 
 # jquery 事件对象
+
+事件被触发,就会有事件对象产生
+`element.on(events, [selector], function(event){})`
+
+- 阻止默认行为: `event.preventDefault()` / `return false`
+- 阻止冒泡: `event.stopPropagation()`
+
+```html
+<style>
+	div {
+		width: 200px;
+		height: 200px;
+		background-color: pink;
+	}
+</style>
+<div></div>
+<script>
+	$(function () {
+		$(document).on('click', function () {
+			console.log('点击了doocument');
+		})
+
+		$('div').on('click', function (e) {  // 这里的e为事件对象
+			console.log('点击了div');
+			e.stopPropagation(); // 停止冒泡
+		})
+
+
+	})
+</script>
+```

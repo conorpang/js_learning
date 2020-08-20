@@ -8,6 +8,35 @@
 	<script src="jquery.min.js"></script>
 </head>
 
+<style>
+	div {
+		width: 200px;
+		height: 200px;
+		background-color: pink;
+	}
+</style>
+
+<div></div>
+<span></span>
+
+<script>
+	$(function () {
+
+		// 封装选择元素的函数$
+		function $(ele) {
+			return document.querySelector(ele);
+		}
+		console.log($('div'));
+
+		// $符号冲突，用jQuery代替
+		jQuery.each();
+
+		// 让jQuery释放对$的控制权，用户可以自定义
+		var suibian = jQuery.noConflict();
+		console.log(suibian('span'));
+	})
+
+</script>
 
 <body>
 
