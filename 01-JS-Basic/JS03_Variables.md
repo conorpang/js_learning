@@ -27,21 +27,22 @@
 
 # 变量的使用
 
-
+```html
 <script>
 	// 1.声明
 	var age; //age为变量名  //var是固定的，age是变量名，自己定
 
+
 	// 2.赋值
 	age = 10; //把这个变量赋值为10
-
+	
 	// 3.输出结果
 	console.log(age);
-
+	
 	// 4.变量的初始化
 	var myName = 'pink老师';
 </script>
-
+```
 
 
 # 变量的使用

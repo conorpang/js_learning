@@ -12,9 +12,9 @@ vue结合网络数据开发应用
 
 使用方式：加入以下代码
 
+```html
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
+```
 
 
 24.over

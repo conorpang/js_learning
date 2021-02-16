@@ -37,6 +37,7 @@ Vue 学习前需要掌握
 - 使用简洁的模板语法{{}}把数据渲染到页面上
 
 
+```js
 <div id="app">
 	{{ message }}
 </div>
@@ -52,6 +53,7 @@ Vue 学习前需要掌握
 		}
 	})
 </script>
+```
 
 # el: 挂载点
 
@@ -68,6 +70,7 @@ Vue会管理el选项命中的元素及其内部的后代元素
 可以使用其他的双标签，不用于单标签，不用于HTML和BODY标签
 
 
+```js
 {{ message }}
 <!-- el命中的元素外部不可以作用message属性 -->
 <div id="app" class="app">
@@ -91,6 +94,7 @@ Vue会管理el选项命中的元素及其内部的后代元素
 		}
 	})
 </script>
+```
 
 
 # data: 数据对象
@@ -102,6 +106,7 @@ Vue会管理el选项命中的元素及其内部的后代元素
 
 data中除了可以有message，还可以添加别的数据类型
 
+```html
 <script>
 	var app = new Vue({
 		el: '#app',
@@ -112,8 +117,6 @@ data中除了可以有message，还可以添加别的数据类型
 		}
 	})
 </script>
-
-
 
 <div id="app">
 	{{ message }}
@@ -126,6 +129,7 @@ data中除了可以有message，还可以添加别的数据类型
 
 <!-- 开发环境版本，包含了有帮助的命令行警告 -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 
 <script>
 	var app = new Vue({
@@ -140,3 +144,5 @@ data中除了可以有message，还可以添加别的数据类型
 		}
 	})
 </script>
+
+```

@@ -7,19 +7,19 @@
 - Vue指令：以v-开头的一组特殊语法
 
 内容绑定，事件绑定
-v-text
-v-html
-v-on basic
+- v-text
+- v-html
+- v-on basic
 
 显示切换，属性绑定
-v-show
-v-if
-v-bind
+- v-show
+- v-if
+- v-bind
 
 列表循环，表单元素绑定
-v-for
-v-on
-v-model
+- v-for
+- v-on
+- v-model
 
 
 # v-text
@@ -29,6 +29,7 @@ v-model
 - 使用差值表达式{{}}可以替换指定内容
 - 支持内部表达式
 
+```html
 <div id="app">
 	<h2 v-text="message + '!'"></h2>
 	<h2 v-text="info + '!'"></h2>
@@ -47,15 +48,17 @@ v-model
 		}
 	})
 </script>
+```
 
 # v-html
 
-作用：设置元素的innerHTML
-内容中有html结构会被解析为标签
-v-text指令无论内容是什么，只会解析为文本
+- 作用：设置元素的innerHTML
+- 内容中有html结构会被解析为标签
+- v-text指令无论内容是什么，只会解析为文本
 
 因此：解析文本使用v-text,解析html结构使用v-html
 
+```html
 <div id="app">
 	<p v-html="content"></p>
 	<p v-text="content"></p>
@@ -72,15 +75,17 @@ v-text指令无论内容是什么，只会解析为文本
 		}
 	})
 </script>
+```
 
 # v-on
 
-v-on为元素绑定事件
-事件名不需要on
-指令可以简写为@
-绑定的方法写在methods属性中
-方法内部通过this关键字可以访问定义在data中的数据
+- v-on为元素绑定事件
+- 事件名不需要on
+- 指令可以简写为@
+- 绑定的方法写在methods属性中
+- 方法内部通过this关键字可以访问定义在data中的数据
 
+```html
 <div id="app">
 	<input type="button" value="v-on command" v-on:click="doIt">
 	<input type="button" value="v-on command" v-on:mouseenter="doIt">
@@ -105,9 +110,11 @@ v-on为元素绑定事件
 		}
 	})
 </script>
+```
 
 # 案例：计数器
 
+```html
 <!-- 如有需要可以自己加css -->
 
 <!-- html 部分 -->
@@ -138,7 +145,7 @@ v-on为元素绑定事件
 			sub: function () {
 				if (this.num <= 1) {
 					alert('should not be less than 1');
-
+	
 				} else {
 					this.num--;
 				}
@@ -146,6 +153,7 @@ v-on为元素绑定事件
 		}
 	})
 </script>
+```
 
 
 回顾：
@@ -167,12 +175,13 @@ v-on为元素绑定事件
 - true 显示 / false 隐藏
 - 数据改变后，对应元素的显示状态会同步更新
 
+```html
 <div id="app">
 	<!-- v-show 的值一定是布尔值 -->
 
 	<!-- 布尔值 -->
 	<img src="" v-show="true">
-
+	
 	<!-- 数据中的属性值 isShow: false -->
 	<img src="images/open.png" v-show="isShow">
 	<input type="button" value="switch" @click="changeIsShow">
@@ -200,6 +209,7 @@ v-on为元素绑定事件
 		}
 	})
 </script>
+```
 
 # v-if
 
@@ -211,18 +221,19 @@ v-on为元素绑定事件
 - 频繁切换用v-show，反之用v-if，前者的切换消耗小
 
 
+```html
 <div id="app">
 	<input type="button" @click="toggleIsShow" value="切换显示">
 
 	<p v-if="true"></p>
-
+	
 	<p v-if="isShow">v-if</p>
 	<!-- 使用v-if直接从DOM中移除了 操纵的是DOM 性能消耗较大-->
-
+	
 	<p v-show="isShow">v-show</p>
 	<!-- 使用v-show只是改变了display属性 操纵的是样式-->
 	<!-- 频繁切换的元素用v-show, 反之用v-if -->
-
+	
 	<h2 v-if="temperature>=35">so hot</h2>
 
 </div>
@@ -242,6 +253,7 @@ v-on为元素绑定事件
 		}
 	})
 </script>
+```
 
 # v-bind
 
@@ -253,6 +265,7 @@ v-on为元素绑定事件
 - 省略写法：:属性名
 - 需要动态增删class建议使用对象的方式
 
+```html
 <style>
 	.active {
 		border: 1px solid red;
@@ -265,9 +278,9 @@ v-on为元素绑定事件
 	<!-- 其中v-bind可以省略，直接写:就行 -->
 	<img :src="imgSrc">
 	<img :title="imgTitle + '!!!'">
-
+	
 	<img :title="点我切换" @click="toggleActive" :class="isActive?'active':''">
-
+	
 	<!-- 不建议用三元表达式来写，推荐用对象的方式来写 -->
 	<img @click="toggleActive" :class="{active:isActive}">
 
@@ -289,6 +302,7 @@ v-on为元素绑定事件
 		}
 	})
 </script>
+```
 
 # 案例：图片切换
 
@@ -296,17 +310,18 @@ v-on为元素绑定事件
 
 实现方式：
 
-图片变化实际上图片的src属性改变了，可用v-bind指令修改
-图片可用数组和索引的方式引入和判断
-点击图片发生改变，可用v-on绑定事件
-首张图片时，上一页的点击按钮会隐藏，可用v-show指令
-末张图片时，下一页的点击按钮会隐藏，可用v-show指令
+- 图片变化实际上图片的src属性改变了，可用v-bind指令修改
+- 图片可用数组和索引的方式引入和判断
+- 点击图片发生改变，可用v-on绑定事件
+- 首张图片时，上一页的点击按钮会隐藏，可用v-show指令
+- 末张图片时，下一页的点击按钮会隐藏，可用v-show指令
 
 以下代码是听老师分析后自己写的，注意：
-1.数组的索引增加，与是否显示上一页下一页是两件事，注意分开写，这里分别写到了方法里和v-show的属性值里
-2.可以用数组的方式保存图片，注意尽量写相对路径
+1. 数组的索引增加，与是否显示上一页下一页是两件事，注意分开写，这里分别写到了方法里和v-show的属性值里
+2. 可以用数组的方式保存图片，注意尽量写相对路径
 
 
+```html
 <style>
 	img {
 		height: 300px;
@@ -346,6 +361,7 @@ v-on为元素绑定事件
 		}
 	})
 </script>
+```
 
 - 列表数据可以使用数组保存
 - v-bind指令可以设置元素属性，比如src
@@ -358,6 +374,7 @@ v-on为元素绑定事件
 根据数据生成列表结构
 
 
+```html
 <div id="app">
 	<ul>
 		<li v-for="(item,index) in arr" :title="item">
@@ -367,7 +384,7 @@ v-on为元素绑定事件
 		</li>
 
 	</ul>
-
+	
 	<ol>
 		<li v-for="(item,index) in testObj">
 			我是对象的索引：{{index}}，
@@ -378,7 +395,7 @@ v-on为元素绑定事件
 
 	<input type="button" @click="addVeg" value="加一个">
 	<input type="button" @click="removeVeg" value="减一个">
-
+	
 	<ul>
 		<li v-for="(item,index) in vegetables">
 			我是对象数组的索引：{{index}}，
@@ -417,6 +434,7 @@ v-on为元素绑定事件
 		}
 	})
 </script>
+```
 
 - v-for指令的作用：根据数据生成列表结构
 - 数组经常和v-for结合使用
@@ -433,7 +451,7 @@ v-on为元素绑定事件
 https://cn.vuejs.org/v2/api#v-on
 
 
-
+```html
 <div id="app">
 	<input type="button" value="666" @click="doThis(666,'老铁')">
 	<input type="text" @keyup.enter="sayHi">
@@ -458,6 +476,7 @@ https://cn.vuejs.org/v2/api#v-on
 		}
 	})
 </script>
+```
 
 - 事件绑定的方法写成函数调用的形式，可以传入自定义函数
 - 定义方法时需要定义形参来接受传入的实参
@@ -470,6 +489,7 @@ https://cn.vuejs.org/v2/api#v-on
 
 获取和设置表单元素的值，也称“双向数据绑定”
 
+```html
 <div id="app">
 	<input type="text" v-model="message" @keyup.enter="getM">
 	<!-- 这里表单元素message发生变化，JS中message的value也会发生改变，可以从下方h2标签看出 -->
@@ -498,6 +518,7 @@ https://cn.vuejs.org/v2/api#v-on
 		}
 	})
 </script>
+```
 
 - v-model指令的作用是便捷的设置和获取表单元素的值
 - 绑定的数据会和表单元素值相关联
@@ -539,6 +560,7 @@ https://cn.vuejs.org/v2/api#v-on
 - 基于数据的开发方式，与基于DOM不同
 
 
+```html
 <!-- APP主体 -->
 <section id="todoapp">
 	<header class="header">
@@ -594,3 +616,4 @@ https://cn.vuejs.org/v2/api#v-on
 		}
 	})
 </script>
+```

@@ -1,10 +1,11 @@
 List relevant links for learning JS.
 
-Doc
+## Documentation
+
 - [MDN web docs](https://developer.mozilla.org/zh-CN/)
 - [Runoob 菜鸟教程](https://www.runoob.com/js/js-tutorial.html)
 
-Course
+## Course
 
 - [JS Basic](https://www.bilibili.com/video/BV1ux411d75J/) `All Done`
 - [JS Basic素材](https://gitee.com/xiaoqiang001/jsapis_material/tree/master)  
@@ -15,13 +16,13 @@ Course
 - [Ajax](https://www.bilibili.com/video/BV1ji4y1876Y/)
 - [Vue.js](https://www.bilibili.com/video/BV12J411m7MG) `P24.over`
 
-Github
+## Github
+
 - [Github Deployment](https://www.cnblogs.com/superGG1990/p/6844952.html)
 - using `git push to` in VScode to upload to remote repo
 - using `git pull from` in VScode to download from remote repo
 
-Markdown
-- [Mermaid Grammar](https://cloud.tencent.com/developer/article/1334691)
+## Markdown
 
-Emmet Doc
+- [Mermaid Grammar](https://cloud.tencent.com/developer/article/1334691)
 - [Emmet Doc](https://docs.emmet.io/abbreviations/syntax/)

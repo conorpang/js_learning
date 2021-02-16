@@ -1,7 +1,7 @@
+```html
 <!-- html struc & vue mount -->
 
 <div id="app">
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -14,3 +14,5 @@
 		}
 	})
 </script>
+```
+

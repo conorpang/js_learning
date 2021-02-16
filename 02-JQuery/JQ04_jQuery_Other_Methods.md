@@ -78,6 +78,15 @@
 </script>
 ```
 
+小结
+
+|            | 数据类型 | 拷贝什么 | A新属性 | AB冲突属性 | B旧属性  | 修改B      | 修改A     |
+| ---------- | -------- | -------- | ------- | ---------- | -------- | ---------- | --------- |
+| 浅拷贝A->B | 简单数据 | 拷贝内容 | 添加到B | A覆盖B     | 保留在B  | A不变, B变 | A变,B不变 |
+|            | 复杂数据 | 拷贝地址 | 添加到B | A覆盖B     | 直接删除 | AB都变     | AB都变    |
+| 深拷贝A->B | 简单数据 | 拷贝内容 | 添加到B | A覆盖B     | 保留在B  | A不变, B变 | A变,B不变 |
+|            | 复杂数据 | 拷贝内容 | 添加到B | A覆盖B     | 保留在B  | A不变, B变 | A变,B不变 |
+
 # 多库共存
 
 - 问题概述：jQuery使用$作为标识符，随着jquery的流行，其他js库也会用$做标识符，一起用这些库时会引起冲突
@@ -129,7 +138,7 @@
   - 图片使用延迟加载,可提高网页下载速度,也能帮助减轻服务器负载
   - 当滑动到可视区域时,再加载图片
 - 全屏滚动 fullpage.js [github](https://github.com/alvarotrigo/fullPage.js/tree/master/lang/chinese#fullpagejs)
- 
+
 ## bootstrap JS 插件
 
 bootstrap框架也是依赖于jquery开发的，因此里面的js插件使用，也必须引入jquery文件（需要引入bootstrap的css/js，jquery的js）
@@ -154,7 +163,7 @@ bootstrap直接找组件复制后按需修改
    - 基本HTML骨架代码
    - 引入的css，js
    - 自己的js可以单独写一个文件再引入
-  
+
 
 P58.over
 https://www.bilibili.com/video/BV1Wz411B7N5?p=59
