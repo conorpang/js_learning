@@ -1,5 +1,6 @@
-【jQuery常用API】
+# jquery常用API
 
+- [jquery常用API](#jquery常用api)
 - [jquery 选择器](#jquery-选择器)
 	- [基础选择器](#基础选择器)
 	- [层级选择器](#层级选择器)
@@ -39,19 +40,19 @@
 
 ## 基础选择器
 
-jquery 做了统一封装 `$('selector')` 选择器直接写css选择器即可，要加引号
+jquery 做了统一封装 $('selector') 选择器直接写css选择器即可，要加引号
 
-- id selector: `$('#id')`
-- all selector: `$('*')`
-- class selector: `$('.class')`
-- tag selector: `$('div')`
-- union selector 并集选择器: `$(div,p,li')`
-- intersection selector 交集选择器: `$('li.current')`
+- id selector: $('#id')
+- all selector: $('*')
+- class selector: $('.class')
+- tag selector: $('div')
+- union selector 并集选择器: $(div,p,li')
+- intersection selector 交集选择器: $('li.current')
 
 ## 层级选择器
 
-- 子代选择器: `$('ul>li')` 只获取亲儿子，不获取孙子
-- 后代选择器: `$('ul li')` 获取所有后代
+- 子代选择器: $('ul>li') 只获取亲儿子，不获取孙子
+- 后代选择器: $('ul li') 获取所有后代
 
 
 ```html
@@ -100,7 +101,7 @@ jquery 做了统一封装 `$('selector')` 选择器直接写css选择器即可�
 
 ## 隐式迭代
 
-jquery设置样式 `$('div').css('attribute','value')`
+jquery设置样式 $('div').css('attribute','value')
 
 隐式迭代
 - 遍历内部DOM元素（伪数组形式存储）的过程叫做隐式迭代
@@ -131,11 +132,11 @@ jquery设置样式 `$('div').css('attribute','value')`
 
 ## jquery 筛选选择器
 
-- `:first` 举例：`$('li:first')` 获取第一个li元素
-- `:last` 举例：`$('li:last')` 获取最后一个li元素
-- `:eq(index)` 举例：`$('li:eq(2)')` 获取到的li元素中，选择索引号为2的
-- `:odd` 举例：`$('li:odd')` 获取到的li元素中，选择为奇数
-- `:even` 举例：`$('li:even')` 获取到的li元素中，选择为偶数的
+- :first 举例：$('li:first') 获取第一个li元素
+- :last 举例：$('li:last') 获取最后一个li元素
+- :eq(index) 举例：$('li:eq(2)') 获取到的li元素中，选择索引号为2的
+- :odd 举例：$('li:odd') 获取到的li元素中，选择为奇数
+- :even 举例：$('li:even') 获取到的li元素中，选择为偶数的
 
 ```html
 <script src="jquery.min.js"></script>
@@ -164,18 +165,18 @@ jquery设置样式 `$('div').css('attribute','value')`
 ```
 ## jquery 筛选方法
 
-> 重点记 `parent()`，`children(selector)`，`find(selector)`，`siblings(selector)`，`eq(index)`
+> 重点记 parent()，children(selector)，find(selector)，siblings(selector)，eq(index)
 
-- `parent()` 用法: `$('li').parent()` 说明:查找父级
-- `children(selector)` 用法: `$('ul').children('li')` 说明:查找最近一级的子元素(亲儿子),相当于 `$('ul>li')`
-- `find(selector)` 用法: `$(ul).find('li')` 说明:后代选择器,相当于`$('ul li')`
-- `siblings(selector)` 用法: `$('.first').siblings(li)` 说明: 查找兄弟接节点,不包括本身
-- `nextAll([expr])` 用法: `$('.first').nextAll()` 说明: 查找当前元素之后所有的同辈元素
-- `prevAll([expr])` 用法: `$('.last').prevAll()` 说明: 查找当前元素之前所有的同辈元素
-- `hasClass(class)` 用法: `$('div').hasClass(protected)` 说明: 检查当前元素是否含有某个特定的类,如果有,返回true
-- `eq(index)` 用法: `$('li').eq(2)` 说明: 相当于 `$('li:eq(2)')` index从0开始
+- parent() 用法: $('li').parent() 说明:查找父级
+- children(selector) 用法: $('ul').children('li') 说明:查找最近一级的子元素(亲儿子),相当于 $('ul>li')
+- find(selector) 用法: $(ul).find('li') 说明:后代选择器,相当于$('ul li')
+- siblings(selector) 用法: $('.first').siblings(li) 说明: 查找兄弟接节点,不包括本身
+- nextAll([expr]) 用法: $('.first').nextAll() 说明: 查找当前元素之后所有的同辈元素
+- prevAll([expr]) 用法: $('.last').prevAll() 说明: 查找当前元素之前所有的同辈元素
+- hasClass(class) 用法: $('div').hasClass(protected) 说明: 检查当前元素是否含有某个特定的类,如果有,返回true
+- eq(index) 用法: $('li').eq(2) 说明: 相当于 $('li:eq(2)') index从0开始
 
-> 使用`parent()`，`children(selector)`，`siblings(selector)`
+> 使用parent()，children(selector)，siblings(selector)
 
 ```html
 <script src="jquery.min.js"></script>
@@ -208,7 +209,7 @@ jquery设置样式 `$('div').css('attribute','value')`
 
 
 
-> 使用`siblings()`，`prevAll()`，`nextAll()`，`hasClass()`，`eq(index)`
+> 使用siblings()，prevAll()，nextAll()，hasClass()，eq(index)
 
 ```html
 <script src="jquery.min.js"></script>
@@ -369,9 +370,9 @@ jquery设置样式 `$('div').css('attribute','value')`
 
 - 左侧有9个标签（li），鼠标移动到任意标签上，右侧的内容区盒子显示对应图片，其余的图片隐藏
 - 需要得到当前小li的索引号，就可以显示对应索引号的图片
-- jQuery得到当前元素索引号`$(this).index()`
-- 通过`eq(index)`方法选择对应的图片
-- 显示隐藏元素 `show()` `hide()`
+- jQuery得到当前元素索引号$(this).index()
+- 通过eq(index)方法选择对应的图片
+- 显示隐藏元素 show() hide()
 
 
 ```html
@@ -432,9 +433,9 @@ jquery设置样式 `$('div').css('attribute','value')`
 简单样式修改css，复杂样式操作类
 
 简答样式修改
-- 参数只写属性名，则是返回属性值 `$(this).css('color');`
-- 参数写了属性名和属性值，逗号分隔，可以修改对应属性的属性值 `$(this).css('color','red');` 注意属性名必须加引号，值为数字可以不带单位和引号
-- 参数修改可以是对象形式，方便设置多组样式，属性名和属性值用冒号隔开，属性可以不加引号 `$(this).css({'color':'white','font-size':'20px'})`
+- 参数只写属性名，则是返回属性值 $(this).css('color');
+- 参数写了属性名和属性值，逗号分隔，可以修改对应属性的属性值 $(this).css('color','red'); 注意属性名必须加引号，值为数字可以不带单位和引号
+- 参数修改可以是对象形式，方便设置多组样式，属性名和属性值用冒号隔开，属性可以不加引号 $(this).css({'color':'white','font-size':'20px'})
 
 ```html
 	<script src="jquery.min.js"></script>
@@ -466,10 +467,10 @@ jquery设置样式 `$('div').css('attribute','value')`
 
 
 复杂样式修改类
-- 作用等同于`classList` 可以操作样式，注意操作类里面的参数不需要加点
-- 添加类 `$('div').addClass('current')` 注意类名无需加点
-- 删除类 `$('div').removeClass('current')` 
-- 切换类 `$('div').toggleClass('current')`
+- 作用等同于classList 可以操作样式，注意操作类里面的参数不需要加点
+- 添加类 $('div').addClass('current') 注意类名无需加点
+- 删除类 $('div').removeClass('current') 
+- 切换类 $('div').toggleClass('current')
 
 ```html
 <script src="jquery.min.js"></script>
@@ -621,7 +622,7 @@ jquery设置样式 `$('div').css('attribute','value')`
 
 ## 显示隐藏效果
 
-显示/隐藏/切换,语法规范 `show([speed,[easing],[fn]])`
+显示/隐藏/切换,语法规范 show([speed,[easing],[fn]])
 - 三个参数可以都省略,无动画直接显示
 - speed: 速度,预定速度字符串'slow' 'normal' 'fast' 或者表示动画时长的毫秒数值,如1000
 - easing: 用来指定切换效果, 默认是'swing', 可用参数 'linear'
@@ -666,7 +667,7 @@ jquery设置样式 `$('div').css('attribute','value')`
 
 ## 滑动效果
 
-- 语法规范  `slideDown([speed,[easing],[fn]])`, 和show()系列是一样的
+- 语法规范  slideDown([speed,[easing],[fn]]), 和show()系列是一样的
 
 ```html
 <style>
@@ -699,7 +700,7 @@ jquery设置样式 `$('div').css('attribute','value')`
 
 ## 事件切换
 
-`hover([over,] out)`
+hover([over,] out)
 over 鼠标经过触发的函数,相当于mouseover
 out 鼠标离开触发的函数,相当于mouseout
 
@@ -745,8 +746,8 @@ out 鼠标离开触发的函数,相当于mouseout
 ## 动画队列及其停止排队方法
 
 - 动画队列/效果队列:动画或者效果一旦触发就会执行,如果多次触发,就会造成多个动画或者效果排队执行
-- 停止排队 `stop()` 停止上一次动画
-- `stop()`必须写到动画前面
+- 停止排队 stop() 停止上一次动画
+- stop() 必须写到动画前面
  
 ```html
 <script src="jquery.min.js"></script>
@@ -763,9 +764,9 @@ out 鼠标离开触发的函数,相当于mouseout
 
 ## 淡入淡出效果
 
-- 有四个:`fadeIn()` `fadeOut()`  `fadeToggle()` `fadeTo()`
-- 前三个语法规范: `fadeIn([speed,[easing],[fn]])`, 和show()系列是一样的
-- `fadeTo()`语法规范: `fadeTo([speed,opacity,[easing],[fn]])` 
+- 有四个:fadeIn() fadeOut()  fadeToggle() fadeTo()
+- 前三个语法规范: fadeIn([speed,[easing],[fn]]), 和show()系列是一样的
+- fadeTo()语法规范: fadeTo([speed,opacity,[easing],[fn]]) 
   - opacity 为透明度必须写, 取值0~1之间
   - speed: 速度,预定速度字符串'slow' 'normal' 'fast' 或者表示动画时长的毫秒数值,如1000
   - easing: 用来指定切换效果, 默认是'swing', 可用参数 'linear'
@@ -910,16 +911,16 @@ out 鼠标离开触发的函数,相当于mouseout
 
 # jquery 属性操作
 
-- 获取元素固有属性值 `prop('attributeName')`
-- 设置~ : `prop('attributeName')`
-- 获取元素自定义属性值: `attr('attributeName')`
-- 设置~: `attr('attributeName')`
-- `attr()`方法也可以获取h5自定义属性
+- 获取元素固有属性值 prop('attributeName')
+- 设置~ : prop('attributeName')
+- 获取元素自定义属性值: attr('attributeName')
+- 设置~: attr('attributeName')
+- attr()方法也可以获取h5自定义属性
 
 数据缓存
-- `data()`方法可以再指定的元素上存取数据,并不会修改DOM元素的结构,一旦页面刷新,之前存放的数据都将被移除
-- 附加数据语法 `data('name','value')`
-- 获取数据语法 `data('name')`
+- data()方法可以再指定的元素上存取数据,并不会修改DOM元素的结构,一旦页面刷新,之前存放的数据都将被移除
+- 附加数据语法 data('name','value')
+- 获取数据语法 data('name')
 - 同时该方法还可以读取会h5自定义属性(可省略data-前缀),得到的是数字型
 
 ```html
@@ -961,7 +962,7 @@ out 鼠标离开触发的函数,相当于mouseout
 - 因为 checked 是复选框的固有属性,所以利用 prop() 方法获取和设置该属性
 - 把全选按钮状态赋值给三个小的复选框即可
 - 当我们每次点击小的复选框按钮时,就做判断,如果小的复选框被选中的个数等于3,就应该把全选按钮选上,否则不选
-- `:checked` 选择器 查找被选中的表单元素
+- :checked 选择器 查找被选中的表单元素
 - 
 ```html
 <script>
@@ -986,15 +987,15 @@ out 鼠标离开触发的函数,相当于mouseout
 
 # jquery 文本属性值
 - 主要针对元素的内容/表单的值 操作
-- 普通元素内容 `html()` 相当于原生的 `innerHTML()`
-  - `html()` 获取元素内容
-  - `html('content')` 设置元素内容
-- 普通元素文本内容 `text()` 相当于原生的 `innerText()`
-  - `text()` 获取元素文本内容
-  - `text('content')` 设置元素文本内容
-- 表单元素的值 `val()`
-  - `val()` 获取元素内容
-  - `val('content')` 设置元素内容
+- 普通元素内容 html() 相当于原生的 innerHTML()
+  - html() 获取元素内容
+  - html('content') 设置元素内容
+- 普通元素文本内容 text() 相当于原生的 innerText()
+  - text() 获取元素文本内容
+  - text('content') 设置元素文本内容
+- 表单元素的值 val()
+  - val() 获取元素内容
+  - val('content') 设置元素内容
 
 
 ```html
@@ -1183,7 +1184,7 @@ out 鼠标离开触发的函数,相当于mouseout
 
 jquery隐式迭代是对同一类元素做相同操作,如果想给同一类元素做不同操作,就需要用到遍历
 
-语法:`$('div'.each(fucntion(index, domEle){xxx;}))`
+语法:$('div'.each(fucntion(index, domEle){xxx;}))
 
 1. each() 方法遍历匹配的每一个元素, 主要用DOM处理
 2. 里面的回调函数有两个参数, index是元素的索引号, domEle 每个DOM元素对象, 而不是jquery对象
@@ -1212,7 +1213,7 @@ jquery隐式迭代是对同一类元素做相同操作,如果想给同一类元�
 	</script>
 ```
 
-另一种遍历方式 `$.each(object, function(index, element){xxx;})`
+另一种遍历方式 $.each(object, function(index, element){xxx;})
 
 1. $.each() 方法可用于遍历任何对象,主要用于**数据处理**,比如数组,对象
 2. 里面的函数有2个参数, index是元素索引号,element遍历内容
@@ -1250,19 +1251,19 @@ jquery隐式迭代是对同一类元素做相同操作,如果想给同一类元�
 
 直接写HTML标签用$()包裹即可动态创建
 
-语法:`$('<li></li>')`
+语法:$('<li></li>')
 
 ## 添加元素
 
 1. 内部添加 
 
-- `element.append('content')` 把内容添加到匹配元素内部最后面,类似原生的appendChild
-- `element.prepend('content')` 把内容添加到匹配元素内部最前面
+- element.append('content') 把内容添加到匹配元素内部最后面,类似原生的appendChild
+- element.prepend('content') 把内容添加到匹配元素内部最前面
 
 2. 外部添加
 
-- `element.before('content')` 把内容添加到目标元素后面
-- `element.after('content')` 把内容添加到目标元素前面
+- element.before('content') 把内容添加到目标元素后面
+- element.after('content') 把内容添加到目标元素前面
 
 内部添加元素,生成之后,是父子关系
 外部添加元素,生成之后,是兄弟关系
@@ -1270,9 +1271,9 @@ jquery隐式迭代是对同一类元素做相同操作,如果想给同一类元�
 
 ## 删除元素
 
-- `element.remove()` 删除匹配的元素(自杀)
-- `element.empty()` 删除匹配的元素集合中所有的子节点(杀孩子)
-- `element.html('')` 清空匹配的元素内容(换成空)
+- element.remove() 删除匹配的元素(自杀)
+- element.empty() 删除匹配的元素集合中所有的子节点(杀孩子)
+- element.html('') 清空匹配的元素内容(换成空)
 
 ```html
 	<ul>

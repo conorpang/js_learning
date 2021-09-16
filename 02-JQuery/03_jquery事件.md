@@ -1,5 +1,5 @@
-【jquery 事件】
-
+# jquery 事件
+- [jquery 事件](#jquery-事件)
 - [jquery 事件注册](#jquery-事件注册)
 - [jquery 事件处理](#jquery-事件处理)
 	- [事件绑定on()](#事件绑定on)
@@ -13,8 +13,8 @@
 
 单个事件注册
 
-- 以前的写法 `element.event(function(){})`
-- eg: `$('div').click(funcion(){ ... })`
+- 以前的写法 element.event(function(){})
+- eg: $('div').click(funcion(){ ... })
 - 基本和原生JS一致
 
 # jquery 事件处理
@@ -22,7 +22,7 @@
 ## 事件绑定on()
 
 - on() 方法在匹配元素上绑定一个或多个事件的处理函数
-- 语法 `element.on(events, (selector), fn)`
+- 语法 element.on(events, (selector), fn)
 
 说明
 1. events 一个或多个用空格分隔的事件类型，如click， keydown
@@ -212,9 +212,9 @@ off()方法可以移除通过on()方法添加的事件处理程序
 有些事件希望自动触发，比如轮播图自动播放功能跟点击按钮一直，可以利用定时器自动触发右侧按钮点击事件，不必鼠标点击触发
 
 有三种方式
-1. `element.click()` // 第一种简写形式
-2. `element.trigger('type')` // 第二种自动触发方式
-3. `element.triggerHandler(type)`  // 第三种自动触发方式,不会触发元素的默认行为
+1. element.click() // 第一种简写形式
+2. element.trigger('type') // 第二种自动触发方式
+3. element.triggerHandler(type)  // 第三种自动触发方式,不会触发元素的默认行为
 
 ```html
 <style>
@@ -252,10 +252,10 @@ off()方法可以移除通过on()方法添加的事件处理程序
 # jquery 事件对象
 
 事件被触发,就会有事件对象产生
-`element.on(events, [selector], function(event){})`
+element.on(events, [selector], function(event){})
 
-- 阻止默认行为: `event.preventDefault()` / `return false`
-- 阻止冒泡: `event.stopPropagation()`
+- 阻止默认行为: event.preventDefault() / return false
+- 阻止冒泡: event.stopPropagation()
 
 ```html
 <style>

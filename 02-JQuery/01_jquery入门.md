@@ -1,5 +1,6 @@
-【jQuery 入门】
+# jQuery 入门
 
+- [jQuery 入门](#jquery-入门)
 - [jQuery概述](#jquery概述)
 	- [JS库](#js库)
 	- [常见的JS库](#常见的js库)
@@ -146,8 +147,8 @@ library，是一个封装好的特定的集合（方法和函数），预先定�
 ## jQuery 对象和 DOM 对象互相转换
 - jquery obejct / dom object 可以互相转换
 - js比jquery大, 而一些原生的属性和方法jquery没有封装，我们要使用这些属性和方法就必须把jquery object转换为dom object
-- dom object => jquery object：`$(div)` 直接将已获取的DOM元素再用$包装一下
-- jquery object => dom object：两种方法 `$('div')[index]` 或 `$('div').get(index)`
+- dom object => jquery object：$(div) 直接将已获取的DOM元素再用 $ 包装一下
+- jquery object => dom object：两种方法 $('div')[index] 或 $('div').get(index)
 
 ```html
 <video src="mov.mp4" muted></video>

@@ -1,5 +1,6 @@
-【Web APIs 简介】
+# Web API 简介
 
+- [Web API 简介](#web-api-简介)
 - [Web API 和 JS 的关联性](#web-api-和-js-的关联性)
 - [API 和 Web APIs](#api-和-web-apis)
 - [总结](#总结)

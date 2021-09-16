@@ -1,10 +1,19 @@
-【jquery其他方法】
+# jquery其他方法
+
+- [jquery其他方法](#jquery其他方法)
+- [jquery 拷贝对象](#jquery-拷贝对象)
+- [多库共存](#多库共存)
+- [jquery 插件](#jquery-插件)
+	- [jquery 插件](#jquery-插件-1)
+	- [bootstrap JS 插件](#bootstrap-js-插件)
+- [案例：阿里百秀](#案例阿里百秀)
+- [综合案例： ToDOList](#综合案例-todolist)
 
 # jquery 拷贝对象
 
-- 如果想把某个对象拷贝给另一个对象使用，可以使用`$.extend()`方法
+- 如果想把某个对象拷贝给另一个对象使用，可以使用 $.extend() 方法
 
-语法：`$.extend([deep], traget, object1, [objectN])`
+语法：$.extend([deep], traget, object1, [objectN])
 1. deep - true 深拷贝，false 浅拷贝
 2. target - 要拷贝的目标对象
 3. object1 - 待拷贝的第一个对象
@@ -91,7 +100,7 @@
 
 - 问题概述：jQuery使用$作为标识符，随着jquery的流行，其他js库也会用$做标识符，一起用这些库时会引起冲突
 - 客观需求：需要一个解决方案，让jquery和其他的js库不存在冲突，可以同时存在，这叫做多库共存
-- jquery解决方案：1. `$` -> `jQuery` 2. 规定新的名称 `var xx = $.noConflict()`
+- jquery解决方案：1. $ -> jQuery 2. 规定新的名称 var xx = $.noConflict()
 
 ```html
 <div></div>
