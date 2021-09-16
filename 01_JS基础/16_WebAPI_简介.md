@@ -1,9 +1,9 @@
 # Web API 简介
 
-- [Web API 简介](#web-api-简介)
-- [Web API 和 JS 的关联性](#web-api-和-js-的关联性)
-- [API 和 Web APIs](#api-和-web-apis)
-- [总结](#总结)
+- [Web API 简介](#web-api-%E7%AE%80%E4%BB%8B)
+- [Web API 和 JS 的关联性](#web-api-%E5%92%8C-js-%E7%9A%84%E5%85%B3%E8%81%94%E6%80%A7)
+- [API 和 Web APIs](#api-%E5%92%8C-web-apis)
+- [总结](#%E6%80%BB%E7%BB%93)
 
 # Web API 和 JS 的关联性
 
@@ -22,7 +22,7 @@ API：预先定义的函数，一种工具，实现某种功能，我们不关�
 
 Web API：浏览器提供的一套操作浏览器功能和页面元素的API（BOM/DOM），主要针对浏览器做交互效果
 
-比如我们想要弹出一个警示框 `alert('');`
+比如我们想要弹出一个警示框 alert('');
 
 
 # 总结

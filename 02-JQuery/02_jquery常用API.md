@@ -853,7 +853,7 @@ out 鼠标离开触发的函数,相当于mouseout
 
 ## 自定义动画 animate 
 
-- 语法规范: `animate(params, [speed], [easing], [fn])`
+- 语法规范: animate(params, [speed], [easing], [fn])
 - params: 想要更改的样式属性,以对象形式传递,必须写,属性名可以不带引号,如果是复合属性需要采用驼峰命名法,其余的参数都可以省略
 
 ```html

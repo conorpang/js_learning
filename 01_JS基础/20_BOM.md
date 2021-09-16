@@ -64,14 +64,13 @@ window对象是浏览器的顶级对象，有双重角色
 - JS 访问浏览器窗口的一个接口
 - 是全局对象，定义在全局作用域中的变量，函数都会变成window对象的属性和方法
 
-> 注意：调用时可以省略`window`,如 `alert()`, `prompt()`
+> 注意：调用时可以省略window,如 alert(), prompt()
 ```js
 window.alert()
 window.prompt()
 ```
 
-
-<script>
+```js
 	window.document.querySelector();
 	var num = 0; //num为全局对象,自动变成windows的属性
 	console.log(window.num);
@@ -84,8 +83,7 @@ window.prompt()
 
 	console.dir(window);
 	console.dir(window.name); //name本身有意义，不要随便命名变量为name
-</script>
-
+```
 
 # window对象的常见事件
 
@@ -102,53 +100,49 @@ window.prompt()
 </script>
 ```
 
-- `window.onload` 是窗口加载事件，当文档内容完全加载完成（包括图片、脚本文件、CSS文件等）会触发该事件，然后调用处理函数
-- `window.onload` 传统注册方式只能写一次，如果有多个，会以最后一个 `window.onload` 为准
-- 若使用`addEventListener`则没有限制
+- window.onload 是窗口加载事件，当文档内容完全加载完成（包括图片、脚本文件、CSS文件等）会触发该事件，然后调用处理函数
+- window.onload 传统注册方式只能写一次，如果有多个，会以最后一个 window.onload 为准
+- 若使用addEventListener则没有限制
 
-```html
-<script>
-	//窗口加载事件
-	// 传统方式
-	window.onload = function () { }
-	// addEventListener方式
-	window.addEventListener('load', function () { })
+```js
+//窗口加载事件
+// 传统方式
+window.onload = function () { }
+// addEventListener方式
+window.addEventListener('load', function () { })
 
-	//还有一个类似的，DOMContentLoaded事件触发是，仅当DOM加载完成，不包括样式表、图片、flash等，IE9+支持
-	document.addEventListener('DOMContentLoaded', function () { })
+//还有一个类似的，DOMContentLoaded事件触发是，仅当DOM加载完成，不包括样式表、图片、flash等，IE9+支持
+document.addEventListener('DOMContentLoaded', function () { })
 
-	//如果页面的图片很多，从用户访问到onload触发可能需要较长时间，交互效果就不能实现，必然影响用户体验，此时用DOMContentLoaded比较合适
-</script>
+//如果页面的图片很多，从用户访问到onload触发可能需要较长时间，交互效果就不能实现，必然影响用户体验，此时用DOMContentLoaded比较合适
 ```
 
-```html
-<script>
-	window.onload = function () {  //这样就可以把JS放在页面任意位置
-		var btn = document.querySelector('button');
-		btn.addEventListener('click', function () {
-			alert('click me');
-		})
-	}
-
-	window.onload = function () {
-		alert('22');       //传统方式只能注册一次，第二次会覆盖第一次
-	}
-
-	window.addEventListener('load', function () {
-		var btn = document.querySelector('button');
-		btn.addEventListener('click', function () {
-			alert('click me');
-		})
+```js
+window.onload = function () {  //这样就可以把JS放在页面任意位置
+	var btn = document.querySelector('button');
+	btn.addEventListener('click', function () {
+		alert('click me');
 	})
+}
 
-	window.addEventListener('load', function () {
-		alert('22');   //addEventListener方式无限制
-	})
+window.onload = function () {
+	alert('22');       //传统方式只能注册一次，第二次会覆盖第一次
+}
 
-	document.addEventListener('DOMCintentLoaded', function () {
-		alert('33');  //DOMCintentLoaded比load加载更快，先弹33
+window.addEventListener('load', function () {
+	var btn = document.querySelector('button');
+	btn.addEventListener('click', function () {
+		alert('click me');
 	})
-</script>
+})
+
+window.addEventListener('load', function () {
+	alert('22');   //addEventListener方式无限制
+})
+
+document.addEventListener('DOMCintentLoaded', function () {
+	alert('33');  //DOMCintentLoaded比load加载更快，先弹33
+})
 ```
 
 ## 调整窗口大小事件
@@ -160,9 +154,9 @@ window.prompt()
 </script>
 ```
 
-`window.onresize` 是调整窗口大小的加载事件，当触发时就会调用处理函数
-- `window.innerWidth` 当前屏幕宽度
-- `window.innerHeight` 当前屏幕高度
+window.onresize 是调整窗口大小的加载事件，当触发时就会调用处理函数
+- window.innerWidth 当前屏幕宽度
+- window.innerHeight 当前屏幕高度
 
 注意
 1. 只要窗口发生像素变化，就会触发该事件
@@ -196,8 +190,8 @@ window.prompt()
 # 定时器
 
 window对象提供了2种好用的方法：定时器
-- `setTimeout()`
-- `setInterval()`
+- setTimeout()
+- setInterval()
 
 ## 设置定时器 setTimeout()
 
@@ -231,14 +225,14 @@ window对象提供了2种好用的方法：定时器
 </script>
 ```
 
-`setTimeout()`这个函数我们也称为*回调函数 callback*
+setTimeout()这个函数我们也称为*回调函数 callback*
 
 普通函数按照代码顺序直接调用，而这个函数需要等待时间，时间到了才去调用函数，因此称为回调函数
 
 以前所讲的
 
-- `element.onclick = function(){}`
-- `element.addEventListener('click',function(){})`
+- element.onclick = function(){}
+- element.addEventListener('click',function(){})
 
 里面的函数都是回调函数
 
@@ -520,17 +514,15 @@ JS是**单线程语言**，同一时间只能做一件事，JS为交互而生
 - 异步任务放到任务队列中
 - 一旦执行栈中的同步任务执行完毕，系统就会按次序读取任务队列中的异步任务，于是被读取的异步任务结束等待状态，进入执行栈，开始执行
 
-```html
-<script>
-	console.log(1); // 同步任务1
-	document.onclick = function () {
-		console.log('click'); //异步任务1
-	}
-	console.log(2); // 同步任务2
-	setTimeout(function () {
-		console.log(3); //异步任务2
-	}, 3000)
-</script>
+```js
+console.log(1); // 同步任务1
+document.onclick = function () {
+	console.log('click'); //异步任务1
+}
+console.log(2); // 同步任务2
+setTimeout(function () {
+	console.log(3); //异步任务2
+}, 3000)
 ```
 
 执行过程
@@ -548,7 +540,7 @@ window对象提供了一个location属性用于获取或设置窗体的URL，并
 URL是什么？
 - 统一资源定位符：互联网上标准资源的地址
 - 语法格式
-- `protocol://host[:port]/path/[?query]$fragment`
+- protocol://host[:port]/path/[?query]$fragment
 
 说明
 - protocol 通信协议
@@ -560,23 +552,23 @@ URL是什么？
 
 ## location对象的属性
 
-- **`location.href`** 获取或设置整个URL
-- `location.host` 返回主机/域名
-- `location.port` 返回端口号 如果未写 返回空字符串
-- `location.pathname` 返回路径
-- **`location.search`** 返回参数
-- `location.hash` 返回片段
+- **location.href** 获取或设置整个URL
+- location.host 返回主机/域名
+- location.port 返回端口号 如果未写 返回空字符串
+- location.pathname 返回路径
+- **location.search** 返回参数
+- location.hash 返回片段
 
 > 重点记忆 href 和 search
 
 举个例子
 
 
-- `https://www.bilibili.com/video/BV1dV411d72A?from=search&seid=16034263370898888134#dasdasdasd` 整个URL
-- `www.bilibili.com` 域名
-- `/video/BV1dV411d72A` 路径
-- `?from=search&seid=16034263370898888134` 参数
-- `#dasdasdasd` 片段
+- https://www.bilibili.com/video/BV1dV411d72A?from=search&seid=16034263370898888134#dasdasdasd 整个URL
+- www.bilibili.com 域名
+- /video/BV1dV411d72A 路径
+- ?from=search&seid=16034263370898888134 参数
+- #dasdasdasd 片段
 
 页面跳转功能
 
@@ -649,9 +641,9 @@ index.html
 
 ## location对象的方法
 
-- `location.assign()` 跟hrer一样,可以跳转页面,也称为重定向页面
-- `location.replace()` 替换当前页面,因为不记录历史,所以不能后推页面
-- `location.reload()` 重新加载页面,相当于刷新按钮或者F5, 如果参数为true,强制刷新ctrl+F5
+- location.assign() 跟hrer一样,可以跳转页面,也称为重定向页面
+- location.replace() 替换当前页面,因为不记录历史,所以不能后推页面
+- location.reload() 重新加载页面,相当于刷新按钮或者F5, 如果参数为true,强制刷新ctrl+F5
 
 ```html
 	<button class="button1">click1</button>
@@ -680,9 +672,9 @@ index.html
 
 # naviagator对象
 
-navigator对象包含有关浏览器的信息, 它有很多属性,最常用的是`userAgent`, 该属性可以返回由客户机发送服务器的user-agent头部的值
+navigator对象包含有关浏览器的信息, 它有很多属性,最常用的是 userAgent, 该属性可以返回由客户机发送服务器的user-agent头部的值
 
-可以通过`navigator.userAgent`属性作为判断条件,给电脑端和移动端跳转不同页面
+可以通过navigator.userAgent属性作为判断条件,给电脑端和移动端跳转不同页面
 
 # history对象
 
@@ -692,9 +684,9 @@ history对象一般在实际开发中比较少用,但是会在一些OA办公系�
 
 
 history方法
-- `back()` 后退功能
-- `forward()` 前进功能
-- `go(para)` 前进/后退均可, 参数为1 前进1个页面, 参数为-1 后退一个页面
+- back() 后退功能
+- forward() 前进功能
+- go(para) 前进/后退均可, 参数为1 前进1个页面, 参数为-1 后退一个页面
 
 ## 案例：前进后退页面
 

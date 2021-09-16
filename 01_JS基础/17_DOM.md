@@ -157,7 +157,7 @@ getElementsByTagName() 返回带有指定标签名的对象集合
 
 还可以获取某个元素(父元素)内部的所有指定标签名的子元素
 
-```element.getElementsByTagName('tagName')```
+element.getElementsByTagName('tagName')
 
 父元素必须是指定的单个对象,获取的时候不包括父元素自己
 
@@ -194,13 +194,13 @@ getElementsByTagName() 返回带有指定标签名的对象集合
 
 ## H5新增方法获取元素
 
-`document.getElementsByClassName('class')`
+document.getElementsByClassName('class')
 // 根据类名返回元素对象集合
 
-`document.querySelector('selector')`
+document.querySelector('selector')
 // 根据指定选择器返回第一个元素对象
 
-`document.querySelectorAll('selector')`
+document.querySelectorAll('selector')
 // 根据指定选择器返回所有元素
 
 
