@@ -81,7 +81,6 @@ library，是一个封装好的特定的集合（方法和函数），预先定�
 </style>
 
 <div></div>
-
 <script>
 	$('div').hide(); //隐藏div元素  使用
 </script>
@@ -93,37 +92,31 @@ library，是一个封装好的特定的集合（方法和函数），预先定�
 - 不同于原生JS中的load事件是等页面文档，外部的JS文件，CSS文件，image都加载完毕了才执行代码
 
 方式1：传统方式
-```html
-<script>
+```js
 	$(document).ready(function () {
 		$('div').hide();
 	})
-</script>
 ```
 
 方式2：更简单的方式（推荐）
 
-```html
-<script>
+```js
 	$(function () {
 		$('div').hide();
 	})
-</script>
 ```
 
 ## jQuery 的顶级对象 $
 - $ 是 jQuery 的别称，实际开发中通常直接使用 $
 <!-- - $ 是 jQuery 的顶级对象，相当于原生JS中的window，把元素用$包装成jQuery对象，就可以调用jQuery的方法 -->
 
-```html
-<script>
+```js
 	// 以下两条入口函数等同
 
 	$(function () { })
 
 	jQuery(function () { })
 
-</script>
 ```
 
 ## jQuery 对象和 DOM 对象
@@ -146,7 +139,7 @@ library，是一个封装好的特定的集合（方法和函数），预先定�
 
 	// $('div').style.display = 'none'; 
 	//这种写法是错误的!!! jQuery 对象只能使用jQuery方法
-	
+
 </script>
 ```
 

@@ -25,20 +25,17 @@ JS 引擎会把JS里面所有的var和function提升到当前作用域的最前�
 # 第二步：代码执行
 按照代码书写的顺序从上往下执行
 
-```html
-<script>
+```js
 
 // 所以函数表达式调用必须写在函数表达式的下面
 
-</script>
 ```
 
 # 预解析案例
 
 ## 案例1
 
-```html
-<script>
+```js
 	var num = 10;
 	fun();
 
@@ -60,13 +57,11 @@ JS 引擎会把JS里面所有的var和function提升到当前作用域的最前�
 	// num = 10
 	// fun();
 
-</script>
 ```
 
 ## 案例2
 
-```html
-<script>
+```js
 	var num = 10;
 	function fn() {
 		console.log(num);
@@ -76,13 +71,11 @@ JS 引擎会把JS里面所有的var和function提升到当前作用域的最前�
 	fn();
 
 	//最终结果为 undefined,20
-</script>
 ```
 
 ## 案例3
 
-```html
-<script>
+```js
 	var a = 18;
 	f1();
 	function f1() {
@@ -93,15 +86,13 @@ JS 引擎会把JS里面所有的var和function提升到当前作用域的最前�
 	}
 
 	//最终结果为undefined,9
-</script>
 ```
 
 ## 案例4
 
 (最容易出错，重要！)
 
-```html
-<script>
+```js
 	f1();
 	console.log(c);
 	console.log(b);
@@ -116,5 +107,4 @@ JS 引擎会把JS里面所有的var和function提升到当前作用域的最前�
 	}
 
 	//最终结果为9,9,9,9,9,undefined
-</script>
 ```

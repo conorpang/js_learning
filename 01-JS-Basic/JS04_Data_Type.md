@@ -29,25 +29,21 @@
 - 为什么需要数据类型？因为不同数据占用存储空间不同
 - 变量的数据类型：JS是弱类型，动态语言
 
-```html
-<script>
+```js
 	var num; //这里的num是不确定属于那种数据类型的
 	var num = 10; //num属于数字型
 	var str = 'pink'; //str属于字符串型
 
 	//js的变量数据类型只有在程序运行过程中，根据等号右边的值来确定
-</script>
 ```
 
 总结一下：
 - JS中，变量的数据类型是根据等号右边的数据类型来判断的
 - JS拥有动态类型，意味着相同的变量可用作不同类型
 
-```html
-<script>
+```js
 	var x = 6;
 	x = 'Bill';
-</script>
 ```
 
 # 简单数据类型
@@ -65,8 +61,7 @@
 - 加0x 十六进制
 
 
-```html
-<script>
+```js
 	var num = 10; //num 数字型
 	var PI = 3.14; //PI 数字型
 
@@ -84,39 +79,32 @@
 	var num4 = 0xa;
 	console.log(num4);
 
-</script>
 ```
 
 ## 数字型的最大最小值
 
-```html
-<script>
+```js
 	alert(Number.MAX_VALUE); //1.7976....e+308
 	console.log(Number.MAX_VALUE);
 
 	alert(Number.Min_VALUE); //5e-324
-</script>
 ```
 
 ## 数字型特殊值
 
-```html
-<script>
+```js
 	alert(Infinity); //无穷大
 	alert(-Infinity); //无穷小
 	alert(NaN); //非数值, not a number
-</script>
 ```
 
 ## isNaN()方法
 
-```html
-<script>
+```js
 	//isNaN() 这个方法用来判断非数字，并且返回一个值，是数字返回false，反之true
 
 	console.log(isNaN(12)); //false
 	console.log(isNaN('pink老师')); //true
-</script>
 ```
 
 
@@ -127,11 +115,9 @@
 
 **引号嵌套**：外双内单，外单内双
 
-```html
-<script>
+```js
 	var str = '我是一个"高富帅"的程序员'
 	var str = "我是一个'高富帅'的程序员"
-</script>
 ```
 
 字符串转义符，均以反斜\开头
@@ -143,11 +129,9 @@
 - `\t`  tab缩进
 - `\b`  空格
 
-```html
-<script>
+```js
 	var str = '我是一个"高富帅"\n的程序员'
 	//转义字符需要写到引号里
-</script>
 ```
 
 
@@ -156,13 +140,11 @@
 
 ## 字符串长度 length 属性
 
-```html
-<script>
+```js
 	//检测获取字符串长度 length
 	var str = 'my name is andy';
 	console.log(str.length); //15
 
-</script>
 ```
 
 
@@ -172,43 +154,37 @@
 - *只要有字符串，最后的结果一定是字符串
 - *口诀：数值相加，字符相连
 
-```html
-<script>
+```js
 	console.log('shamo' + 'luotuo'); //shamoluotuo
 	console.log('pink老师' + 18); //pink老师18
 	console.log('pink老师' + true); //pink老师true
 
 	console.log(12 + 12); //24
 	console.log('12' + 12); //1212
-</script>
 ```
 
 
 ## 字符串拼接加强版
 
-```html
-<script>
+```js
 	var age = 18;
 	console.log('pink' + age + '岁');
 
 	//变量不要写到字符串李，是通过字符串相连的方式实现的
 	//口诀：引引加加
-</script>
 ```
 
 ## 案例：显示年龄
 
 输入年龄，显示多少岁
 
-```html
-<script>
+```js
 	//用户输入
 	var age = prompt('请输入您的年龄');
 	//内部处理
 	var str = '您今年已经' + age + '岁了';
 	//输出结果
 	alert(str);
-</script>
 ```
 
 
@@ -216,21 +192,18 @@
 
 两个值：true, false
 
-```html
-<script>
+```js
 	var flag = true;
 	var flag1 = false;
 	console.log(flag + 1); //true参与加法运算当1看
 	console.log(flag1 + 1); //false参与加法运算当0看
 
-</script>
 ```
 
 
 # undefined & null
 
-```html
-<script>
+```js
 	//undefined 未定义数据类型
 	var str;
 	console.log(var);
@@ -242,7 +215,6 @@
 	var space = null;
 	console.log(space + 'pink'); //nullpink
 	console.log(space + 1); //1
-</script>
 ```
 
 
@@ -250,8 +222,7 @@
 
 typeof 可用来检测数据类型
 
-```html
-<script>
+```js
 	var num = 10;
 	console.log(typeof num); //number
 
@@ -271,6 +242,4 @@ typeof 可用来检测数据类型
 	var age = prompt('请输入你的年龄:');
 	console.log(age);
 	console.log(typeof age); //string
-
-</script>
 ```

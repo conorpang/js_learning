@@ -78,22 +78,19 @@
 
 不是构造函数，所以不需要new来调用，而是直接调用属性或方法
 
-```html
-<script>
+```js
 	console.log(Math.PI);  //圆周率属性
 	console.log(Math.max(1, 99, 3));  //99
 	console.log(Math.max(1, 99, 'pink'));  //NaN
 	console.log(Math.max); //-Infinity
 
-</script>
 ```
 
 ## 封装自己的数学对象
 
 封装自己的数学对象，里面有PI、求最大值、求最小值
 
-```html
-<script>
+```js
 	var myMath = {
 		PI: 3.14159265357,
 		max: function () {
@@ -120,24 +117,20 @@
 	console.log(myMath.PI);
 	console.log(myMath.max(1, 2, 3));
 	console.log(myMath.min(1, 2, 3));
-</script>
 ```
 
 ## Math取绝对值方法
 
-```html
-<script>
+```js
 	// 绝对值
 	console.log(Math.abs(-1)); //1
 	console.log(Math.abs('-1'));  //隐式转换 会把字符串转换为数字型
 	console.log(Math.abs('pink')); //无法转换 NaN
-</script>
 ```
 
 ## Math三个取整方法
 
-```html
-<script>
+```js
 	//取整
 	Math.floor();   // 向下取整
 	Math.ceil();    // 向上取整
@@ -156,13 +149,11 @@
 	console.log(Math.round(-1.1)); // -1
 	console.log(Math.round(-1.5)); // -1  !!!
 
-</script>
 ```
 
 ## Math随机数方法
 
-```html
-<script>
+```js
 	// Math.random() 随机返回一个小数 [0,1)
 	// 该方法不跟参数
 
@@ -179,7 +170,6 @@
 	var arr = ['jake', 'jakee', 'jakeee', 'rose', 'rosee'];
 	console.log(arr[getRandom(0, arr.length - 1)]);
 
-</script>
 ```
 
 ## 猜数字游戏
@@ -189,8 +179,7 @@
 如果小于该数字，提示数字小了，继续猜；
 如果等于该数字，提示猜对了，结束程序；
 
-```html
-<script>
+```js
 	function getRandom(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
@@ -212,7 +201,6 @@
 		}
 	}
 
-</script>
 ```
 
 
@@ -222,8 +210,7 @@
 
 # 日期对象
 
-```html
-<script>
+```js
 	// Date() 日期对象，是一个构造函数，必须使用new 来调用
 	var arr = new Array(); //创建一个数组对象
 	var obj = new Object();  //创建了一个对象实例
@@ -242,7 +229,6 @@
 	var date2 = new Date('2019-10-1 8:8:8');
 	console.log(date2);
 
-</script>
 ```
 
 ## 格式化日期年月日星期
@@ -259,8 +245,7 @@
 - getMinutes()
 - getSeconds()
 
-```html
-<script>
+```js
 	var date = new Date();
 	console.log(date.getFullYear()); // 获得年份
 	console.log(date.getMonth() + 1);  // 获得月份，返回的月份小一个月
@@ -298,7 +283,6 @@
 
 	console.log(getTime());
 
-</script>
 ```
 
 ## Date()获取总的毫秒数
@@ -309,8 +293,7 @@
 
 不是当前时间的毫秒数，而是距离1970-01-01过了多久
 
-```html
-<script>
+```js
 	// 1.通过 valueOf()  getTime()
 
 	var date = new Date();
@@ -328,14 +311,12 @@
 
 
 	// 毫秒数永远不会重复，独一无二的，我们称之为“时间戳”
-</script>
 ```
 
 
 ## 倒计时案例
 
-```html
-<script>
+```js
 	// 核心算法：输入的时间减去现在的时间
 	// 用时间戳来做
 	// 时间戳与天时分秒的转换
@@ -365,7 +346,6 @@
 
 	console.log(countDown('2021-05-06 00:00:00'));
 
-</script>
 ```
 
 
@@ -373,8 +353,7 @@
 
 数组的创建
 
-```html
-<script>
+```js
 	// 1. 字面量创建
 	var arr = [1, 2, 3];
 	console.log(arr[0]);
@@ -389,13 +368,11 @@
 	var arr1 = new Array(2, 3);
 	//等价于用字面量创建2个数组元素，分别为2和3
 	console.log(arr1);
-</script>
 ```
 
 ## 检测输入的参数是否为数组
 
-```html
-<script>
+```js
 	// 1. instanceof 运算符，用来检测是否为数组
 	var arr = [];
 	console.log(arr instanceof Array);  //true
@@ -411,13 +388,11 @@
 
 	// 之前的reverse() 数组翻转函数可以在传参后加入一个数组判断
 
-</script>
 ```
 
 ## 添加或删除数组元素
 
-```html
-<script>
+```js
 	// 提供了4种添加或删除元素的方法
 	// push()后加  unshift()前加
 	// pop()后删  shift()前删
@@ -456,7 +431,6 @@
 	console.log(arr); // ['purple',1,2,3,4]
 	console.log(arr.shift());  //返回值为删除的元素 
 
-</script>
 ```
 
 
@@ -464,8 +438,7 @@
 
 工资数组 [1500,1200,2000,2100,1800]，要求工资超过2000的删除，剩余的放到新数组里
 
-```html
-<script>
+```js
 	var arr = [1500, 1200, 2000, 2100, 1800];
 	var newArr = [];
 	for (var i = 0; i < arrlength; i++) {
@@ -475,7 +448,6 @@
 		}
 	}
 	console.log(newArr);
-</script>
 ```
 
 
@@ -484,13 +456,14 @@
 数组方法
 
 ### reverse() 
+
 颠倒数组中元素的顺序，无参数，该方法会改变原有数组，返回新数组
 
 ### sort() 
+
 对数组的元素进行排序，该方法会改变原有数组，返回新数组
 
-```html
-<script>
+```js
 	// 翻转数组
 	var arr = ['blue', 'red', 'pink'];
 	arr.reverse();
@@ -509,7 +482,6 @@
 	});
 	console.log(arr1);
 
-</script>
 ```
 
 ## 数组索引方法
@@ -520,25 +492,20 @@
 ### lastIndexOf() 
 从后往前查找索引，如果存在，返回索引号，如果不存在，返回-1
 
-```html
-<script>
+```js
 	var arr = ['red', 'green', 'blue', 'pink', 'blue'];
 	console.log(arr.indexOf('blue'));   // 2
 	// 如果有多个blue, 只返回第一个满足条件的索引号
 	// 如果没有blue, 返回-1
 
 	console.log(arr.lastIndexOf('blue'));  // 4
-</script>
 ```
 
 ## 数组去重案例（重点）
 
 要求去除数组中重复的元素 ['x','a','z','a','x','a','x','c','b']
 
-
-
-```html
-<script>
+```js
 
 	// 核心算法：遍历旧数组，拿旧数组去查询新数组，如果该元素在新数组中不存在，就添加，否则不添加
 
@@ -559,20 +526,20 @@
 	var demo = unique(arr = ['x', 'a', 'z', 'a', 'x', 'a', 'x', 'c', 'b']);
 
 	console.log(demo);
-</script>
 ```
 
 
 ## 数组转换为字符串方法
 
 ### toString() 
+
 把数组转换成字符串，逗号分隔每一项，返回一个字符串
 
 ### join('delimiter') 
+
 把数组中的所有元素转换为一个字符串，返回一个字符串
 
-```html
-<script>
+```js
 	// toString()
 	var arr = [1, 2, 3]
 	console.log(arr.toString()); //1,2,3
@@ -581,7 +548,6 @@
 	var arr1 = ['green', 'blue', 'pink'];
 	console.log(arr1.join('-')); // green-blue-pink
 	console.log(arr1.join('&')); // green&blue&pink
-</script>
 ```
 
 作业：查询以下方法
@@ -605,8 +571,7 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 
 一句话总结：系统自动将其提升为了对象，专业术语叫“**基本包装类型**”
 
-```html
-<script>
+```js
 	var str = 'Andy';
 	console.log(str.length);  // 4
 
@@ -621,7 +586,6 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	// 销毁临时变量
 	temp = null;
 
-</script>
 ```
 
 
@@ -629,8 +593,7 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 
 字符串里面的值不可变，虽然看上去可以改变内容，其实是地址变了，内存中新开辟了一个内存空间
 
-```html
-<script>
+```js
 	var str = 'andy';
 	console.log(str);  //andy
 
@@ -643,7 +606,6 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	}
 	console.log(str);
 
-</script>
 ```
 
 ## 根据字符返回位置
@@ -656,8 +618,7 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 ### lastIndexOf() 
 从后往前找，只找第一个匹配的
 
-```html
-<script>
+```js
 	// str.indexOf('要查找的字符',[起始的位置])
 
 	var str = '改革春风吹满地，春天来了';
@@ -666,15 +627,13 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 
 	// lastIndexOf() 同理
 
-</script>
 ```
 
 ## 案例：返回字符位置
 
 查找字符串'abcoefoxyozzopp'中所有o出现的位置以及次数
 
-```html
-<script>
+```js
 	var str = 'abcoefoxyozzopp';
 	var index = str.indexOf('o');
 	var num = 0;
@@ -685,7 +644,6 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 		str.indexOf('o', index + 1);
 	}
 	console.log('o出现的次数是：' + num);
-</script>
 ```
 
 作业：
@@ -704,8 +662,7 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 ### str[index]
 获取指定位置处字符，H5，IE8+支持，和charAt()等效
 
-```html
-<script>
+```js
 
 	// charAt()
 	var str = 'Andy';
@@ -722,13 +679,11 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	// str[] H5新增的
 	console.log(str[0]); // a 
 
-</script>
 ```
 
 ## 统计出现次数最多的字符
 
-```html
-<script>
+```js
 	// 判断对象是否有某一属性
 	var o = {
 		age: 18
@@ -739,13 +694,11 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	} else {
 		console.log('the attribute does not exist');
 	}
-</script>
 ```
 
 
 
-```html
-<script>
+```js
 	// 判断一个字符串'abcoefoxyozzopp'中出现次数最多的字符，并统计次数
 
 	// 核心算法：用charAt()遍历整个字符串
@@ -776,7 +729,6 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	console.log(max);
 	console.log('最多的字符是：' + ch);
 
-</script>
 ```
 
 
@@ -794,8 +746,7 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 ### substring(start,end) 
 从start位置开始，截取到end的位置，end取不到，基本和slice()相同，但是不接受负值
 
-```html
-<script>
+```js
 	// 字符串操作
 
 	// concat()
@@ -806,15 +757,13 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	var str1 = '改革春风吹满地';
 	console.log(str1.substr(2, 2));  //春风
 
-</script>
 ```
 
 ## 替换字符串
 
 ### replace('source char','target char')
 
-```html
-<script>
+```js
 
 	// replace()
 	var str = 'andyandy';
@@ -830,7 +779,6 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 
 	// 可以用于过滤敏感词
 
-</script>
 ```
 
 
@@ -838,8 +786,7 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 
 ### split('delimiter')
 
-```html
-<script>
+```js
 	// 字符串=>数组 split('delimiter')
 	// 联想到 数组=>字符串 join('delimiter')
 
@@ -849,7 +796,6 @@ splice() 数组删除splice(begin, deleteNumbers) 返回被删除项目的新数
 	var str3 = 'red&pink&blue';
 	console.log(str3.split('&'));
 
-</script>
 ```
 
 作业：

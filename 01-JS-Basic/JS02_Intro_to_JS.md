@@ -17,7 +17,6 @@
 # 初识JS
 
 ## 历史
-
 布兰登·艾奇，1995年10天内发明，LiveScript=>JS
 
 ## JS是什么 
@@ -62,7 +61,7 @@ JS的三种位置：
 - 外部
 
 行内式
-```html
+```js
 <input type="button" value="tangbohu" onclick="alert('qiuxiang')">
 ```
 
@@ -72,14 +71,12 @@ JS的三种位置：
 
 
 内嵌式
-```html
-<script>
-	alert('shamoluotuo')
+```jshamoluotuo')
 </script>
 ```
 
 外部引入
-```html
+```js
 <script src="abc.js"><script>
 ```
 # JS注释
@@ -96,9 +93,7 @@ JS的三种位置：
 | `prompt(info)`     | 浏览器弹出输入框，用户可以输入 | 归属浏览器 |
 
 例如：
-```html
-<script>
-	
+```js
 	// input
 	prompt('input age:')
 
@@ -107,6 +102,4 @@ JS的三种位置：
 
 	// console
 	console.log('only viewed by coder')
-
-</script>
 ```

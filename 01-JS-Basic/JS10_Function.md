@@ -27,8 +27,7 @@
 
 封装了一段可以被重复执行调用的代码块，目的就是让大量代码重复使用
 
-```html
-<script>
+```js
 	function getSum(num1, num2) {
 		var sum = 0;
 		for (var i = num1; i <= num2; i++) {
@@ -38,7 +37,6 @@
 	}
 	getSum(1, 100);
 	get(10, 50);
-<script>
 ```
 
 
@@ -46,8 +44,7 @@
 
 两步：声明函数、调用函数
 
-```html
-<script>
+```js
 	// 声明函数
 	function sayHi() {
 		// function 小写
@@ -59,15 +56,13 @@
 	// 调用函数
 	// 函数名()
 	sayHi();
-<script>
 ```
 
-函数的封装（打包）：通过函数封装起来，对外只提供一个简单的函数接口
+函数的**封装**：通过函数封装起来，对外只提供一个简单的函数接口
 
 ## 求1-100的累加和
 
-```html
-<script>
+```js
 	function getSum() {
 		var sum = 0;
 		for (var i = 1; i <= 100; i++) {
@@ -77,14 +72,12 @@
 	}
 
 	getSum();
-<script>
 ```
 
 # 函数的参数
 
 形参和实参
-```html
-<script>
+```js
 	function 函数名(形参1, 形参2, 实参n) {   //声明函数的小括号里面用形参
 
 	}
@@ -93,22 +86,18 @@
 
 	//形参是接受实参的，相当于一个变量，无需声明
 	//函数的参数，个数不限，可以没有
-<script>
 ```
 
 
-```html
-<script>
+```js
 	//利用函数求任意两个数的和
 	function getSum(num1, num2) {
 		console.log(num1 + num2);
 	}
 	getSum(3, 8);
-<script>
 ```
 
-```html
-<script>
+```js
 	//利用函数求任意两个数之间的和
 	function getSums(start, end) {
 		var sum = 0;
@@ -118,7 +107,6 @@
 		console.log(sum);
 	}
 	getSum(3, 8);
-<script>
 ```
 
 注意：
@@ -127,11 +115,8 @@
 
 
 
-
 ## 函数形参和实参的匹配问题
-```html
-<script>
-
+```js
 	function getSum(num1, num2) {
 		console.log(num1, num2);
 	}
@@ -145,15 +130,13 @@
 	getSum(1); //NaN
 
 //建议：尽量让实参的个数和形参相匹配
-<script>
 ```
 
 # 函数的返回值return
 
 希望函数将值返回给调用者，可用return语句实现
 
-```html
-<script>
+```js
 	function 函数名() {
 		return 需要返回的结果;
 
@@ -161,37 +144,31 @@
 
 	// 函数只实现某种功能，最终的结果需要返回给函数的调用者函数名，通过return实现
 	// 只要函数遇到return，就把后面的结果返回给函数的调用者
-<script>
 ```
 
 代码验证
 
-```html
-<script>
+```js
 	function getResult() {
 		return 666;
 	}
 	getResult(); // getResult() = 666
 	console.log(getResult());
-<script>
 ```
 
 
-```html
-<script>
+```js
 	//用return语句重写：利用函数求任意两个数的和
 	function getSum(num1, num2) {
 		return num1 + num2;
 
 	}
 	console.log(getSum(1, 2));
-<script>
 ```
 
 ## 利用函数求任意两个数的最大值
 
-```html
-<script>
+```js
 	function getMax(num1, num2) {
 		if (num1 > num2) {
 			return num1;
@@ -204,15 +181,13 @@
 	}
 	console.log(getMax(1, 3));
 
-<script>
 ```
 
 ## 利用函数求任意一个数组中的最大值
 
 求数组 [5,2,99,101,67,77] 中的最大值
 
-```html
-<script>
+```js
 	function getArrMax(arr) {
 		var max = arr[0];
 		for (var i = 1; i < arr.length; i++) {
@@ -225,14 +200,12 @@
 	//实际开发中，常用一个变量来接受函数的返回结果
 	var re = getArrMax([5, 2, 99, 101, 67, 77]);  //实参是一个数组
 	console.log(re);
-<script>
 ```
 
 
 ## return终止函数只能返回一个值
 
-```html
-<script>
+```js
 
 	// return终止函数，之后的程序都不会执行
 
@@ -257,13 +230,11 @@
 	var re = getResult(1, 2);
 	console.log(re);
 
-<script>
 ```
 
 ## 函数没有return返回的是undefined
 
-```html
-<script>
+```js
 	// 函数有return，则返回return后面的值
 	// 没有return，则返回undefined
 
@@ -272,7 +243,6 @@
 	}
 	console.log(fun2());  //返回undefined
 
-<script>
 ```
 
 
@@ -294,8 +264,7 @@
 
 # arguments的使用
 
-```html
-<script>
+```js
 
 	// 不确定有多少参数传递时，可以用arguments获取，是函数中的内置对象，存储了传递的所有实参
 
@@ -316,13 +285,11 @@
 	}
 	fn(1, 2, 3);
 	fn(1, 2, 3, 4, 5);
-<script>
 ```
 
 ## 利用函数求任意个数的最大值
 
-```html
-<script>
+```js
 	function getMax() {
 		var max = arguments[0];
 		for (var i = 0; i < arguments.length; i++) {
@@ -334,15 +301,13 @@
 	}
 	var re = getMax(1, 5, 6);
 	console.log(re);
-<script>
 ```
 
 # 函数案例
 
 ## 利用函数翻转数组
 
-```html
-<script>
+```js
 	function reverseArr(arr) {
 		var newArr = []; //注意声明数组的写法，需要复习
 		for (var i = 0; i < arr.length; i++) {
@@ -361,32 +326,26 @@
 	var re = reverseArr(arr);
 	console.log(re);
 
-<script>
 ```
 
 
 ## 函数封装冒泡排序
 
-```html
-<script>
+```js
 
-<script>
 ```
 
 
 ## 利用函数判断闰年
 
-```html
-<script>
+```js
 
-<script>
 ```
 
 
 # 函数可以调用另一个函数
 
-```html
-<script>
+```js
 
 	// 函数可以相互调用
 
@@ -399,15 +358,13 @@
 		console.log(222);
 		console.log('fn2');
 	}
-<script>
 ```
 
 ## 输出2月份天数
 
 输入年份，输出当前年份2月份的天数
 
-```html
-<script>
+```js
 
 	//输入年份，输出当前年份2月份的天数
 	function febDays() {
@@ -430,14 +387,12 @@
 		}
 		return leap;
 	}
-<script>
 ```
 
 
 # 函数的两种声明方式
 
-```html
-<script>
+```js
 	// 1.利用函数关键字自定义函数(命名函数)
 	function fn() {
 
@@ -455,5 +410,4 @@
 	// 调用时用变量名调用
 	// 匿名函数也可以传递参数
 
-<script>
 ```

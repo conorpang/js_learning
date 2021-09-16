@@ -30,8 +30,7 @@
 
 为什么需要对象？
 
-```html
-<script>
+```js
 	// 保存一个值：用变量
 
 	// 保存多个值：用数组
@@ -42,7 +41,6 @@
 	person.sex = 'male';
 	person.age = 128;
 	person.height = 154;
-</script>
 ```
 
 
@@ -59,8 +57,7 @@
 
 用花括号 `{ }` 可包含属性和方法
 
-```html
-<script>
+```js
 
 	// var obj = {}; //创建了一个空的对象
 	var obj = {
@@ -87,7 +84,6 @@
 
 	//调用对象的方法，对象名.方法名
 	obj.sayHi(); //要加小括号()
-</script>
 ```
 
 小练习：
@@ -99,8 +95,7 @@
 - 颜色：红色
 - 技能：汪汪bark，演电影showFilm
 
-```html
-<script>
+```js
 	var dogObj = {
 		name: 'keke',
 		type: 'alaska',
@@ -115,7 +110,6 @@
 	}
 
 	console.log(dogObj.name + ', ' + dogObj.type);
-</script>
 ```
 
 ## 变量、属性、函数、方法总结
@@ -123,8 +117,7 @@
 
 ### 变量和属性
 
-```html
-<script>
+```js
 
 	// 相同点：都是用来存储数据的
 	// 不同点：
@@ -134,14 +127,12 @@
 	var obj = {
 		age: 18
 	}
-</script>
 ```
 
 
 ### 函数和方法
 
-```html
-<script>
+```js
 	// 相同点：都是实现某种功能的
 	// 不同点：
 	// 函数是单独声明，并且调用的，函数名单独存在
@@ -159,12 +150,10 @@
 
 	}
 
-</script>
 ```
 
 ## 利用 new Object 创建对象
-```html
-<script>
+```js
 
 	var obj = new Object();   //创建了一个空的对象   //注意这里的O要大写
 	obj.uname = 'Jake';       //利用等号赋值的方法添加对象的属性和方法
@@ -179,7 +168,6 @@
 	console.log(obj['sex']);
 	obj.sayHi();
 
-</script>
 ```
 
 
@@ -192,8 +180,7 @@
 - 年龄：19岁
 - 技能：影分身术
 
-```html
-<script>
+```js
 	var mingrenObj = new Object();
 	mingrenObj.name = 'mingren';
 	mingrenObj.sex = 'male';
@@ -203,7 +190,6 @@
 			console.log('mingren');
 		}
 	}
-</script>
 ```
 
 ## 利用构造函数创建对象
@@ -218,8 +204,7 @@ why?
 
 构造函数就是把对象里面的一些相同的属性和方法抽象出来封装到函数里
 
-```html
-<script>
+```js
 	// 构造函数创建对象
 	// 举例：创建四大天王对象，相同的 属性：名字，年龄，性别 方法：唱歌
 	// 构造函数的语法格式
@@ -229,14 +214,12 @@ why?
 		}
 	}
 	new 构造函数名();
-</script>
 ```
 
 
 
 
-```html
-<script>
+```js
 	function Star(uname, age, sex) {
 		this.name = uname;
 		this.age = age;
@@ -260,21 +243,18 @@ why?
 // 只要new Star()调用函数就创建了一个对象 ldh{}
 // 属性和方法前必须加this
 
-</script>
 ```
 
 小练习：
 
 利用构造函数创建两个英雄对象，函数的公共部分包括：
 
-| 姓名属性 | 类型属性 | 血量属性 | 攻击方式   |
-| -------- | -------- | -------- | ---------- |
-| 廉颇     | 力量型   | 500血量  | 攻击：近战 |
-| 后羿     | 射手型   | 100血量  | 攻击：远程 |
+| 姓名属性 | 类型属性 | 血量属性 |  攻击方式  |
+| :------: | :------: | :------: | :--------: |
+|   廉颇   |  力量型  | 500血量  | 攻击：近战 |
+|   后羿   |  射手型  | 100血量  | 攻击：远程 |
 
-```html
-<script>
-
+```js
 </script>
 ```
 
@@ -288,8 +268,7 @@ why?
 
 ## new关键字执行过程
 
-```html
-<script>
+```js
 	// new 构造函数可以在内存中创建一个空的对象
 	// this 指向刚才创建的对象
 	// 执行构造函数里面的代码，给这个空对象添加属性和方法
@@ -301,7 +280,6 @@ why?
 	// 3.教孩子读书一肚子墨水
 	// 4.长大挣钱回报父母
 
-</script>
 ```
 
 
@@ -309,8 +287,7 @@ why?
 
 一个一个打印对象属性太过麻烦
 
-```html
-<script>
+```js
 	var obj = {
 		name: 'pink',
 		age: 18,
@@ -321,23 +298,19 @@ why?
 	console.log(obj.age);
 	console.log(obj.sex);
 
-</script>
 ```
 
 
 
 `for...in`语句：用于对数组或者对象的属性进行循环操作
 
-```html
-<script>
+```js
 	for (变量 in 对象) {
 
 	}
-</script>
 ```
 
-```html
-<script>
+```js
 	for (var k in obj) {
 		console.log(k);   //k变量输出得到的是 属性名
 		console.log(obj[k]);  //obj[k]输出得到的是 属性值 k不加引号
@@ -345,7 +318,6 @@ why?
 		// for in 变量常用k或者key
 		// for in 也可以遍历方法，但是很少用
 	}
-</script>
 ```
 
 # 小结

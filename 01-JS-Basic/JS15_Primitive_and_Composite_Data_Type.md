@@ -12,14 +12,12 @@
 
 string, number, boolean, undefined, null
 
-```html
-<script>
+```js
 	// 注意简单数据类型中null 返回的是一个空的对象 object
 	var timer = null;
 	console.log(typeof timer); //object
 
 	// 如果有个变量以后存储为对象，暂时没想好放什么
-</script>
 ```
 复杂数据类型：引用类型，存储变量时存储的仅仅时‘地址’
 
